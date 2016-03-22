@@ -61,3 +61,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/JSP-Test/nbproject/private/
+/JSP-Test/build/
+/JSP-Test/dist/
+/Test/nbproject/private/
+/Test/build/
+/Test/dist/
+/test/mvc/build/
+/test/mvc/nbproject/private/
+/mvc/nbproject/private/

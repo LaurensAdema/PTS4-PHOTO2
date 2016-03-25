@@ -14,20 +14,20 @@
             </h1>
         </div>
         <div class="col-md-3">
-            <form role="form" class="form-group">
+            <form role="form" class="form-group" ID="formbefore">
                 <div class="form-group">
 
-                    <label for="exampleInputEmail1">
+                    <label for="tbusername">
                         Email address
                     </label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" />
+                    <input type="text" class="form-control" id="tbusername" />
                 </div>
                 <div class="form-group">
 
-                    <label for="exampleInputPassword1">
+                    <label for="tbpassword">
                         Password
                     </label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" />
+                    <input type="password" class="form-control" id="tbpassword" />
                 </div>
 
                 <div class="checkbox">
@@ -36,8 +36,8 @@
                         <input type="checkbox" /> Remember my Username
                     </label>
                 </div> 
-                <button type="submit" class="btn btn-default">
-                    Submit
+                <button type="submit" class="btn btn-default" ID="btnsubmit" >
+                    Log In
                 </button>
             </form>
         </div>
@@ -45,19 +45,19 @@
     <nav class="navbar navbar-default ">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Home</a>
+                <a class="navbar-brand active" href="#">Home</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Admin <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Contact</a></li>
-                    
+                    <li><a href="#">Mijn Producten</a></li>
+                    <li><a href="#">Admin</a></li>
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <div class="navbar-nav btn-group">
@@ -138,6 +138,15 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+<!--   <div class="col-md-3 form-group profile-usertitle " ID="formafter">
+        <div class="profile-usertitle-name">
+            Marcus Doe
+        </div>
+        <div class="profile-usertitle-job">
+            Developer
+        </div>
+    </div>-->
+</div>
 
 
 
@@ -154,5 +163,5 @@
 
         <jsp:doBody/>
 
-        </body>
+    </body>
 </html>

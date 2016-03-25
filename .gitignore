@@ -70,3 +70,4 @@ $RECYCLE.BIN/
 /test/mvc/build/
 /test/mvc/nbproject/private/
 /mvc/nbproject/private/
+/mvc/dist/

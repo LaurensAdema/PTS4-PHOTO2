@@ -6796,4 +6796,13 @@ ul.dropdown-cart li .item-right{
 ul.dropdown-cart li .item-right button{
     margin-top:14px;
 }
+.flag {
+	width: 16px;
+	height: 11px;
+	background:url("../img/flags.png") no-repeat
+            
+}
+
+.flag.flag-gb {background-position: -16px 0}
+.flag.flag-nl {background-position: 0 -11px}
 /*# sourceMappingURL=bootstrap.css.map */

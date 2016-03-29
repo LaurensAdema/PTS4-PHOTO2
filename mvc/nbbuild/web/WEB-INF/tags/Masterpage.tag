@@ -8,52 +8,55 @@
     <script src="js/bootstrap.js" type="text/javascript"></script>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-12">
             <h1 class="text-center h1">
                 PhotoShop 
             </h1>
         </div>
-        <div class="col-md-3">
-             <c:choose>
-        <c:when test = "${not requestScope.logged}">
-            <form role="form" class="form-group" ID="formbefore">
-                <div class="form-group">
+        <div class="col-md-3 col-sm-12">
+            <c:choose>
+                <c:when test = "${requestScope.logged}">
+                    <form role="form" class="form-group" ID="formbefore">
+                        <div class="form-group">
 
-                    <label for="tbusername">
-                        Email address
-                    </label>
-                    <input type="text" class="form-control" id="tbusername" />
-                </div>
-                <div class="form-group">
+                            <label for="tbusername">
+                                Email address
+                            </label>
+                            <input type="text" class="form-control" id="tbusername" />
+                        </div>
+                        <div class="form-group">
 
-                    <label for="tbpassword">
-                        Password
-                    </label>
-                    <input type="password" class="form-control" id="tbpassword" />
-                </div>
+                            <label for="tbpassword">
+                                Password
+                            </label>
+                            <input type="password" class="form-control" id="tbpassword" />
+                        </div>
 
-                <div class="checkbox">
+                        <div class="checkbox">
 
-                    <label>
-                        <input type="checkbox" /> Remember my Username
-                    </label>
-                </div> 
-                <button type="submit" class="btn btn-default" ID="btnsubmit" >
-                    Log In
-                </button>
-            </form>
-            </c:when>
-            <c:otherwise>
-            <div class="form-group profile-usertitle " ID="formafter">
-                <div class="profile-usertitle-name">
-                    Marcus Doe
-                </div>
-                <div class="profile-usertitle-job">
-                    Developer
-                </div>
-            </div>
-        </c:otherwise>
-             </c:choose>
+                            <label>
+                                <input type="checkbox" /> Remember my Username
+                            </label>
+                        </div> 
+                        <button type="submit" class="btn btn-default" ID="btnsubmit" >
+                            Log In
+                        </button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <div class="form-group profile-usertitle " ID="formafter">
+                        <div class="profile-usertitle-name">
+                            Marcus Doe
+                        </div>
+                        <div class="profile-usertitle-job">
+                            Developer
+                        </div>
+                        <button type="submit" class="btn btn-default" ID="btnlogout" >
+                            Log Out
+                        </button>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <nav class="navbar navbar-default ">
@@ -152,30 +155,11 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-<!--   <div class="col-md-3 form-group profile-usertitle " ID="formafter">
-        <div class="profile-usertitle-name">
-            Marcus Doe
-        </div>
-        <div class="profile-usertitle-job">
-            Developer
-        </div>
-    </div>-->
 </div>
-
-
-
 </head>
-
 <html>
-
-
-
     <jsp:invoke fragment="header"/>
     <div id="body" >
-
-
-
         <jsp:doBody/>
-
     </body>
 </html>

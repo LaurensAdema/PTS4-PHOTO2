@@ -1,5 +1,5 @@
 <%@tag description="Photo 2" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@attribute name="header" fragment="true" %>
 
 <head>
@@ -14,6 +14,8 @@
             </h1>
         </div>
         <div class="col-md-3">
+             <c:choose>
+        <c:when test = "${not requestScope.logged}">
             <form role="form" class="form-group" ID="formbefore">
                 <div class="form-group">
 
@@ -40,6 +42,18 @@
                     Log In
                 </button>
             </form>
+            </c:when>
+            <c:otherwise>
+            <div class="form-group profile-usertitle " ID="formafter">
+                <div class="profile-usertitle-name">
+                    Marcus Doe
+                </div>
+                <div class="profile-usertitle-job">
+                    Developer
+                </div>
+            </div>
+        </c:otherwise>
+             </c:choose>
         </div>
     </div>
     <nav class="navbar navbar-default ">

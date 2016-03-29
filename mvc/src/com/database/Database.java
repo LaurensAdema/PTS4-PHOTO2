@@ -133,8 +133,9 @@ public class Database {
                     = "SELECT " + query.get(QUERYTYPES.SELECT)
                     + " FROM " + query.get(QUERYTYPES.FROM)
                     + " WHERE " + query.get(QUERYTYPES.WHERE)
-                    + " = " + query.get(QUERYTYPES.IS) + ";";
+                    + " = '" + query.get(QUERYTYPES.IS) + "';";
             results = statement.executeQuery(SQLquery);
+            results.next();
             return results.getString(1);
 
         } catch (SQLException ex)

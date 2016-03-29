@@ -22,14 +22,14 @@
                             <label for="tbusername">
                                 Email address
                             </label>
-                            <input type="text" class="form-control" id="tbusername" />
+                            <input type="text" class="form-control" name="tbusername" />
                         </div>
                         <div class="form-group">
 
                             <label for="tbpassword">
                                 Password
                             </label>
-                            <input type="password" class="form-control" id="tbpassword" />
+                            <input type="password" class="form-control" name="tbpassword" />
                         </div>
 
                         <div class="checkbox">

@@ -32,7 +32,7 @@ public class Account {
     }
 
     public boolean validate() {
-        if (password.equals(Database.getDatabase().query("password", "user", "username", this.naam))) {
+        if (password.equals(Database.getDatabase().query("password", "account", "username", this.naam))) {
             return true;
         } else {
             return false;

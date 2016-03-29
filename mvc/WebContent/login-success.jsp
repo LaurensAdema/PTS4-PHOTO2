@@ -1,7 +1,7 @@
-<%@page import="com.javatpoint.LoginBean"%>
+<%@page import="com.domain.account.Account"%>
 
 <p>You are successfully logged in!</p>
 <%
-LoginBean bean=(LoginBean)request.getAttribute("bean");
-out.print("Welcome, "+bean.getName());
+Account account=(Account)request.getAttribute("account");
+out.print("Welcome, "+account.getNaam());
 %>

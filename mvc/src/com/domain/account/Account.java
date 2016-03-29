@@ -6,6 +6,14 @@
 package com.domain.account;
 
 import com.database.Database;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,10 +41,22 @@ public class Account {
     }
 
     public boolean validate() {
-        if (password.equals(Database.getDatabase().query("password", "account", "username", this.naam))) {
-            return true;
-        } else {
-            return false;
+
+        try {
+            ResultSet rs = Database.getDatabase().query(Database.queryBuilder("SELECT password FROM account WHERE username = " + this.naam));
+            
+            rs.next();
+            String foundpassword = rs.getString(1);
+            if (password.equals(foundpassword)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Database.getDatabase().closeConnection();
+        return false;
     }
+
 }

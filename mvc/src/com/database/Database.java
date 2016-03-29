@@ -1,13 +1,19 @@
 package com.database;
 
+import com.domain.account.Account;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,10 +28,8 @@ import java.util.logging.Logger;
  */
 public class Database {
 
-    private Map query;
-
-    private enum QUERYTYPES {
-        SELECT, FROM, WHERE, IS
+    public static enum QUERYTYPES {
+        SELECT, FROM, WHERE, IS, INSERT, INTO, AND, FIELD, TABLE, VALUES, DELETE
     }
 
     // JDBC driver name and database URL
@@ -62,24 +66,6 @@ public class Database {
         }
     }
 
-    public ResultSet executeUnsafeQuery(String sql) throws SQLException {
-        //Execute a query
-        Statement statement;
-        ResultSet resultSet = null;
-        try {
-            if (conn == null || conn.isClosed()) {
-                openConnection();
-            }
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(sql);
-        } catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-        return resultSet;
-    }
-
     public void closeConnection() {
         try {
             if (conn != null) {
@@ -94,10 +80,9 @@ public class Database {
         }
     }
 
-    public String query(String selectField, String table, String whereField, String whereValue) {
-        setQuery(selectField, table, whereField, whereValue);
-        ResultSet results;
-
+    public ResultSet query(Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
+        //Queried de database voor resultaten met gegeven tabel en field
+        //Na gebruik _altijd_ connectie closen (closeConnection())
         try {
             if (conn == null || conn.isClosed()) {
                 openConnection();
@@ -106,31 +91,117 @@ public class Database {
                     return null;
                 }
             }
-            Statement statement = conn.createStatement();
+            String queryTemp = "";
+            Map<QUERYTYPES, String> toPrepare = new LinkedHashMap<QUERYTYPES, String>();
+            for (Entry<Integer, LinkedHashMap<QUERYTYPES, String>> entry : query.entrySet()) {
+                for (Entry<QUERYTYPES, String> entryinner : entry.getValue().entrySet()) {
+                    if (entryinner.getKey() == QUERYTYPES.IS) {
+                        queryTemp += " = ? ";
+                        toPrepare.put(entryinner.getKey(), entryinner.getValue());
+                    } else {
+                        queryTemp += " " + entryinner.getValue() + " ";
+                    }
+                }
+            }
+            queryTemp += ";";
 
-            String SQLquery
-                    = "SELECT " + query.get(QUERYTYPES.SELECT)
-                    + " FROM " + query.get(QUERYTYPES.FROM)
-                    + " WHERE " + query.get(QUERYTYPES.WHERE)
-                    + " = '" + query.get(QUERYTYPES.IS) + "';";
-            results = statement.executeQuery(SQLquery);
-            results.next();
-            return results.getString(1);
+            PreparedStatement SQLquery = conn.prepareStatement(queryTemp);
+            int i = 1;
+            for (Entry<QUERYTYPES, String> entry : toPrepare.entrySet()) {
+                SQLquery.setString(i, entry.getValue());
+                i++;
+            }
+
+            return SQLquery.executeQuery();
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeConnection();
         }
         return null;
     }
 
-    private void setQuery(String selectField, String table, String whereField, String whereValue) {
-        query = new HashMap<String, String>();
-
-        query.put(QUERYTYPES.SELECT, selectField);
-        query.put(QUERYTYPES.FROM, table);
-        query.put(QUERYTYPES.WHERE, whereField);
-        query.put(QUERYTYPES.IS, whereValue);
+    public static void tempQuery(Database.QUERYTYPES type, String value, Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
+        int size = query.size();
+        if (query.get(size) == null) {
+            query.put(size, new LinkedHashMap<Database.QUERYTYPES, String>());
+        }
+        query.get(size).put(type, value);
     }
+
+    public static Map queryBuilder(String querytoBuild) {
+        Map<Integer, LinkedHashMap<Database.QUERYTYPES, String>> query = new LinkedHashMap<>();
+
+        List<String> words = new ArrayList<>();
+
+        for (String word : querytoBuild.split(" ")) {
+            words.add(word);
+            switch (word) {
+                case "SELECT":
+                    tempQuery(QUERYTYPES.SELECT, word, query);
+                    break;
+                case "FROM":
+                    tempQuery(QUERYTYPES.FROM, word, query);
+                    break;
+                case "WHERE":
+                    tempQuery(QUERYTYPES.WHERE, word, query);
+                    break;
+                case "AND":
+                    tempQuery(QUERYTYPES.AND, word, query);
+                    break;
+                case "DELETE":
+                    tempQuery(QUERYTYPES.DELETE, word, query);
+                    break;
+                case "INSERT":
+                    tempQuery(QUERYTYPES.INSERT, word, query);
+                    break;
+                case "INTO":
+                    tempQuery(QUERYTYPES.INTO, word, query);
+                    break;
+                case "VALUES":
+                    tempQuery(QUERYTYPES.VALUES, word, query);
+                    break;
+                default:
+                    String previousword = words.get(words.size() - 2);
+                    switch (previousword) {
+                        case "SELECT":
+                            tempQuery(QUERYTYPES.FIELD, word, query);
+                            break;
+                        case "FROM":
+                            tempQuery(QUERYTYPES.TABLE, word, query);
+                            break;
+                        case "WHERE":
+                            tempQuery(QUERYTYPES.FIELD, word, query);
+                            break;
+                        case "INTO":
+                            tempQuery(QUERYTYPES.TABLE, word, query);
+                            break;
+                        case "AND":
+                            tempQuery(QUERYTYPES.FIELD, word, query);
+                            break;
+                        case "=":
+                            tempQuery(QUERYTYPES.IS, word, query);
+                            break;
+                        default:
+                            break;
+                    }
+            }
+        }
+        int previousentry = 0;
+
+/*        for (Entry<Integer, LinkedHashMap<Database.QUERYTYPES, String>> entry : query.entrySet()) {
+            if (entry.getValue().containsKey(QUERYTYPES.IS)) {
+                if (query.get(previousentry).containsKey(QUERYTYPES.IS)) {
+                    String previousword = query.get(previousentry).get(QUERYTYPES.IS);
+                    query.put(previousentry, new LinkedHashMap<>());
+                    query.get(previousentry).put(QUERYTYPES.IS, previousword + " " + query.get(previousentry + 1).get(QUERYTYPES.IS));
+                    query.remove(previousentry + 1);
+                }
+            }
+            previousentry = entry.getKey();
+
+        }*/
+        return query;
+
+    }
+
 }

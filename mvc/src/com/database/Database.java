@@ -119,6 +119,10 @@ public class Database {
             }
             Statement statement = conn.createStatement();
 
+            if (conn == null || conn.isClosed()) {
+                openConnection();
+            }
+            
             String SQLquery
                     = "SELECT " + query.get(QUERYTYPES.SELECT)
                     + " FROM " + query.get(QUERYTYPES.FROM)
@@ -132,6 +136,9 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         } finally
         {
+            closeConnection();
+        }
+        finally {
             closeConnection();
         }
         return null;

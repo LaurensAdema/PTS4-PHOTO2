@@ -1,5 +1,6 @@
-package com.javatpoint;
+package com.login;
 
+import com.domain.account.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -18,12 +19,12 @@ public class ControllerServlet extends HttpServlet {
 		String name=request.getParameter("name");
 		String password=request.getParameter("password");
 		
-		LoginBean bean=new LoginBean();
-		bean.setName(name);
-		bean.setPassword(password);
-		request.setAttribute("bean",bean);
+                Account account = new Account();
+		account.setNaam(name);
+		account.setPassword(password);
+		request.setAttribute("account",account);
 		
-		boolean status=bean.validate();
+		boolean status=account.validate();
 		
 		if(status){
 			RequestDispatcher rd=request.getRequestDispatcher("login-success.jsp");

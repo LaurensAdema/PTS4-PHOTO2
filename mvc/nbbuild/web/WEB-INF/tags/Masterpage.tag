@@ -51,7 +51,7 @@
                         <div class="profile-usertitle-job">
                             Developer
                         </div>
-                        <button type="submit" class="btn btn-default" ID="btnlogout" >
+                        <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href='/WEB-INF'" >
                             Log Out
                         </button>
                     </div>

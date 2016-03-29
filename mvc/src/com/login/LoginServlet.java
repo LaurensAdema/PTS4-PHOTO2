@@ -26,14 +26,14 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("account", account);
 
         boolean status = account.validate();
-
+        request.setAttribute("logged",true);
         if (status)
         {
-            RequestDispatcher rd = request.getRequestDispatcher("login-success.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         } else
         {
-            RequestDispatcher rd = request.getRequestDispatcher("login-error.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
 

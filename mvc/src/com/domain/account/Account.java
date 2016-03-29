@@ -20,10 +20,9 @@ import java.util.logging.Logger;
  * @author Laurens Adema
  */
 public class Account {
-
     private String naam;
     private String password;
-
+    
     public String getNaam() {
         return naam;
     }

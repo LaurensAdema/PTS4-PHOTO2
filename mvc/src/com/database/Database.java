@@ -85,6 +85,7 @@ public class Database {
         //Na gebruik _altijd_ connectie closen (closeConnection())
         try {
             if (conn == null || conn.isClosed()) {
+
                 openConnection();
                 if (conn == null) {
                     System.out.println("Geen conn");
@@ -116,6 +117,7 @@ public class Database {
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         return null;
     }
@@ -188,7 +190,7 @@ public class Database {
         }
         int previousentry = 0;
 
-/*        for (Entry<Integer, LinkedHashMap<Database.QUERYTYPES, String>> entry : query.entrySet()) {
+        /*        for (Entry<Integer, LinkedHashMap<Database.QUERYTYPES, String>> entry : query.entrySet()) {
             if (entry.getValue().containsKey(QUERYTYPES.IS)) {
                 if (query.get(previousentry).containsKey(QUERYTYPES.IS)) {
                     String previousword = query.get(previousentry).get(QUERYTYPES.IS);

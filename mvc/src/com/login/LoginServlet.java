@@ -18,7 +18,6 @@ public class LoginServlet extends HttpServlet {
 
         String name = request.getParameter("tbusername");
         String password = request.getParameter("tbpassword");
-
         Account account = new Account();
         account.setNaam(name);
         account.setPassword(password);
@@ -26,14 +25,9 @@ public class LoginServlet extends HttpServlet {
 
         boolean status = account.validate();
 
-        if (status) {
-            RequestDispatcher rd = request.getRequestDispatcher("login-success.jsp");
-            rd.forward(request, response);
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("login-error.jsp");
-            rd.forward(request, response);
-        }
-
+        request.setAttribute("logged", true);
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request, response);
     }
 
     @Override

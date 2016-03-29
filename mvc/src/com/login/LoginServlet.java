@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
@@ -27,12 +26,10 @@ public class LoginServlet extends HttpServlet {
 
         boolean status = account.validate();
 
-        if (status)
-        {
+        if (status) {
             RequestDispatcher rd = request.getRequestDispatcher("login-success.jsp");
             rd.forward(request, response);
-        } else
-        {
+        } else {
             RequestDispatcher rd = request.getRequestDispatcher("login-error.jsp");
             rd.forward(request, response);
         }
@@ -41,8 +38,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         doPost(req, resp);
     }
 

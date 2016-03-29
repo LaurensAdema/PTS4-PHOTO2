@@ -12,9 +12,10 @@ import com.database.Database;
  * @author Laurens Adema
  */
 public class Account {
+
     private String naam;
     private String password;
-    
+
     public String getNaam() {
         return naam;
     }

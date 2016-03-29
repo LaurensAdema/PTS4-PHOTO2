@@ -121,12 +121,13 @@ public class Database {
             if (conn == null || conn.isClosed())
             {
                 openConnection();
+                if(conn == null)
+                {
+                    System.out.println("Geen conn");
+                    return null;
+                }
             }
             Statement statement = conn.createStatement();
-
-            if (conn == null || conn.isClosed()) {
-                openConnection();
-            }
             
             String SQLquery
                     = "SELECT " + query.get(QUERYTYPES.SELECT)
@@ -141,9 +142,6 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         } finally
         {
-            closeConnection();
-        }
-        finally {
             closeConnection();
         }
         return null;

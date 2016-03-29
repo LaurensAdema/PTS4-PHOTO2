@@ -17,8 +17,8 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
+        String name = request.getParameter("tbusername");
+        String password = request.getParameter("tbpassword");
 
         Account account = new Account();
         account.setNaam(name);

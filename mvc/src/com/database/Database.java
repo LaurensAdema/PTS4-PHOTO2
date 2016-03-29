@@ -135,7 +135,7 @@ public class Database {
                     + " WHERE " + query.get(QUERYTYPES.WHERE)
                     + " = " + query.get(QUERYTYPES.IS) + ";";
             results = statement.executeQuery(SQLquery);
-            return results.getNString(1);
+            return results.getString(1);
 
         } catch (SQLException ex)
         {

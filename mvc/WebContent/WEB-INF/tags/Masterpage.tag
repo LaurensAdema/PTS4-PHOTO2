@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-3">
              <c:choose>
-        <c:when test = "${not requestScope.logged}">
+        <c:when test = "${requestScope.logged}">
             <form role="form" class="form-group" ID="formbefore">
                 <div class="form-group">
 
@@ -51,6 +51,9 @@
                 <div class="profile-usertitle-job">
                     Developer
                 </div>
+                <button type="submit" class="btn btn-default" ID="btnlogout" >
+                    Log Out
+                </button>
             </div>
         </c:otherwise>
              </c:choose>

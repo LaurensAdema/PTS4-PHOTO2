@@ -95,10 +95,15 @@ public class Database {
     {
         try
         {
-            if (conn != null || !conn.isClosed())
+            if (conn != null)
+                    {
+                    if(!conn.isClosed())
+                        
             {
                 conn.close();
                 System.out.println("Connection closed");
+            }
+            } else {
             }
         } catch (SQLException ex)
         {

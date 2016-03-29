@@ -1,3 +1,6 @@
+package com.javatpoint;
+
+import com.database.Database;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +14,6 @@ public class LoginController {
 
     public String getPassword(String username) {
 
-        return database.query("password", "user", "username", username);
+        return Database.getDatabase().query("password", "user", "username", username);
     }
 }

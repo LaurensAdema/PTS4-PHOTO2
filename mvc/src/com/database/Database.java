@@ -2,6 +2,7 @@ package com.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 public class Database {
 
     private Map query;
+
     private enum QUERYTYPES {
         SELECT, FROM, WHERE, IS
     }
@@ -91,8 +93,23 @@ public class Database {
 
     public String query(String selectField, String table, String whereField, String whereValue) {
         setQuery(selectField, table, whereField, whereValue);
-        //return this.query -- needs to be implemented
-        return "temp";
+        ResultSet results;
+
+        try {
+            Statement statement = conn.createStatement();
+
+            String SQLquery
+                    = "SELECT " + query.get(QUERYTYPES.SELECT)
+                    + " FROM " + query.get(QUERYTYPES.FROM)
+                    + " WHERE " + query.get(QUERYTYPES.WHERE)
+                    + " = " + query.get(QUERYTYPES.IS) + ";";
+            results = statement.executeQuery(SQLquery);
+            return results.getNString(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     private void setQuery(String selectField, String table, String whereField, String whereValue) {

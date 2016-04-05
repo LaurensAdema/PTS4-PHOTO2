@@ -19,8 +19,8 @@
                 <option name="8" value="8">8</option>
             </select>
             <select name="language">
-                <option name="English" value="english">Nederlands</option>
-                <option name="Nederlands"value="nederlands">English</option>
+                <option name="English" value="1">Nederlands</option>
+                <option name="Nederlands"value="2">English</option>
             </select>
 
             <button type="submit" class="btn btn-default" ID="btnlang" >

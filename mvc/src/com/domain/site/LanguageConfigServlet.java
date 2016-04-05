@@ -30,7 +30,7 @@ public class LanguageConfigServlet extends HttpServlet {
     }
 
     private void insertValues(String id, String value, String page, String language) {
-        ResultSet rs = Database.getDatabase().query("INSERT INTO element (name, PageID) VALUES (" + id + ", " + page + ")", Database.QUERY.UPDATE);
+        ResultSet rs = Database.getDatabase().query("INSERT INTO element (name,PageID) VALUES (" + id + " , " + page + ")", Database.QUERY.UPDATE);
         int key = -1;
 
         try {

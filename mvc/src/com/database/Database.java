@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -124,6 +125,12 @@ public class Database {
                 return SQLquery.executeQuery();
             } else {
                 PreparedStatement SQLquery = conn.prepareStatement(queryTemp, Statement.RETURN_GENERATED_KEYS);
+                int i = 1;
+                for (String entry : toPrepare) {
+                    SQLquery.setString(i, entry);
+                    i++;
+                }
+                
                 SQLquery.executeUpdate();
 
                 return SQLquery.getGeneratedKeys();
@@ -159,6 +166,9 @@ public class Database {
         for (String word : querytoBuild.split(" ")) {
             words.add(word);
         }
+        
+        words.removeAll(Arrays.asList("", null));
+
 
         for (int i = 0; i < words.size(); i++) {
             String word = words.get(i);

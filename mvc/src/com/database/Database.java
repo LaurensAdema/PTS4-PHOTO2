@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 public class Database {
 
     public static enum QUERYTYPES {
-        SELECT, FROM, WHERE, IS, INSERT, INTO, AND, FIELD, TABLE, VALUES, DELETE
+        SELECT, FROM, WHERE, IS, INSERT, INTO, AND, FIELD, TABLE, VALUES, DELETE, IN, HAAKJE
     }
 
     // JDBC driver name and database URL
@@ -93,12 +93,12 @@ public class Database {
                 }
             }
             String queryTemp = "";
-            Map<QUERYTYPES, String> toPrepare = new LinkedHashMap<QUERYTYPES, String>();
+            List<String> toPrepare = new ArrayList<>();
             for (Entry<Integer, LinkedHashMap<QUERYTYPES, String>> entry : query.entrySet()) {
                 for (Entry<QUERYTYPES, String> entryinner : entry.getValue().entrySet()) {
                     if (entryinner.getKey() == QUERYTYPES.IS) {
                         queryTemp += " = ? ";
-                        toPrepare.put(entryinner.getKey(), entryinner.getValue());
+                        toPrepare.add(entryinner.getValue());
                     } else {
                         queryTemp += " " + entryinner.getValue() + " ";
                     }
@@ -108,8 +108,8 @@ public class Database {
 
             PreparedStatement SQLquery = conn.prepareStatement(queryTemp);
             int i = 1;
-            for (Entry<QUERYTYPES, String> entry : toPrepare.entrySet()) {
-                SQLquery.setString(i, entry.getValue());
+            for (String entry : toPrepare) {
+                SQLquery.setString(i, entry);
                 i++;
             }
 
@@ -138,6 +138,9 @@ public class Database {
         Map<Integer, LinkedHashMap<Database.QUERYTYPES, String>> query = new LinkedHashMap<>();
 
         List<String> words = new ArrayList<>();
+
+        querytoBuild = querytoBuild.replace("(", " ( ");
+        querytoBuild = querytoBuild.replace(")", " ) ");
 
         for (String word : querytoBuild.split(" ")) {
             words.add(word);
@@ -170,8 +173,43 @@ public class Database {
                 case "VALUES":
                     tempQuery(QUERYTYPES.VALUES, word, query);
                     break;
+                case "IN":
+                    tempQuery(QUERYTYPES.IN, word, query);
+                    break;
+                case ")":
+                    tempQuery(QUERYTYPES.HAAKJE, word, query);
+                    break;
+                case "(":
+                    tempQuery(QUERYTYPES.HAAKJE, word, query);
+                    break;
+                case "IS":
+                    tempQuery(QUERYTYPES.IS, word, query);
+                    break;
                 default:
                     String previousword = words.get(i - 1);
+                    for (int j = i + 1; j < words.size(); j++) {
+                        String word2 = words.get(j);
+                        if (!word2.contains("SELECT")
+                                && !word2.contains("FROM")
+                                && !word2.contains("WHERE")
+                                && !word2.contains("AND")
+                                && !word2.contains("DELETE")
+                                && !word2.contains("INSERT")
+                                && !word2.contains("INTO")
+                                && !word2.contains("VALUES")
+                                && !word2.contains("(")
+                                && !word2.contains(")")
+                                && !word2.contains("=")
+                                && !word2.contains("IN")
+                                && !word2.contains("AS")
+                                && !word.contains("=")) {
+                            word += " " + word2;
+                            words.remove(j);
+                            j--;
+                        } else {
+                            break;
+                        }
+                    }
                     switch (previousword) {
                         case "SELECT":
                             tempQuery(QUERYTYPES.FIELD, word, query);
@@ -189,21 +227,6 @@ public class Database {
                             tempQuery(QUERYTYPES.FIELD, word, query);
                             break;
                         case "=":
-                            for (int j = i + 1; j < words.size(); j++) {
-                                String word2 = words.get(j);
-                                if (!word2.contains("SELECT")
-                                        && !word2.contains("FROM")
-                                        && !word2.contains("WHERE")
-                                        && !word2.contains("AND")
-                                        && !word2.contains("DELETE")
-                                        && !word2.contains("INSERT")
-                                        && !word2.contains("INTO")
-                                        && !word2.contains("VALUES")) {
-                                    word += " " + word2;
-                                    words.remove(j);
-                                    j--;
-                                }
-                            }
                             tempQuery(QUERYTYPES.IS, word, query);
                             break;
                         default:
@@ -211,20 +234,6 @@ public class Database {
                     }
             }
         }
-        int previousentry = 0;
-
-        /*        for (Entry<Integer, LinkedHashMap<Database.QUERYTYPES, String>> entry : query.entrySet()) {
-            if (entry.getValue().containsKey(QUERYTYPES.IS)) {
-                if (query.get(previousentry).containsKey(QUERYTYPES.IS)) {
-                    String previousword = query.get(previousentry).get(QUERYTYPES.IS);
-                    query.put(previousentry, new LinkedHashMap<>());
-                    query.get(previousentry).put(QUERYTYPES.IS, previousword + " " + query.get(previousentry + 1).get(QUERYTYPES.IS));
-                    query.remove(previousentry + 1);
-                }
-            }
-            previousentry = entry.getKey();
-
-        }*/
         return query;
 
     }

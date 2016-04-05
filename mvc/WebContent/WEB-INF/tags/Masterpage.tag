@@ -1,3 +1,6 @@
+<jsp:include page="LanguageServlet" />
+
+
 <%@tag description="Photo 2" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@attribute name="header" fragment="true" %>

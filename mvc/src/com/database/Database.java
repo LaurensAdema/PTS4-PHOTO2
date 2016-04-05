@@ -49,9 +49,9 @@ public class Database {
         return database;
     }
 
-    Connection conn = null;
+    static Connection conn = null;
 
-    public void openConnection() {
+    public static void openConnection() {
         try {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -80,7 +80,7 @@ public class Database {
         }
     }
 
-    public ResultSet query(Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
+    private static ResultSet queryDatabase(Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
         //Queried de database voor resultaten met gegeven tabel en field
         //Na gebruik _altijd_ connectie closen (closeConnection())
         try {
@@ -122,6 +122,10 @@ public class Database {
         return null;
     }
 
+    public static ResultSet query(String query) {
+        return queryDatabase(queryBuilder(query));
+    }
+
     public static void tempQuery(Database.QUERYTYPES type, String value, Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
         int size = query.size();
         if (query.get(size) == null) {
@@ -130,13 +134,17 @@ public class Database {
         query.get(size).put(type, value);
     }
 
-    public static Map queryBuilder(String querytoBuild) {
+    private static Map queryBuilder(String querytoBuild) {
         Map<Integer, LinkedHashMap<Database.QUERYTYPES, String>> query = new LinkedHashMap<>();
 
         List<String> words = new ArrayList<>();
 
         for (String word : querytoBuild.split(" ")) {
             words.add(word);
+        }
+
+        for (int i = 0; i < words.size(); i++) {
+            String word = words.get(i);
             switch (word) {
                 case "SELECT":
                     tempQuery(QUERYTYPES.SELECT, word, query);
@@ -163,7 +171,7 @@ public class Database {
                     tempQuery(QUERYTYPES.VALUES, word, query);
                     break;
                 default:
-                    String previousword = words.get(words.size() - 2);
+                    String previousword = words.get(i - 1);
                     switch (previousword) {
                         case "SELECT":
                             tempQuery(QUERYTYPES.FIELD, word, query);
@@ -181,6 +189,21 @@ public class Database {
                             tempQuery(QUERYTYPES.FIELD, word, query);
                             break;
                         case "=":
+                            for (int j = i + 1; j < words.size(); j++) {
+                                String word2 = words.get(j);
+                                if (!word2.contains("SELECT")
+                                        && !word2.contains("FROM")
+                                        && !word2.contains("WHERE")
+                                        && !word2.contains("AND")
+                                        && !word2.contains("DELETE")
+                                        && !word2.contains("INSERT")
+                                        && !word2.contains("INTO")
+                                        && !word2.contains("VALUES")) {
+                                    word += " " + word2;
+                                    words.remove(j);
+                                    j--;
+                                }
+                            }
                             tempQuery(QUERYTYPES.IS, word, query);
                             break;
                         default:

@@ -20,9 +20,10 @@ import java.util.logging.Logger;
  * @author Laurens Adema
  */
 public class Account {
+
     private String naam;
     private String password;
-    
+
     public String getNaam() {
         return naam;
     }
@@ -42,14 +43,15 @@ public class Account {
     public boolean validate() {
 
         try {
-            ResultSet rs = Database.getDatabase().query(Database.queryBuilder("SELECT password FROM account WHERE username = " + this.naam));
-            
-            rs.next();
-            String foundpassword = rs.getString(1);
-            if (password.equals(foundpassword)) {
-                return true;
-            } else {
-                return false;
+            ResultSet rs = Database.getDatabase().query("SELECT password FROM account WHERE username = " + this.naam);
+
+            while (rs.next()) {
+                String foundpassword = rs.getString(1);
+                if (password.equals(foundpassword)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);

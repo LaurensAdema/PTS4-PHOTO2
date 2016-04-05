@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 
         boolean status = account.validate();
 
-        request.setAttribute("logged", true);
+        request.setAttribute("logged", status);
         RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }

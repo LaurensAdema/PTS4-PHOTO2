@@ -18,4 +18,13 @@
   <servlet-name>LanguageServlet</servlet-name>
   <url-pattern>/LanguageServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>LanguageConfigServlet</servlet-name>
+  <servlet-class>com.domain.site.LanguageConfigServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>LanguageConfigServlet</servlet-name>
+  <url-pattern>/LanguageConfigServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

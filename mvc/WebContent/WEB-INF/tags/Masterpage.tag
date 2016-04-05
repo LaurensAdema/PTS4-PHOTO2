@@ -23,14 +23,14 @@
                         <div class="form-group">
 
                             <label for="tbusername">
-                                Email address
+                                <c:out value="${lbl_username}"/> 
                             </label>
                             <input type="text" class="form-control" name="tbusername" />
                         </div>
                         <div class="form-group">
 
                             <label for="tbpassword">
-                                Password
+                                <c:out value="${lbl_password}"/> 
                             </label>
                             <input type="password" class="form-control" name="tbpassword" />
                         </div>
@@ -38,7 +38,7 @@
                         <div class="checkbox">
 
                             <label>
-                                <input type="checkbox" /> Remember my Username
+                                <input type="checkbox" />  <c:out value="${lbl_rememberusername}"/> 
                             </label>
                         </div> 
                         <button type="submit" class="btn btn-default" ID="btnsubmit" >
@@ -54,7 +54,7 @@
                         <div class="profile-usertitle-job">
                             Developer
                         </div>
-                        <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href='/WEB-INF'" >
+                        <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href = '/WEB-INF'" >
                             Log Out
                         </button>
                     </div>

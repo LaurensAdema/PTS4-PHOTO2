@@ -43,7 +43,7 @@ public class Account {
     public boolean validate() {
 
         try {
-            ResultSet rs = Database.getDatabase().query("SELECT password FROM account WHERE username = " + this.naam);
+            ResultSet rs = Database.getDatabase().query("SELECT password FROM account WHERE username = " + this.naam, Database.QUERY.QUERY);
 
             while (rs.next()) {
                 String foundpassword = rs.getString(1);

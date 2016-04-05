@@ -33,9 +33,9 @@ public class LanguageServlet extends HttpServlet {
 
         ResultSet rs = Database.getDatabase().query("SELECT element_language.text, element.name FROM element_language, element WHERE ElementID IN "
                 + "(SELECT ElementID FROM element WHERE PageID IN "
-                + "(SELECT id FROM page WHERE uri = " + page + ")) AND element_language.LanguageID IN "
+                + "(SELECT id FROM page WHERE uri = " + page + " OR uri = masterpage)) AND element_language.LanguageID IN "
                 + "(SELECT id FROM language WHERE name = " + language + ")"
-                + "AND element.id=element_language.ElementID");
+                + "AND element.id=element_language.ElementID", Database.QUERY.QUERY);
 
         try {
             if (rs != null) {

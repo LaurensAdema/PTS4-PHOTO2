@@ -29,7 +29,11 @@ import java.util.logging.Logger;
 public class Database {
 
     public static enum QUERYTYPES {
-        SELECT, FROM, WHERE, IS, INSERT, INTO, AND, FIELD, TABLE, VALUES, DELETE, IN, HAAKJE
+        SELECT, FROM, WHERE, IS, INSERT, INTO, AND, FIELD, TABLE, VALUES, DELETE, IN, HAAKJE, OR
+    }
+
+    public static enum QUERY {
+        QUERY, UPDATE
     }
 
     // JDBC driver name and database URL
@@ -51,7 +55,7 @@ public class Database {
 
     static Connection conn = null;
 
-    public static void openConnection() {
+    public void openConnection() {
         try {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -80,7 +84,7 @@ public class Database {
         }
     }
 
-    private static ResultSet queryDatabase(Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
+    private ResultSet queryDatabase(Map<Integer, LinkedHashMap<QUERYTYPES, String>> query, QUERY type) {
         //Queried de database voor resultaten met gegeven tabel en field
         //Na gebruik _altijd_ connectie closen (closeConnection())
         try {
@@ -106,14 +110,20 @@ public class Database {
             }
             queryTemp += ";";
 
-            PreparedStatement SQLquery = conn.prepareStatement(queryTemp);
-            int i = 1;
-            for (String entry : toPrepare) {
-                SQLquery.setString(i, entry);
-                i++;
-            }
+            if (type == QUERY.QUERY) {
+                PreparedStatement SQLquery = conn.prepareStatement(queryTemp);
+                int i = 1;
+                for (String entry : toPrepare) {
+                    SQLquery.setString(i, entry);
+                    i++;
+                }
+                return SQLquery.executeQuery();
+            } else {
+                PreparedStatement SQLquery = conn.prepareStatement(queryTemp, Statement.RETURN_GENERATED_KEYS);
+                SQLquery.executeUpdate();
 
-            return SQLquery.executeQuery();
+                return SQLquery.getGeneratedKeys();
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,8 +132,8 @@ public class Database {
         return null;
     }
 
-    public static ResultSet query(String query) {
-        return queryDatabase(queryBuilder(query));
+    public ResultSet query(String query, QUERY type) {
+        return queryDatabase(queryBuilder(query), type);
     }
 
     public static void tempQuery(Database.QUERYTYPES type, String value, Map<Integer, LinkedHashMap<QUERYTYPES, String>> query) {
@@ -185,6 +195,9 @@ public class Database {
                 case "IS":
                     tempQuery(QUERYTYPES.IS, word, query);
                     break;
+                case "OR":
+                    tempQuery(QUERYTYPES.OR, word, query);
+                    break;
                 default:
                     String previousword = words.get(i - 1);
                     for (int j = i + 1; j < words.size(); j++) {
@@ -202,6 +215,7 @@ public class Database {
                                 && !word2.contains("=")
                                 && !word2.contains("IN")
                                 && !word2.contains("AS")
+                                && !word2.contains("OR")
                                 && !word.contains("=")) {
                             word += " " + word2;
                             words.remove(j);
@@ -228,6 +242,9 @@ public class Database {
                             break;
                         case "=":
                             tempQuery(QUERYTYPES.IS, word, query);
+                            break;
+                        case "OR":
+                            tempQuery(QUERYTYPES.FIELD, word, query);
                             break;
                         default:
                             break;

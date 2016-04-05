@@ -3,7 +3,7 @@
    <t:Masterpage>
         
        <jsp:body>
-           <c:out class="textField">${database_test}</c:out> 
+           <c:out>${database_test}</c:out> 
            
        </jsp:body>
        

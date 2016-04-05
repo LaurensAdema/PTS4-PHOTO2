@@ -21,10 +21,12 @@ public class LanguageConfigServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String id = request.getParameter("tbusername");
-        String value = request.getParameter("tbpassword");
-        String page = request.getParameter("tbpassword");
-        String language = request.getParameter("tbpassword");
+        String id = request.getParameter("tbelname");
+        String value = request.getParameter("tbelvalue");
+        String page = request.getParameter("page");
+        String language = request.getParameter("language");
+        
+        insertValues(id, value, page, language);
     }
 
     private void insertValues(String id, String value, String page, String language) {

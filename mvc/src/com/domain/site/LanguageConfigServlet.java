@@ -40,7 +40,7 @@ public class LanguageConfigServlet extends HttpServlet {
                 }
             }
             if (key != -1) {
-                Database.getDatabase().query("INSERT INTO element_language (LanguageID, ElementID, text) VALUES (" + language + ", " + key + ", " + value + ")", Database.QUERY.UPDATE);
+                Database.getDatabase().query("INSERT INTO element_language (LanguageID,ElementID,text) VALUES (" + language + " , " + key + " , " + value + ")", Database.QUERY.UPDATE);
 
             }
         } catch (SQLException ex) {

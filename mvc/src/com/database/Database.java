@@ -101,7 +101,11 @@ public class Database {
             for (Entry<Integer, LinkedHashMap<QUERYTYPES, String>> entry : query.entrySet()) {
                 for (Entry<QUERYTYPES, String> entryinner : entry.getValue().entrySet()) {
                     if (entryinner.getKey() == QUERYTYPES.IS) {
-                        queryTemp += " = ? ";
+                        if (type == QUERY.QUERY) {
+                            queryTemp += " = ? ";
+                        } else {
+                            queryTemp += " ? ";
+                        }
                         toPrepare.add(entryinner.getValue());
                     } else {
                         queryTemp += " " + entryinner.getValue() + " ";
@@ -198,6 +202,9 @@ public class Database {
                 case "OR":
                     tempQuery(QUERYTYPES.OR, word, query);
                     break;
+                case ",":
+                    tempQuery(QUERYTYPES.HAAKJE, word, query);
+                    break;
                 default:
                     String previousword = words.get(i - 1);
                     for (int j = i + 1; j < words.size(); j++) {
@@ -215,6 +222,7 @@ public class Database {
                                 && !word2.contains("=")
                                 && !word2.contains("IN")
                                 && !word2.contains("AS")
+                                && !word2.contains(",")
                                 && !word2.contains("OR")
                                 && !word.contains("=")) {
                             word += " " + word2;
@@ -245,6 +253,16 @@ public class Database {
                             break;
                         case "OR":
                             tempQuery(QUERYTYPES.FIELD, word, query);
+                            break;
+                        case "(":
+                            if (words.get(i - 2) == "VALUES") {
+                                tempQuery(QUERYTYPES.IS, word, query);
+                            } else {
+                                tempQuery(QUERYTYPES.FIELD, word, query);
+                            }
+                            break;
+                        case ",":
+                            tempQuery(QUERYTYPES.IS, word, query);
                             break;
                         default:
                             break;

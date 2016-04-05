@@ -9,8 +9,8 @@
             <input type="text" class="form-control" name="tbelname" placeholder="name of element ex. lbl_username"/><br>
             <input type="text" class="form-control" name="tbelvalue" placeholder="value of element so : Username"/>
             <select name="page">
-                <option name="master" value="1">1</option>
-                <option name="index" value="2">2</option>
+                <option name="master" value="1">master</option>
+                <option name="index" value="2">index</option>
                 <option name="3" value="3">3</option>
                 <option name="4" value="4">4</option>
                 <option name="5" value="5">5</option>

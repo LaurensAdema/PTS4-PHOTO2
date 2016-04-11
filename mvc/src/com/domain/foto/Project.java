@@ -19,7 +19,6 @@ public class Project {
     }
 
     private String Name;
-    private DateTime Date;
 
     /**
      * Get the value of Name
@@ -39,15 +38,15 @@ public class Project {
         this.Name = Name;
     }
 
-    private LocalDate DateTime;
+    private DateTime Date;
 
     /**
      * Get the value of Date
      *
      * @return the value of Date
      */
-    public LocalDate getDate() {
-        return DateTime;
+    public DateTime getDate() {
+        return Date;
     }
 
     /**
@@ -58,4 +57,10 @@ public class Project {
     public void setDate(DateTime Date) {
         this.Date = Date;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" + "Name=" + Name + ", Date=" + Date + '}';
+    }
+
 }

@@ -13,37 +13,17 @@
 <div class="container-fluid">
     <div class="row" height="100px">
         <div class="panel panel-default col-md-6">
-            <table class="table table-striped table-condensed">
-                <thead>
-                    <tr>
-                        <th>
-                            #
-                        </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Number of Photo's
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Test Project
-                        </td>
-                        <td>
-                            31-12-2015
-                        </td>
-                        <td>
-                            01/04/2012
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+           <form role="form" class="form form-group" action="LoginServlet" method="post">
+<table>
+<tr><th>Name</th> <th>Date</th></tr>
+<c:forEach var="Project" items="${projectlist}">
+    <tr>
+           <td>${Project.Name}</td>
+       <td>${Project.Date}</td>
+    </tr>
+</c:forEach>
+</table>
+<form>
         </div>
         <div class="panel panel-default col-md-6 panelcollapseheight">
             <form role="form" class="form form-group" action="LoginServlet" method="post">

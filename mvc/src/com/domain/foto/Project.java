@@ -5,7 +5,7 @@
  */
 package com.domain.foto;
 
-import java.time.LocalDate;
+import org.joda.time.*;
 
 /**
  *
@@ -13,14 +13,13 @@ import java.time.LocalDate;
  */
 public class Project {
 
-    public Project(String Name, LocalDate Date) {
+    public Project(String Name, DateTime Date) {
         this.Name = Name;
         this.Date = Date;
     }
-    
-    
-    
-     private String Name;
+
+    private String Name;
+    private DateTime Date;
 
     /**
      * Get the value of Name
@@ -40,7 +39,7 @@ public class Project {
         this.Name = Name;
     }
 
-    private LocalDate Date;
+    private LocalDate DateTime;
 
     /**
      * Get the value of Date
@@ -48,7 +47,7 @@ public class Project {
      * @return the value of Date
      */
     public LocalDate getDate() {
-        return Date;
+        return DateTime;
     }
 
     /**
@@ -56,8 +55,7 @@ public class Project {
      *
      * @param Date new value of Date
      */
-    public void setDate(LocalDate Date) {
+    public void setDate(DateTime Date) {
         this.Date = Date;
     }
-
 }

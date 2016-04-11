@@ -75,8 +75,8 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Mijn Producten</a></li>
-     <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
+                    <li><a href="../../index.jsp">Mijn Producten</a></li>
+                    <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -158,30 +158,12 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <!--   <div class="col-md-3 form-group profile-usertitle " ID="formafter">
-            <div class="profile-usertitle-name">
-                Marcus Doe
-            </div>
-            <div class="profile-usertitle-job">
-                Developer
-            </div>
-        </div>-->
 </div>
-
-
-
 </head>
-
 <html>
-
-
-
     <jsp:invoke fragment="header"/>
+    
     <div id="body" >
-
-
-
         <jsp:doBody/>
-
     </body>
 </html>

@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-3">
             <c:choose>
-                <c:when test = "${ not requestScope.logged}">
+                <c:when test = "${ empty account}">
                     <form role="form" class="form-group" ID="formbefore" action="LoginServlet" method="post">
                         <div class="form-group">
 
@@ -49,7 +49,7 @@
                 <c:otherwise>
                     <div class="form-group profile-usertitle " ID="formafter">
                         <div class="profile-usertitle-name">
-                            Marcus Doe
+                            <c:out value="${account.naam}"/>
                         </div>
                         <div class="profile-usertitle-job">
                             Developer

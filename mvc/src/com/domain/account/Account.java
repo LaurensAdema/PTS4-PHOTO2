@@ -8,13 +8,8 @@ package com.domain.account;
 import com.database.Database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.UUID;
 /**
  *
  * @author Laurens Adema
@@ -22,7 +17,6 @@ import java.util.UUID;
 public class Account {
 
     private String naam;
-    private String password;
 
     public String getNaam() {
         return naam;
@@ -32,21 +26,13 @@ public class Account {
         this.naam = naam;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean validate() {
+    public boolean validate(String password) {
 
         try {
-            ResultSet rs = Database.getDatabase().query("SELECT password FROM account WHERE username = " + this.naam, Database.QUERY.QUERY);
+            ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + this.naam, Database.QUERY.QUERY);
 
             while (rs.next()) {
-                String foundpassword = rs.getString(1);
+                String foundpassword = rs.getString("password");
                 if (password.equals(foundpassword)) {
                     return true;
                 } else {

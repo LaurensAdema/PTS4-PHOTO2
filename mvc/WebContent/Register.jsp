@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-          <form method="post" action="registration.jsp">
+          <form action="LogincodeServlet" method="post"  >
             <center>
             <table border="1" width="30%" cellpadding="5">
                 <thead>
@@ -24,15 +24,15 @@
                 <tbody>
                     <tr>
                         <td>Naam</td>
-                        <td><input type="text" name="accountname" value="" /></td>
+                        <td><input type="text" name="tbaccountname" value="" /></td>
                     </tr>
                     <tr>
-                        <td>Klas</td>
-                        <td><input type="text" name="klasname" value="" /></td>
+                        <td>Adres</td>
+                        <td><input type="text" name="tbadres" value="" /></td>
                     </tr>
                     
                     <tr>
-                        <td><input onclick="document.forms[0].action = 'logincode.jsp'; return true;" type="submit" value="Submit" /></td>
+                        <td><input  type="submit" value="register" /></td>
                    
                     </tr>
                  
@@ -59,7 +59,7 @@
                     </tr>
                     
                     <tr>
-                        <td><input onclick="document.forms[1].action = 'logincode.jsp'; return true;" type="submit" value="Submit" /></td>
+                        <td><input  type="submit" value="Submit" /></td>
                    
                     </tr>
                  

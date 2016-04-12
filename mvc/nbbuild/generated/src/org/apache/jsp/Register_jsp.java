@@ -52,7 +52,7 @@ public final class Register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>JSP Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("          <form method=\"post\" action=\"registration.jsp\">\n");
+      out.write("          <form action=\"Test\" method=\"post\"  >\n");
       out.write("            <center>\n");
       out.write("            <table border=\"1\" width=\"30%\" cellpadding=\"5\">\n");
       out.write("                <thead>\n");
@@ -63,15 +63,15 @@ public final class Register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <tbody>\n");
       out.write("                    <tr>\n");
       out.write("                        <td>Naam</td>\n");
-      out.write("                        <td><input type=\"text\" name=\"accountname\" value=\"\" /></td>\n");
+      out.write("                        <td><input type=\"text\" name=\"tbaccountname\" value=\"\" /></td>\n");
       out.write("                    </tr>\n");
       out.write("                    <tr>\n");
-      out.write("                        <td>Klas</td>\n");
-      out.write("                        <td><input type=\"text\" name=\"klasname\" value=\"\" /></td>\n");
+      out.write("                        <td>Adres</td>\n");
+      out.write("                        <td><input type=\"text\" name=\"tbadres\" value=\"\" /></td>\n");
       out.write("                    </tr>\n");
       out.write("                    \n");
       out.write("                    <tr>\n");
-      out.write("                        <td><input onclick=\"document.forms[0].action = 'logincode.jsp'; return true;\" type=\"submit\" value=\"Submit\" /></td>\n");
+      out.write("                        <td><input  type=\"submit\" value=\"register\" /></td>\n");
       out.write("                   \n");
       out.write("                    </tr>\n");
       out.write("                 \n");
@@ -98,7 +98,7 @@ public final class Register_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </tr>\n");
       out.write("                    \n");
       out.write("                    <tr>\n");
-      out.write("                        <td><input onclick=\"document.forms[1].action = 'logincode.jsp'; return true;\" type=\"submit\" value=\"Submit\" /></td>\n");
+      out.write("                        <td><input  type=\"submit\" value=\"Submit\" /></td>\n");
       out.write("                   \n");
       out.write("                    </tr>\n");
       out.write("                 \n");

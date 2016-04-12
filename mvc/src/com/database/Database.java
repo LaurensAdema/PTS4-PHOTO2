@@ -265,7 +265,7 @@ public class Database {
                             tempQuery(QUERYTYPES.FIELD, word, query);
                             break;
                         case "(":
-                            if (words.get(i - 2) == "VALUES") {
+                            if (words.get(i - 2).equals("VALUES")) {
                                 tempQuery(QUERYTYPES.IS, word, query);
                             } else {
                                 tempQuery(QUERYTYPES.FIELD, word, query);

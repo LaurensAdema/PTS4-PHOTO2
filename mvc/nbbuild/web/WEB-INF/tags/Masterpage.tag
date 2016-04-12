@@ -83,8 +83,8 @@
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-                            <li><a href="#"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>
+                            <li><a href="?lang=english"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+                            <li><a href="?lang=dutch"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>
                         </ul>
                         <script>$(".dropdown-menu li a").click(function () {
                                 var selText = $(this).text();

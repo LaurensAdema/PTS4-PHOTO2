@@ -5,13 +5,14 @@
  */
 package com.domain.foto;
 
+import java.io.Serializable;
 import org.joda.time.*;
 
 /**
  *
  * @author markb
  */
-public class Project {
+public class Project implements Serializable {
 
     public Project(String Name, DateTime Date) {
         this.Name = Name;

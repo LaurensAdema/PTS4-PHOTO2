@@ -8,6 +8,10 @@
         <servlet-name>Test</servlet-name>
         <servlet-class>com.logincode.LogincodeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PhotoGroup</servlet-name>
+        <servlet-class>com.logincode.PhotoGroup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PhotoGroup</servlet-name>
+        <url-pattern>/PhotoGroup</url-pattern>
     </servlet-mapping>
 </web-app>

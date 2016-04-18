@@ -35,7 +35,10 @@
                         <td><input  type="submit" value="register" /></td>
                    
                     </tr>
-                 
+                     <tr>
+                        <td><input  type="submit" value="logincode" onclick="document.forms[0].action = 'logincode.jsp'; return true;" /></td>
+                   
+                    </tr>
                 </tbody>
             </table>
             </center>
@@ -60,6 +63,30 @@
                     
                     <tr>
                         <td><input  type="submit" value="Submit" /></td>
+                   
+                    </tr>
+                 
+                </tbody>
+            </table>
+            </center>
+        </form>
+             <form action="PhotoGroup" method="post"  >
+            <center>
+            <table border="1" width="30%" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th colspan="2">Voeg foto toe aan een group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>foto</td>
+                        <td><input type="text" name="tbaccountname" value="" /></td>
+                    </tr>
+                    <tr>
+                      
+                    <tr>
+                        <td><input  type="submit" value="register" /></td>
                    
                     </tr>
                  

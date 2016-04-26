@@ -75,7 +75,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="../../index.jsp">Mijn Producten</a></li>
+                    <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>
                     <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
 
                 </ul>

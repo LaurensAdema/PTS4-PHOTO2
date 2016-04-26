@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class Account {
 
     private String naam;
+    private int id;
 
     public String getNaam() {
         return naam;
@@ -27,13 +28,13 @@ public class Account {
     }
 
     public boolean validate(String password) {
-
         try {
             ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + this.naam, Database.QUERY.QUERY);
 
             while (rs.next()) {
                 String foundpassword = rs.getString("password");
                 if (password.equals(foundpassword)) {
+                    id = rs.getInt("id");
                     return true;
                 } else {
                     return false;
@@ -42,8 +43,16 @@ public class Account {
         } catch (SQLException ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Database.getDatabase().closeConnection();
+        finally
+        {
+            Database.getDatabase().closeConnection();
+        }
         return false;
+    }
+
+    public int getID()
+    {
+        return this.id;
     }
 
 }

@@ -33,6 +33,14 @@
         <url-pattern>/LogincodeServlet</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>AttachLoginCodeServlet</servlet-name>
+        <servlet-class>com.logincode.AttachLoginCodeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AttachLoginCodeServlet</servlet-name>
+        <url-pattern>/AttachLoginCodeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>LanguageServlet</servlet-name>
         <servlet-class>com.domain.site.LanguageServlet</servlet-class>
     </servlet>

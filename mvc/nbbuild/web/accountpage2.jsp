@@ -6,11 +6,10 @@
 
     <jsp:body>
         <h3>Add some inlogcode here</h3>
-        <form>
+        <form action="AttachLoginCodeServlet" method="post">
             <div class="form-inline">
                 <label  for="tblogincode">Inlogcode here</label>
-                <input type="text" class="form-control" id="tblogincode" placeholder="Inlogcode">
-               
+                <input type="text" class="form-control" name="tblogincode" placeholder="Inlogcode">
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </jsp:body>

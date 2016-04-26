@@ -18,8 +18,7 @@ import org.joda.time.DateTime;
 
 public class LoginServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
@@ -27,25 +26,25 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("tbpassword");
         Account account = new Account();
         account.setNaam(name);
-        if (account.validate(password))
-        {
-             String lang = null;
-            if(request.getSession(true).getAttribute("lang") != null)
-            {
+        if (account.validate(password)) {
+            String lang = null;
+            if (request.getSession(true).getAttribute("lang") != null) {
                 lang = request.getSession(true).getAttribute("lang").toString();
             }
             request.getSession().invalidate();
 
             HttpSession newSession = request.getSession(true);
-            if(lang != null)
-            {
+            if (lang != null) {
                 newSession.setAttribute("lang", lang);
             }
             newSession.setAttribute("account", account);
 
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
         }
+
+        //RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        //rd.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+
 
         List<Project> projecten = new ArrayList<>();
         projecten.add(new Project("Een", DateTime.now()));
@@ -57,8 +56,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
     }
 
 }

@@ -17,9 +17,13 @@
 <table>
 <tr><th>Name</th> <th>Date</th></tr>
 <c:forEach var="Project" items="${projectlist}">
-    <tr>
-           <td>${Project.Name}</td>
-       <td>${Project.Date}</td>
+       <tr>
+        <td>
+            <c:out value="${Project.Name}" />
+        </td>
+        <td>
+            <c:out value="${Project.Date}" />
+        </td>
     </tr>
 </c:forEach>
 </table>

@@ -8,44 +8,40 @@
         <h1>Account details </h1>
         <form>
             <div class="form-inline">
-                <label  for="exampleInputEmail3">First Name</label>
-                <input type="text" class="form-control" id="tbUsername" placeholder="Username">
-                <label  for="exampleInputEmail3">Last Name</label>
+                <label  for="tbFirstName">First Name</label>
+                <input type="text" class="form-control" id="tbFirstName" placeholder="First Name">
+                <label  for="tbLastName">Last Name</label>
                 <input type="text" class="form-control" id="tbLastName" placeholder="Last Name">
             </div></br>
             <div class="form-group">
-                <label  for="exampleInputEmail3">Email address</label>
-                <input type="email" class="form-control " id="tbEmail" placeholder="Email">
+                <label  for="tbEmail1">Email address</label>
+                <input type="email" class="form-control " id="tbEmail1" placeholder="Email">
             </div>
             <div class="form-group">
-                <label  for="exampleInputEmail3">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                <label  for="tbEmail2">Email address</label>
+                <input type="email" class="form-control" id="tbEmail2" placeholder="Repeat Email">
             </div>
             <div class="form-group">
-                <label  for="exampleInputPassword3">Password</label>
+                <label  for="tbPassword">Password</label>
                 <input type="password" class="form-control" id="tbPassword" placeholder="Password">
             </div>
             <div class="form-group">
-                <label  for="exampleInputPassword3">Password</label>
-                <input type="password" class="form-control" id="tbPassword2" placeholder="Password">
+                <label  for="tbPassword2">Password</label>
+                <input type="password" class="form-control" id="tbPassword2" placeholder=" Repeat Password">
             </div>
 
 
             <h1>Address Form </h1>
             <div class="form-group">
-                <label  for="exampleInputEmail3">Address</label>
-                <input type="text" class="form-control" id="tbAddress">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputName2">Postal Code</label>
+                <label for="tbPostal">Postal Code</label>
                 <input type="text" class="form-control" id="tbPostal" >
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail2">Address number</label>
-                <input type="email" class="form-control" id="tbHousenr">  </div>
+                <label for="tbHousenr">Address number</label>
+                <input type="text" class="form-control" id="tbHousenr">  </div>
             <div class="form-group">
-                <label  for="exampleInputPassword3">City</label>
-                <input type="password" class="form-control" id="tbCity" placeholder="Password">
+                <label  for="tbCity">City</label>
+                <input type="text" class="form-control" id="tbCity" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>

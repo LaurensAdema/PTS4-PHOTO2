@@ -5,7 +5,7 @@
 <t:Masterpage>
 
     <jsp:body>
-        <h3>Add some inlogcode here</h1>
+        <h3>Add some inlogcode here</h3>
         <form>
             <div class="form-inline">
                 <label  for="tblogincode">Inlogcode here</label>

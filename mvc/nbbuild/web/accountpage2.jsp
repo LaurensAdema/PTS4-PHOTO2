@@ -5,8 +5,10 @@
 <t:Masterpage>
 
     <jsp:body>
+        <h3>Add some inlogcode here</h3>
         <form>
             <div class="form-inline">
+                <label  for="tblogincode">Inlogcode here</label>
                 <input type="text" class="form-control" id="tblogincode" placeholder="Inlogcode">
                
             <button type="submit" class="btn btn-default">Submit</button>

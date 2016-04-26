@@ -78,6 +78,7 @@
                     <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>
                     <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
                     <li><a href="/WEB-INF/accountpage1.jsp">Add Account</a></li>
+                                        <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

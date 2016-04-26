@@ -1,5 +1,6 @@
-package com.login;
+package com.register;
 
+import com.database.Database;
 import com.domain.account.Account;
 import com.domain.foto.Project;
 import java.io.IOException;
@@ -16,16 +17,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String name = request.getParameter("tbusername");
-        String password = request.getParameter("tbpassword");
+        String username = request.getParameter("tbUsername");
+        String email = request.getParameter("tbEmail");
+        String address = request.getParameter("tbAddress");
+        String housenr = request.getParameter("tbHousenr");
+        String password = request.getParameter("tbPassword");
+        String password2 = request.getParameter("tbPassword2");
+        String lastname = request.getParameter("tbLastname");
+        
+        if(password.equals(password2) && !username.equals("") && email.contains("@") &&  !address.equals("") && !housenr.equals("") && !password.equals("") && !lastname.equals("")){
+            Database.getDatabase().query("INSERT INTO accounts (username,email,address,nr,password,lastname) VALUES (" + username +" , " + email + " , " + address + " , " + housenr + " , " + password + " , " + lastname + ")", Database.QUERY.UPDATE);
+        
+
+
         Account account = new Account();
-        account.setNaam(name);
+        account.setNaam(username);
         if (account.validate(password)) {
             String lang = null;
             if (request.getSession(true).getAttribute("lang") != null) {
@@ -42,14 +54,12 @@ public class LoginServlet extends HttpServlet {
         }
 
         response.sendRedirect(request.getContextPath() + "/index.jsp");
+        } else {
+            //something went wrong
+            //TODO: for each field, provide error
+        }
 
 
-        List<Project> projecten = new ArrayList<>();
-        projecten.add(new Project("Een", DateTime.now()));
-        projecten.add(new Project("Twee", DateTime.now()));
-        projecten.add(new Project("Drie", DateTime.now()));
-        projecten.add(new Project("Vier", DateTime.now()));
-        request.setAttribute("projectlist", projecten);
     }
 
     @Override

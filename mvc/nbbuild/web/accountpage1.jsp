@@ -9,25 +9,25 @@
         <form>
             <div class="form-inline">
                 <label  for="tbFirstName">First Name</label>
-                <input type="text" class="form-control" id="tbFirstName" placeholder="First Name">
+                <input type="text" class="form-control" name="tbFirstName" placeholder="First Name">
                 <label  for="tbLastName">Last Name</label>
-                <input type="text" class="form-control" id="tbLastName" placeholder="Last Name">
+                <input type="text" class="form-control" name="tbLastName" placeholder="Last Name">
             </div></br>
             <div class="form-group">
                 <label  for="tbEmail1">Email address</label>
-                <input type="email" class="form-control " id="tbEmail1" placeholder="Email">
+                <input type="email" class="form-control " name="tbEmail1" placeholder="Email">
             </div>
             <div class="form-group">
                 <label  for="tbEmail2">Email address</label>
-                <input type="email" class="form-control" id="tbEmail2" placeholder="Repeat Email">
+                <input type="email" class="form-control" name="tbEmail2" placeholder="Repeat Email">
             </div>
             <div class="form-group">
                 <label  for="tbPassword">Password</label>
-                <input type="password" class="form-control" id="tbPassword" placeholder="Password">
+                <input type="password" class="form-control" name="tbPassword" placeholder="Password">
             </div>
             <div class="form-group">
                 <label  for="tbPassword2">Password</label>
-                <input type="password" class="form-control" id="tbPassword2" placeholder=" Repeat Password">
+                <input type="password" class="form-control" name="tbPassword2" placeholder=" Repeat Password">
             </div>
 
 

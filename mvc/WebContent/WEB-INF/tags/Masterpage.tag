@@ -20,6 +20,7 @@
             <c:choose>
                 <c:when test = "${ empty account}">
                     <form role="form" class="form-group" ID="formbefore" action="LoginServlet" method="post">
+                        
                         <div class="form-group">
 
                             <label for="tbusername">

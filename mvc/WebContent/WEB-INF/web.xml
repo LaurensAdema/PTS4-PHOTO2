@@ -20,7 +20,7 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
@@ -71,5 +71,21 @@
     <servlet-mapping>
         <servlet-name>UploadDownloadFileServlet</servlet-name>
         <url-pattern>/UploadDownloadFileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ShowPicturesServletLowRes</servlet-name>
+        <servlet-class>com.showpictures.ShowPicturesServletLowRes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowPicturesServletLowRes</servlet-name>
+        <url-pattern>/ShowPicturesServletLowRes</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ShowPicturesServletHighRes</servlet-name>
+        <servlet-class>com.showpictures.ShowPicturesServletHighRes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowPicturesServletHighRes</servlet-name>
+        <url-pattern>/ShowPicturesServletHighRes</url-pattern>
     </servlet-mapping>
 </web-app>

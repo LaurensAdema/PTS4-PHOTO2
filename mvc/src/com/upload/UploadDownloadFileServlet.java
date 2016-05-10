@@ -96,18 +96,12 @@ public class UploadDownloadFileServlet extends HttpServlet {
         out.write("<html><head></head><body>");
         try {
             List<FileItem> fileItemsList = uploader.parseRequest(request);
-            Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
-            while(fileItemsIterator.hasNext()){
-                FileItem fileItem = fileItemsIterator.next();
-                System.out.println("FieldName="+fileItem.getFieldName());
-                System.out.println("FileName="+fileItem.getName());
-                System.out.println("ContentType="+fileItem.getContentType());
-                System.out.println("Size in bytes="+fileItem.getSize());
+            Iterator<FileItem> fileItemsIterator1 = fileItemsList.iterator();
+            Iterator<FileItem> fileItemsIterator2 = fileItemsList.iterator();
+            while(fileItemsIterator1.hasNext()){
+                FileItem fileItem = fileItemsIterator1.next();
                 
-                File file = new File(request.getServletContext().getAttribute("FILES_DIR")+File.separator+"\\High resolution\\"+fileItem.getName());
-                
-                
-              if (fileItem.isFormField()) {
+                if (fileItem.isFormField()) {
                 
                 String fieldname = fileItem.getFieldName();
                 
@@ -121,21 +115,37 @@ public class UploadDownloadFileServlet extends HttpServlet {
                 }
                 
               }
-              else
-              {
+            }
+            while(fileItemsIterator2.hasNext()){
+                FileItem fileItem = fileItemsIterator2.next();
+                System.out.println("FieldName="+fileItem.getFieldName());
+                System.out.println("FileName="+fileItem.getName());
+                System.out.println("ContentType="+fileItem.getContentType());
+                System.out.println("Size in bytes="+fileItem.getSize());
+                
+                File file = new File(request.getServletContext().getAttribute("FILES_DIR")+File.separator+"\\High resolution\\"+fileItem.getName());
+                
+                
+              
+              
                   
                 file.getParentFile().mkdirs();
                 System.out.println("Absolute Path at server="+file.getAbsolutePath());
                 fileItem.write(file);
-                out.write("File "+fileItem.getName()+ " uploaded successfully.");
-                out.write("<br>");
-                out.write("<a href=\"UploadDownloadFileServlet?fileName=High resolution\\"+fileItem.getName()+"\">Download "+fileItem.getName()+"</a>");
+               // out.write("File "+fileItem.getName()+ " uploaded successfully.");
+               // out.write("<br>");
+                //out.write("<a href=\"UploadDownloadFileServlet?fileName=High resolution\\"+fileItem.getName()+"\">Download "+fileItem.getName()+"</a>");
+                
+               
                 
                 Pathhighres = file.getAbsolutePath();
                 Filename = fileItem.getName();
-              }
-             
               
+             if(fileItem.getName() != null)
+             {
+                 Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+fileItem.getName()+" , "+Prijs+" , Low resolution\\"+fileItem.getName()+" , High resolution\\"+fileItem.getName()+")", Database.QUERY.UPDATE);
+             }
+                     
                 
                 
                 
@@ -179,12 +189,14 @@ catch (Exception ex)
         }
 
         
-       Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+Filename+" , "+Prijs+" , Low resolution\\"+Filename+" , High resolution\\"+Filename+")", Database.QUERY.UPDATE);
+
        //Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( 1 , test , 2 , /tesadtdsf , /teadstsdf)", Database.QUERY.UPDATE);
     //   out.write("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+Filename+" , "+Prijs+" , Low resolution\\"+Filename+" , High resolution\\"+Filename+")");
                
        
        out.write("</body></html>");
+       
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
  
 }

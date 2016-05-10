@@ -23,13 +23,15 @@ import org.joda.time.DateTime;
 
 public class ShowPicturesServletLowRes extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String Accountid = request.getParameter("tbaccountid");
         
-        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE accountID = " + Accountid, Database.QUERY.QUERY);
+        
+        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE accountID = 1", Database.QUERY.QUERY);
 
         try {
             while (rs.next()) {
@@ -40,12 +42,6 @@ public class ShowPicturesServletLowRes extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ShowPicturesServletLowRes.class.getName()).log(Level.SEVERE, null, ex);
         }
-             
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
     }
 
 }

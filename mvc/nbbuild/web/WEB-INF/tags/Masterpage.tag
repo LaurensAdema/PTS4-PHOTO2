@@ -72,7 +72,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand active" href="#">Home</a>
+                <a class="navbar-brand active" href="/WEB-INF/index.jsp">Home</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -80,6 +80,7 @@
                     <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
                     <li><a href="/WEB-INF/accountpage1.jsp">Add Account</a></li>
                                         <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                                        <li><a href="/WEB-INF/showphotoscustomer.jsp">Zie foto's</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

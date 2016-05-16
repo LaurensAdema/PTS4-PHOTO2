@@ -1,4 +1,4 @@
-package com.showpictures;
+package com.group;
 
 import com.database.Database;
 import com.domain.account.Account;
@@ -21,25 +21,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 
-public class ShowPicturesServletHighRes extends HttpServlet {
+public class AddLoginCodeToGroupServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String Accountid = request.getParameter("tbaccountid");
+        String GroepID = request.getParameter("tbgroupid");
+        String Logincode = request.getParameter("tblogincode");
         
-        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE groupID = " + Accountid, Database.QUERY.QUERY);
+        Database.getDatabase().query("INSERT INTO grouplogincodes (groupID,logincode) VALUES ("+GroepID+" , "+Logincode+")", Database.QUERY.UPDATE);
 
-        try {
-            while (rs.next()) {
-                String Pathlowres = rs.getString("pathhighres");
-                out.write("<img src=\"UploadDownloadFileServlet?fileName="+Pathlowres+"\">");
-                out.write("<br>");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowPicturesServletHighRes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
              
     }
 

@@ -88,4 +88,22 @@
         <servlet-name>ShowPicturesServletHighRes</servlet-name>
         <url-pattern>/ShowPicturesServletHighRes</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddLoginCodeToGroupServlet</servlet-name>
+        <servlet-class>com.group.AddLoginCodeToGroupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddLoginCodeToGroupServlet</servlet-name>
+        <url-pattern>/AddLoginCodeToGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddGroupServlet</servlet-name>
+        <servlet-class>com.group.AddGroupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddGroupServlet</servlet-name>
+        <url-pattern>/AddGroupServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
+
+

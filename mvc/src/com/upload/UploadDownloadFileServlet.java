@@ -1,6 +1,7 @@
 package com.upload;
 
 import com.database.Database;
+import com.randomcodegenerator.InlogCodeGenerator;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -88,8 +89,10 @@ public class UploadDownloadFileServlet extends HttpServlet {
          String Accountid = null;
                 String Prijs = null;
                 String Pathlowres = null;
-                String Pathhighres = null;
-                String Filename = null;
+ 
+                InlogCodeGenerator inlogCodeGenerator = new InlogCodeGenerator();
+                
+                String inlogcode = inlogCodeGenerator.GenerateCode();
                 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -138,12 +141,12 @@ public class UploadDownloadFileServlet extends HttpServlet {
                 
                
                 
-                Pathhighres = file.getAbsolutePath();
-                Filename = fileItem.getName();
+
+
               
              if(fileItem.getName() != null)
              {
-                 Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+fileItem.getName()+" , "+Prijs+" , Low resolution\\"+fileItem.getName()+" , High resolution\\"+fileItem.getName()+")", Database.QUERY.UPDATE);
+                 Database.getDatabase().query("INSERT INTO photo (groupID,name,price,pathlowres,pathhighres,logincode) VALUES ( "+Accountid+" , "+fileItem.getName()+" , "+Prijs+" , Low resolution\\"+fileItem.getName()+" , High resolution\\"+fileItem.getName()+" , "+inlogcode+")", Database.QUERY.UPDATE);
              }
                      
                 
@@ -190,13 +193,19 @@ catch (Exception ex)
 
         
 
+
+
        //Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( 1 , test , 2 , /tesadtdsf , /teadstsdf)", Database.QUERY.UPDATE);
     //   out.write("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+Filename+" , "+Prijs+" , Low resolution\\"+Filename+" , High resolution\\"+Filename+")");
-               
-       
+             
+    out.write("Negeer onderstaande inlogcode indien het gaat om een groepsfoto");
+    out.write("<br>");
+       out.write(inlogcode);
+       out.write("<br>");
+        out.write("<a href=\"/WEB-INF/index.jsp\">Terug naar home</a>");
        out.write("</body></html>");
        
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        //response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
  
 }

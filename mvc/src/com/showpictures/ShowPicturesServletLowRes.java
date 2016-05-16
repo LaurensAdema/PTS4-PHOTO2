@@ -31,7 +31,7 @@ public class ShowPicturesServletLowRes extends HttpServlet {
 
         
         
-        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE accountID = 1", Database.QUERY.QUERY);
+        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE groupID = 1", Database.QUERY.QUERY);
 
         try {
             while (rs.next()) {

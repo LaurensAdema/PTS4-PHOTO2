@@ -1,8 +1,9 @@
-package com.showpictures;
+package com.group;
 
 import com.database.Database;
 import com.domain.account.Account;
 import com.domain.foto.Project;
+import com.showpictures.ShowPicturesServletHighRes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -21,25 +22,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 
-public class ShowPicturesServletHighRes extends HttpServlet {
+public class AddGroupServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String Accountid = request.getParameter("tbaccountid");
+        String Groupname = request.getParameter("tbgroupname");
+ 
+        Database.getDatabase().query("INSERT INTO photogroup (groupname) VALUES ("+Groupname+")", Database.QUERY.UPDATE);
         
-        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE groupID = " + Accountid, Database.QUERY.QUERY);
-
+        
+        ResultSet rs = Database.getDatabase().query("SELECT * FROM photogroup ORDER BY id DESC LIMIT 1", Database.QUERY.QUERY);
+String id = null;
         try {
             while (rs.next()) {
-                String Pathlowres = rs.getString("pathhighres");
-                out.write("<img src=\"UploadDownloadFileServlet?fileName="+Pathlowres+"\">");
-                out.write("<br>");
+                id = rs.getString("id");
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(ShowPicturesServletHighRes.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        out.write("<br>");
+       out.write("groep"+ Groupname + "Succesvol aangemaakt met groepsID: "+ id);
+       out.write("<br>");
+        out.write("<a href=\"/WEB-INF/index.jsp\">Terug naar home</a>");
+       out.write("</body></html>");
              
     }
 

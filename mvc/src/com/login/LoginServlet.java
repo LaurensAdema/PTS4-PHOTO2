@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.joda.time.DateTime;
 
 public class LoginServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //LOGIN
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
@@ -26,15 +27,18 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("tbpassword");
         Account account = new Account();
         account.setNaam(name);
-        if (account.validate(password)) {
+        if (account.validate(password))
+        {
             String lang = null;
-            if (request.getSession(true).getAttribute("lang") != null) {
+            if (request.getSession(true).getAttribute("lang") != null)
+            {
                 lang = request.getSession(true).getAttribute("lang").toString();
             }
             request.getSession().invalidate();
 
             HttpSession newSession = request.getSession(true);
-            if (lang != null) {
+            if (lang != null)
+            {
                 newSession.setAttribute("lang", lang);
             }
             newSession.setAttribute("account", account);
@@ -42,19 +46,26 @@ public class LoginServlet extends HttpServlet {
         }
 
         response.sendRedirect(request.getContextPath() + "/index.jsp");
-
-
-        List<Project> projecten = new ArrayList<>();
-        projecten.add(new Project("Een", DateTime.now()));
-        projecten.add(new Project("Twee", DateTime.now()));
-        projecten.add(new Project("Drie", DateTime.now()));
-        projecten.add(new Project("Vier", DateTime.now()));
-        request.setAttribute("projectlist", projecten);
     }
 
+    //LOGOUT
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        String lang = null;
+        if (request.getSession(true).getAttribute("lang") != null)
+        {
+            lang = request.getSession(true).getAttribute("lang").toString();
+        }
+        request.getSession().invalidate();
+
+        HttpSession newSession = request.getSession(true);
+        if (lang != null)
+        {
+            newSession.setAttribute("lang", lang);
+        }
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
 }

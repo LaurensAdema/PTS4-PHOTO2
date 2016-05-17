@@ -62,10 +62,10 @@
                             <c:out value="${account.naam}"/>
                         </div>
                         <div class="profile-usertitle-job">
-                            Developer
+                            <c:out value="${account.type}"/>
                         </div>
                         <button type='button' class='btn btn-sm' ID='btnshowinfo' onclick="window.location.href = '/WEB-INF/accountpage2.jsp'">Show Account Info</button>
-                        <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href = '/WEB-INF'" >
+                        <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href = 'LoginServlet'" >
                             Log Out
                         </button>
                     </div>

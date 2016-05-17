@@ -26,6 +26,10 @@ public class Account {
     public void setNaam(String naam) {
         this.naam = naam;
     }
+    
+    public String getType(){
+        return this.getClass().toString();
+    }
 
     public boolean validate(String password) {
         try {

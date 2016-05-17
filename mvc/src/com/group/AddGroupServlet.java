@@ -29,8 +29,10 @@ public class AddGroupServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String Groupname = request.getParameter("tbgroupname");
+        String Inlogcode = request.getParameter("tbinlogcode");
+        
  
-        Database.getDatabase().query("INSERT INTO photogroup (groupname) VALUES ("+Groupname+")", Database.QUERY.UPDATE);
+        Database.getDatabase().query("INSERT INTO pgroup (logincode,groupname) VALUES ("+Inlogcode+" , "+Groupname+")", Database.QUERY.UPDATE);
         
         
         ResultSet rs = Database.getDatabase().query("SELECT * FROM photogroup ORDER BY id DESC LIMIT 1", Database.QUERY.QUERY);
@@ -44,8 +46,11 @@ String id = null;
             Logger.getLogger(ShowPicturesServletHighRes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        out.write("<br>");
-       out.write("groep"+ Groupname + "Succesvol aangemaakt met groepsID: "+ id);
+        Account test = (Account)request.getSession().getAttribute("account");
+        
+        
+       out.write("groep "+ Groupname + " Succesvol aangemaakt met groepsID: "+ id);
+       out.write("<br>");
        out.write("<br>");
         out.write("<a href=\"/WEB-INF/index.jsp\">Terug naar home</a>");
        out.write("</body></html>");

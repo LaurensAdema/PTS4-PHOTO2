@@ -146,7 +146,7 @@ public class UploadDownloadFileServlet extends HttpServlet {
               
              if(fileItem.getName() != null)
              {
-                 Database.getDatabase().query("INSERT INTO photo (groupID,name,price,pathlowres,pathhighres,logincode) VALUES ( "+Accountid+" , "+fileItem.getName()+" , "+Prijs+" , Low resolution\\"+fileItem.getName()+" , High resolution\\"+fileItem.getName()+" , "+inlogcode+")", Database.QUERY.UPDATE);
+                 Database.getDatabase().query("INSERT INTO photo (name,price,pathlowres,pathhighres,logincode) VALUES ("+fileItem.getName()+" , "+Prijs+" , Low resolution\\"+fileItem.getName()+" , High resolution\\"+fileItem.getName()+" , "+inlogcode+")", Database.QUERY.UPDATE);
              }
                      
                 
@@ -198,7 +198,7 @@ catch (Exception ex)
        //Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( 1 , test , 2 , /tesadtdsf , /teadstsdf)", Database.QUERY.UPDATE);
     //   out.write("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+Filename+" , "+Prijs+" , Low resolution\\"+Filename+" , High resolution\\"+Filename+")");
              
-    out.write("Negeer onderstaande inlogcode indien het gaat om een groepsfoto");
+    out.write("Geef volgende code aan klant mee, zodat zei de relaterende fotos kunnen koppelen aan hen account");
     out.write("<br>");
        out.write(inlogcode);
        out.write("<br>");

@@ -29,8 +29,7 @@ public class ShowPicturesServletLowRes extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        
-        
+     
         ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE groupID = 1", Database.QUERY.QUERY);
 
         try {

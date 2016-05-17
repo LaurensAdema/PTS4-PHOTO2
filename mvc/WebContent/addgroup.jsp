@@ -14,6 +14,8 @@
 
 Groepnaam:<input type="text" class="form-control" name="tbgroupname" />
 <br>
+Inlogcode: <input type="text" class="form-control" name="tbinlogcode" />
+<br>
 <button type="submit" class="btn btn-default" ID="btnsubmit" >
                             Maak nieuwe group aan
                         </button>

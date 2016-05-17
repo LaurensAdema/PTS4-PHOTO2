@@ -5,7 +5,7 @@
    <t:Masterpage>
         
        <jsp:body>
-           <c:out>${database_test}</c:out> 
+<!--           <c:out>${database_test}</c:out> -->
            <t:projectinterface></t:projectinterface>
        </jsp:body>
        

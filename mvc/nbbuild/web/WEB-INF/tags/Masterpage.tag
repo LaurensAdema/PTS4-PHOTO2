@@ -8,7 +8,16 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script> 
+    <link href="../WEB-INF/css/dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="../WEB-INF/css/grid.css" rel="stylesheet" type="text/css"/>
+    <script src="../WEB-INF/js/dialog.js" type="text/javascript"></script>
+    <script src="../WEB-INF/js/draggable.js" type="text/javascript"></script>
+    <script src="../WEB-INF/js/grid.js" type="text/javascript"></script>
+    <script src="../WEB-INF/js/jquery.js" type="text/javascript"></script>
+    <script src="../WEB-INF/js/dialog.min.js" type="text/javascript"></script>
+    <script src="../WEB-INF/js/draggable.min.js" type="text/javascript"></script>
+    <script src="../WEB-INF/js/grid.min.js" type="text/javascript"></script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9">
@@ -55,6 +64,7 @@
                         <div class="profile-usertitle-job">
                             Developer
                         </div>
+                        <button type='button' class='btn btn-sm' ID='btnshowinfo' onclick="window.location.href = '/WEB-INF/accountpage2.jsp'">Show Account Info</button>
                         <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href = '/WEB-INF'" >
                             Log Out
                         </button>

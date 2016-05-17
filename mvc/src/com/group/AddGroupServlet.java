@@ -46,7 +46,7 @@ String id = null;
             Logger.getLogger(ShowPicturesServletHighRes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Account test = (Account)request.getSession().getAttribute("account");
+ 
         
         
        out.write("groep "+ Groupname + " Succesvol aangemaakt met groepsID: "+ id);

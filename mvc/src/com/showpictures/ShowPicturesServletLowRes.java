@@ -2,6 +2,7 @@ package com.showpictures;
 
 import com.database.Database;
 import com.domain.account.Account;
+import com.domain.bestelling.Product;
 import com.domain.foto.Project;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,19 +29,40 @@ public class ShowPicturesServletLowRes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
-     
-        ResultSet rs = Database.getDatabase().query("SELECT * FROM photo WHERE groupID = 1", Database.QUERY.QUERY);
-
+       Account account = (Account)request.getSession().getAttribute("account");
+        
+       
+       ResultSet rs0 = Database.getDatabase().query("SELECT * FROM account_group WHERE accountID = " + account.getID(), Database.QUERY.QUERY);
+       try {
+            while (rs0.next()) {
+                ResultSet rs1 = Database.getDatabase().query("SELECT * FROM pgroup WHERE id = " + rs0.getString("groupID"), Database.QUERY.QUERY);
+                 try {
+            while (rs1.next()) {
+                ResultSet rs2 = Database.getDatabase().query("SELECT * FROM photo WHERE logincode = " + rs1.getString("logincode"),Database.QUERY.QUERY);
         try {
-            while (rs.next()) {
-                String Pathlowres = rs.getString("pathlowres");
+            while (rs2.next()) {
+                String Pathlowres = rs2.getString("pathlowres");
                 out.write("<img src=\"UploadDownloadFileServlet?fileName="+Pathlowres+"\">");
                 out.write("<br>");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ShowPicturesServletLowRes.class.getName()).log(Level.SEVERE, null, ex);
         }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowPicturesServletLowRes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowPicturesServletLowRes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+       
+
+     
+        
     }
 
 }

@@ -17,9 +17,9 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form role="form" action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
-                                            <label for="files">Select a Group</label>
-                                            <select name="files" id="files">
+					<form role="form" class="form form-group" action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
+                                            <label for="selectgroup">Select a Group</label>
+                                            <select name="files" id="selectgroup" class="form-control required">
                                                 <optgroup label="Project1">
                                                     <option value="group1">group1</option>
                                                     <option value="group2">group2</option>
@@ -28,13 +28,14 @@
                                                     <option value="group3">group3</option>
                                                     <option value="group4">group4</option>
                                                 </optgroup>
-                                            </select
-                                            <label for="tbfilename">Select File to Upload:<label>
-                                                    <input type="file" name="tbfilename" multiple="" class="btn btn-primary">
-                                                    <br>
-                                                    <label for="tbprijs">Add price for this group:<label>
-                                                            <input type="text" class="form-control" name="tbprijs" />
-                                                            <input type="submit" value="Upload">
+                                            </select>
+                                            </br>
+                                            <label for="tbfilename">Select File to Upload:</label>
+                                                    <input type="file" name="tbfilename" multiple="" class="btn btn-primary" required>
+                                                    </br>
+                                                    <label for="tbprijs">Add price for all photo's in this group: €  <label>
+                                                            <input type="number" name="tbprijs" step="0.01" min="0.01" max="99" required />
+                                                            <input type="submit" value="Upload" class="btn btn-primary">
                                         </form>
 				</div>
 				

@@ -4,6 +4,10 @@ import com.database.Database;
 import com.domain.account.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +35,29 @@ public class RegisterServlet extends HttpServlet {
             if (password.equals(password2))
             {
                 //if username not in use
+               
+                try
+            {
+                ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + username, Database.QUERY.QUERY);
+                
+                if (rs.next())
+                {
+                  out.println("Username already exists");
+                }
+                else{
+                    System.out.println("Succes");
+                }
+            } 
+                catch (SQLException ex)
+            {
+                System.out.println("Error");
+            } 
+                finally
+            {
+                Database.getDatabase().closeConnection();
+            }
+
+                
                 //if address correct
 
                 Database.getDatabase().query("INSERT INTO account (username,password,first_name,last_name,postal_code,nr,email) VALUES (" + username + " , " + password + " , " + firstname + " , " + lastname + " , " + postal + " , " + housenr + " , " + email + ")", Database.QUERY.UPDATE);

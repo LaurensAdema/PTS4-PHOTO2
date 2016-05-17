@@ -29,6 +29,10 @@ import java.util.logging.Logger;
  */
 public class Database {
 
+    public void query(String select__from_account) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public static enum QUERYTYPES {
         SELECT, FROM, WHERE, IS, INSERT, INTO, AND, FIELD, TABLE, VALUES, DELETE, IN, HAAKJE, OR
     }

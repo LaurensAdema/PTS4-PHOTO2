@@ -88,7 +88,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>
                     <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
-                    <li><a href="/WEB-INF/register.jsp">Register</a></li>
+                    <li><a href="/WEB-INF/Register.jsp">Register</a></li>
                                         <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
                                         <li><a href="/WEB-INF/showphotoscustomer.jsp">Zie foto's</a></li>
 

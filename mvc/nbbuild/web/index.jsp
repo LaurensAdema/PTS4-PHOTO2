@@ -7,6 +7,7 @@
        <jsp:body>
 <!--           <c:out>${database_test}</c:out> -->
            <t:projectinterface></t:projectinterface>
+           <t:Upload></t:Upload>
        </jsp:body>
        
    </t:Masterpage>

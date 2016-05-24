@@ -7,6 +7,7 @@
     <jsp:body>
         <h1>Account details </h1>
         <form role="form" class="form-group" ID="formbefore" action="RegisterServlet" method="post">
+            <div style="color: #FF0000;">${errorMessage}</div>
             <div class="form-inline">
                 <label  for="tbFirstName">First Name</label>
                 <input type="text" class="form-control" name="tbFirstName" placeholder="First Name">

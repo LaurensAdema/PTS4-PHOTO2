@@ -40,30 +40,11 @@ public class RegisterServlet extends HttpServlet {
             {
                 ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + username, Database.QUERY.QUERY);
                 
-                if (rs.next())
+                if (!rs.next())
                 {
-                  out.println("Username already exists");
-                }
-                else{
-                    System.out.println("Succes");
-                }
-            } 
-                catch (SQLException ex)
-            {
-                System.out.println("Error");
-            } 
-                finally
-            {
-                Database.getDatabase().closeConnection();
-            }
-
-                
-                //if address correct
-
-                Database.getDatabase().query("INSERT INTO account (username,password,first_name,last_name,postal_code,nr,email) VALUES (" + username + " , " + password + " , " + firstname + " , " + lastname + " , " + postal + " , " + housenr + " , " + email + ")", Database.QUERY.UPDATE);
-            }
-
-            Account account = new Account();
+                  out.println("Succes");
+                   Database.getDatabase().query("INSERT INTO account (username,password,first_name,last_name,postal_code,nr,email) VALUES (" + username + " , " + password + " , " + firstname + " , " + lastname + " , " + postal + " , " + housenr + " , " + email + ")", Database.QUERY.UPDATE);
+                     Account account = new Account();
             account.setNaam(username);
             if (account.validate(password))
             {
@@ -84,6 +65,29 @@ public class RegisterServlet extends HttpServlet {
             }
 
             response.sendRedirect(request.getContextPath() + "/index.jsp");
+                }
+                else{
+                    request.setAttribute("errorMessage", "Username already exists");
+                    request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                }
+                rs.close();
+            } 
+                catch (SQLException ex)
+            {
+                System.out.println("Error");
+            } 
+                finally
+            {
+                Database.getDatabase().closeConnection();
+            }
+
+                
+                //if address correct
+
+               
+            }
+
+          
         } else
         {
             //something went wrong

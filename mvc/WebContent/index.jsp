@@ -4,11 +4,11 @@
       <%@ page import="com.domain.foto.Project"%>
    <t:Masterpage>
         
-       <jsp:body>
+      <jsp:body>
 <!--           <c:out>${database_test}</c:out> -->
            <t:projectinterface></t:projectinterface>
            <t:Upload></t:Upload>
-       </jsp:body>
+    </jsp:body>
        
    </t:Masterpage>
            

@@ -5,7 +5,7 @@
  */
 package com.domain.account;
 
-import com.domain.foto.Foto;
+import com.domain.photo.Photo;
 import java.util.ArrayList;
 
 /**
@@ -13,5 +13,5 @@ import java.util.ArrayList;
  * @author Laurens Adema
  */
 public class Fotograaf extends Account{
-    private ArrayList<Foto> mijnFotos;
+    private ArrayList<Photo> mijnFotos;
 }

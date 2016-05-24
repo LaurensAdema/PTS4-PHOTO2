@@ -7,7 +7,7 @@ package com.logincode;
 
 import com.database.Database;
 import com.domain.account.Account;
-import com.domain.foto.Project;
+import com.domain.photo.Project;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;

@@ -5,8 +5,8 @@
  */
 package com.domain.account;
 
-import com.domain.foto.Foto;
-import com.domain.foto.Groep;
+import com.domain.photo.Photo;
+import com.domain.photo.Group;
 import com.domain.bestelling.Product;
 import com.domain.account.Account;
 import java.util.ArrayList;
@@ -17,6 +17,6 @@ import java.util.ArrayList;
  */
 public class Klant extends Account{
     private ArrayList<Product> winkelwagen;
-    private ArrayList<Foto> mijnFotos;
-    private ArrayList<Groep> mijnGroepen;
+    private ArrayList<Photo> mijnFotos;
+    private ArrayList<Group> mijnGroepen;
 }

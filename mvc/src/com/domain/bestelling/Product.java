@@ -5,7 +5,7 @@
  */
 package com.domain.bestelling;
 
-import com.domain.foto.Foto;
+import com.domain.photo.Photo;
 
 /**
  *
@@ -14,7 +14,7 @@ import com.domain.foto.Foto;
 public class Product {
     private String naam;
     private ProductType type;
-    private Foto foto;
+    private Photo foto;
     private double prijs;
     private ProductType.formaten formaat;
 }

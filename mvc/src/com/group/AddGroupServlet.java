@@ -2,7 +2,7 @@ package com.group;
 
 import com.database.Database;
 import com.domain.account.Account;
-import com.domain.foto.Project;
+import com.domain.photo.Project;
 import com.showpictures.ShowPicturesServletHighRes;
 import java.io.IOException;
 import java.io.PrintWriter;

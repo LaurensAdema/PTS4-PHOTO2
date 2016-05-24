@@ -29,7 +29,7 @@
             <c:choose>
                 <c:when test = "${ empty account}">
                     <form role="form" class="form-group" ID="formbefore" action="LoginServlet" method="post">
-                        
+
                         <div class="form-group">
 
                             <label for="tbusername">
@@ -89,8 +89,9 @@
                     <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>
                     <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
                     <li><a href="/WEB-INF/Register.jsp">Register</a></li>
-                                        <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
-                                        <li><a href="/WEB-INF/showphotoscustomer.jsp">Zie foto's</a></li>
+                    <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                    <li><a href="/WEB-INF/showphotoscustomer.jsp">Zie foto's</a></li>
+                    <li><a href="/WEB-INF/mygroups.jsp">My groups</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -176,7 +177,7 @@
 </head>
 <html>
     <jsp:invoke fragment="header"/>
-    
+
     <div id="body" >
         <jsp:doBody/>
     </body>

@@ -16,6 +16,10 @@
         <servlet-name>PhotoGroup</servlet-name>
         <servlet-class>com.logincode.PhotoGroup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Additemservlet</servlet-name>
+        <servlet-class>com.shoppingcart.Additemservlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -103,5 +107,9 @@
     <servlet-mapping>
         <servlet-name>MyPhotosServlet</servlet-name>
         <url-pattern>/MyPhotosServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Additemservlet</servlet-name>
+        <url-pattern>/Additemservlet</url-pattern>
     </servlet-mapping>
 </web-app>

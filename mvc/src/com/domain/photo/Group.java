@@ -27,69 +27,53 @@ public class Group {
     private List<Photo> photos;
     private Date date;
 
-    public Group(int id, String loginCode, String groupName, Date date)
-    {
+    public Group(int id, String loginCode, String groupName, Date date) {
         this.id = id;
         this.loginCode = loginCode;
         this.groupName = groupName;
         this.date = date;
     }
 
-    public List<Photo> getPhotos()
-    {
-        if (photos == null)
-        {
+    public List<Photo> getPhotos() {
+        if (photos == null) {
             loadPhotos();
         }
         return photos;
     }
 
-    private void loadPhotos()
-    {
-        if (photos == null)
-        {
+    private void loadPhotos() {
+        if (photos == null) {
             photos = new ArrayList<>();
-            try
-            {
+            try {
                 ResultSet results = Database.getDatabase().query("SELECT * FROM photo WHERE id IN ( SELECT photoID FROM photo_group WHERE groupID = " + this.id + " )", Database.QUERY.QUERY);
 
-                if (results != null)
-                {
-                    while (results.next())
-                    {
-                        photos.add(new Photo(results.getString("name"), results.getInt("id"), results.getString("pathlowres"), results.getString("pathhighres")));
+                if (results != null) {
+                    while (results.next()) {
+                        photos.add(new Photo(results.getString("name"), results.getInt("price"), results.getInt("id"), results.getString("pathlowres"), results.getString("pathhighres")));
                     }
                 }
-            } catch (SQLException ex)
-            {
+            } catch (SQLException ex) {
                 Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } finally
-            {
+            } finally {
                 Database.getDatabase().closeConnection();
             }
         }
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public String getLoginCode()
-    {
+    public String getLoginCode() {
         return loginCode;
     }
 
-    public String getGroupName()
-    {
+    public String getGroupName() {
         return groupName;
     }
 
-    public Date getDate()
-    {
+    public Date getDate() {
         return date;
     }
-    
-    
 
 }

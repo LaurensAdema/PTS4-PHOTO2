@@ -10,40 +10,64 @@ package com.domain.photo;
  * @author NesciO
  */
 public class Photo {
-    
+
     private String name;
     private int price;
     private String pathlowres;
     private String pathhighres;
+    private int id;
 
-    public Photo(String name, int price, String pathlowres, String pathhighres)
-    {
+    public Photo(String name, int price, int id, String pathlowres, String pathhighres) {
         this.name = name;
         this.price = price;
+        this.id = id;
         this.pathlowres = pathlowres;
         this.pathhighres = pathhighres;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public int getPrice()
-    {
+    public int getPrice() {
         return price;
     }
 
-    public String getPathlowres()
-    {
+    public String getPathlowres() {
         return pathlowres;
     }
 
-    public String getPathhighres()
-    {
+    public String getPathhighres() {
         return pathhighres;
     }
-    
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!Photo.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final Photo other = (Photo) obj;
+        if (id != other.getId()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + id;
+        return hash;
+    }
 }

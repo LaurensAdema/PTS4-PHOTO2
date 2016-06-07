@@ -1,4 +1,10 @@
-<%@ include file="index.jsp" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.domain.photo.Project"%>
+<t:Masterpage>
+
+    <jsp:body>
 <div class="input-group">
     <form role="form" class="form-group" ID="language" action="LanguageConfigServlet" method="post">
         <div class="form-group">
@@ -24,3 +30,15 @@
 
 </div>
 </div>
+<form role="form" class="form-group" ID="formbefore" action="AddGroupServlet" method="post">
+     
+
+Groepnaam:<input type="text" class="form-control" name="tbgroupname" />
+<br>
+Inlogcode: <input type="text" class="form-control" name="tbinlogcode" />
+<br>
+<button type="submit" class="btn btn-default" ID="btnsubmit" >
+                            Maak nieuwe group aan
+                        </button>
+</form>
+    </jsp:body></t:Masterpage>

@@ -61,6 +61,7 @@ abstract public class Account {
 
     public String getType()
     {
-        return this.getClass().toString();
+        //return this.getClass().toString();
+        return this.getClass().getSimpleName();
     }
 }

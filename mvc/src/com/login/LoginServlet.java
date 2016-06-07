@@ -5,6 +5,7 @@ import com.domain.account.Account;
 import com.domain.account.Photographer;
 import com.domain.account.Customer;
 import com.domain.account.Admin;
+import com.domain.photo.Photo;
 import com.domain.photo.Project;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,6 +49,7 @@ public class LoginServlet extends HttpServlet {
             {
                 newSession.setAttribute("lang", lang);
             }
+            newSession.setAttribute("cart", new ArrayList<Photo>());
             newSession.setAttribute("account", account);
 
         }

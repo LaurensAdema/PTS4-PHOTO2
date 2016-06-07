@@ -96,6 +96,7 @@
                         <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
                         <li><a href="/WEB-INF/index.jsp">Homepage</a></li> 
                         <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                        <li><a href="/WEB-INF/mygroups.jsp">Mygroups</a></li>
                         </c:when>
                         <c:otherwise>
                         <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp">Register</a></li>

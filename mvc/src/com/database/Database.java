@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 /**
  *
- * @author soufyan
+ * @author NesciO
  */
 public class Database {
 
@@ -44,7 +44,7 @@ public class Database {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://www.ict4events.nl:3306/photoshop";
-  //  static final String DB_URL = "jdbc:mysql://localhost:3333";
+    //  static final String DB_URL = "jdbc:mysql://localhost:3333";
 
     //  Database credentials
     static final String USER = "photoshop";
@@ -135,7 +135,7 @@ public class Database {
                     SQLquery.setString(i, entry);
                     i++;
                 }
-                
+
                 SQLquery.executeUpdate();
 
                 return SQLquery.getGeneratedKeys();
@@ -171,9 +171,8 @@ public class Database {
         for (String word : querytoBuild.split(" ")) {
             words.add(word);
         }
-        
-        words.removeAll(Arrays.asList("", null));
 
+        words.removeAll(Arrays.asList("", null));
 
         for (int i = 0; i < words.size(); i++) {
             String word = words.get(i);

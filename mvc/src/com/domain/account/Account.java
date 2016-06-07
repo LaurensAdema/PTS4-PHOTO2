@@ -10,53 +10,57 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author Laurens Adema
  */
-public class Account {
-
-    private String naam;
-    private int id;
-
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-    
-    public String getType(){
-        return this.getClass().toString();
-    }
-
-    public boolean validate(String password) {
-        try {
-            ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + this.naam, Database.QUERY.QUERY);
-
-            while (rs.next()) {
-                String foundpassword = rs.getString("password");
-                if (password.equals(foundpassword)) {
-                    id = rs.getInt("id");
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally
-        {
-            Database.getDatabase().closeConnection();
-        }
-        return false;
-    }
+abstract public class Account {
+    protected int id;
+    protected String username;
+    protected String first_name;
+    protected String last_name;
+    protected String postal_code;
+    protected String nr;
+    protected String email;
 
     public int getID()
     {
-        return this.id;
+        return id;
     }
 
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public String getFirst_name()
+    {
+        return first_name;
+    }
+
+    public String getLast_name()
+    {
+        return last_name;
+    }
+
+    public String getPostal_code()
+    {
+        return postal_code;
+    }
+
+    public String getNr()
+    {
+        return nr;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getType()
+    {
+        return this.getClass().toString();
+    }
 }

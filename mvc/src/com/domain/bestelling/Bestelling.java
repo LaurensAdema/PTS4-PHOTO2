@@ -5,7 +5,7 @@
  */
 package com.domain.bestelling;
 
-import com.domain.account.Klant;
+import com.domain.account.Customer;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -18,5 +18,5 @@ public class Bestelling {
     private double prijs;
     private GregorianCalendar datum;
     private Betaalmethode betaalmethode;
-    private Klant klant;
+    private Customer klant;
 }

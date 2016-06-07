@@ -2,6 +2,7 @@ package com.register;
 
 import com.database.Database;
 import com.domain.account.Account;
+import com.login.LoginServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -35,59 +36,52 @@ public class RegisterServlet extends HttpServlet {
             if (password.equals(password2))
             {
                 //if username not in use
-               
+
                 try
-            {
-                ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + username, Database.QUERY.QUERY);
-                
-                if (!rs.next())
                 {
-                  out.println("Succes");
-                   Database.getDatabase().query("INSERT INTO account (username,password,first_name,last_name,postal_code,nr,email) VALUES (" + username + " , " + password + " , " + firstname + " , " + lastname + " , " + postal + " , " + housenr + " , " + email + ")", Database.QUERY.UPDATE);
-                     Account account = new Account();
-            account.setNaam(username);
-            if (account.validate(password))
-            {
-                String lang = null;
-                if (request.getSession(true).getAttribute("lang") != null)
+                    ResultSet rs = Database.getDatabase().query("SELECT * FROM account WHERE username = " + username, Database.QUERY.QUERY);
+
+                    if (!rs.next())
+                    {
+                        out.println("Succes");
+                        Database.getDatabase().query("INSERT INTO account (username,password,first_name,last_name,postal_code,nr,email) VALUES (" + username + " , " + password + " , " + firstname + " , " + lastname + " , " + postal + " , " + housenr + " , " + email + ")", Database.QUERY.UPDATE);
+                        Account account = LoginServlet.login(username, password);
+                        if (account != null)
+                        {
+                            String lang = null;
+                            if (request.getSession(true).getAttribute("lang") != null)
+                            {
+                                lang = request.getSession(true).getAttribute("lang").toString();
+                            }
+                            request.getSession().invalidate();
+
+                            HttpSession newSession = request.getSession(true);
+                            if (lang != null)
+                            {
+                                newSession.setAttribute("lang", lang);
+                            }
+                            newSession.setAttribute("account", account);
+
+                        }
+
+                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+                    } else
+                    {
+                        request.setAttribute("errorMessage", "Username already exists");
+                        request.getRequestDispatcher("/Register.jsp").forward(request, response);
+                    }
+                    rs.close();
+                } catch (SQLException ex)
                 {
-                    lang = request.getSession(true).getAttribute("lang").toString();
-                }
-                request.getSession().invalidate();
-
-                HttpSession newSession = request.getSession(true);
-                if (lang != null)
+                    System.out.println("Error");
+                } finally
                 {
-                    newSession.setAttribute("lang", lang);
+                    Database.getDatabase().closeConnection();
                 }
-                newSession.setAttribute("account", account);
 
-            }
-
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
-                }
-                else{
-                    request.setAttribute("errorMessage", "Username already exists");
-                    request.getRequestDispatcher("/Register.jsp").forward(request, response);
-                }
-                rs.close();
-            } 
-                catch (SQLException ex)
-            {
-                System.out.println("Error");
-            } 
-                finally
-            {
-                Database.getDatabase().closeConnection();
-            }
-
-                
                 //if address correct
-
-               
             }
 
-          
         } else
         {
             //something went wrong

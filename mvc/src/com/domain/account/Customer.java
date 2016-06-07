@@ -15,8 +15,19 @@ import java.util.ArrayList;
  *
  * @author Laurens Adema
  */
-public class Klant extends Account{
+public class Customer extends Account{
     private ArrayList<Product> winkelwagen;
     private ArrayList<Photo> mijnFotos;
     private ArrayList<Group> mijnGroepen;
+    
+    public Customer(int id, String username, String first_name, String last_name, String postal_code, String nr, String email)
+    {
+        this.id = id;
+        this.username = username;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.postal_code = postal_code;
+        this.nr = nr;
+        this.email = email;
+    }
 }

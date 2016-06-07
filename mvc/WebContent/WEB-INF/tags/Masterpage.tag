@@ -1,5 +1,5 @@
 <jsp:include page="LanguageServlet" />
-<jsp:include page="ShoppingcartServlet" />
+
 
 
 <%@tag description="Photo 2" pageEncoding="UTF-8"%>
@@ -66,7 +66,6 @@
                         <div class="profile-usertitle-job">
                             <c:out value="${account.type}"/>
                         </div>
-                        <button type='button' class='btn btn-sm' ID='btnshowinfo' onclick="window.location.href = '/WEB-INF/accountpage2.jsp'">Show Account Info</button>
                         <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href = 'LoginServlet'" >
                             Log Out
                         </button>
@@ -77,40 +76,36 @@
     </div>
     <nav class="navbar navbar-default ">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
-
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <div class="collapse navbar-collapse">
+             <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarlist" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+<!--      <a class="navbar-brand" href="#">Brand</a>-->
+    </div>
+            <div class="collapse navbar-collapse" id="navbarlist">
                  <ul class="nav navbar-nav">
-                     <c:set var="accounttype" scope="session" value="${'a'}"/>     
+                     <c:set var="accounttype" scope="session" value="${'Admin'}"/>     
                     <c:choose>
-                        <c:when test = "${accounttype == 'u'}">
-                        <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                        <c:when test = "${account.type == 'Customer'}">
+                        <li><a href="/WEB-INF/accountmanagement.jsp">Normal Account Management</a></li>
                         </c:when>    
-                        <c:when test = "${accounttype == 'f'}">
+                        <c:when test = "${account.type == 'Photographer'}">
                          <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>   
                         </c:when>         
-                        <c:when test = "${accounttype == 'a'}">                     
-                        <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
-                        <li><a href="/WEB-INF/index.jsp">Homepage</a></li> 
-                        <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                        <c:when test = "${account.type == 'Admin'}">                     
+                        <li><a href="/WEB-INF/adminpanel.jsp">Admin Panel</a></li>
+                        <li><a href="/WEB-INF/index.jsp">Index</a></li> 
+                        <li><a href="/WEB-INF/accountmanagement.jsp">Normal Account Management</a></li>
                         <li><a href="/WEB-INF/mygroups.jsp">Mygroups</a></li>
                         </c:when>
                         <c:otherwise>
                         <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp">Register</a></li>
                         </c:otherwise>
                     </c:choose>
-                    
-
-
-
-                </ul>
+</ul>
 <ul class="nav navbar-nav navbar-right">
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>

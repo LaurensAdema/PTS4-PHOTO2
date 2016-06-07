@@ -112,12 +112,5 @@
         <servlet-name>Additemservlet</servlet-name>
         <url-pattern>/Additemservlet</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>ShoppingcartServlet</servlet-name>
-        <servlet-class>com.shoppingcart.ShoppingcartServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ShoppingcartServlet</servlet-name>
-        <url-pattern>/ShoppingcartServlet</url-pattern>
-    </servlet-mapping>
+   
 </web-app>

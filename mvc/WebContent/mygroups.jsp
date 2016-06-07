@@ -17,6 +17,7 @@
                                 class="glyphicon glyphicon-th"></span>Grid</a>
                     </div>
                 </div>
+             
                 <c:forEach items="${groups}" var="item">
                     <div id="products" class="row list-group">
                         <div class="item  col-xs-4 col-lg-4">
@@ -33,6 +34,7 @@
                                         <div class="col-xs-6 col-md-6">
                                             <a class="btn btn-success" href="/WEB-INF/group.jsp?id=<c:out value="${item.id}"/>">Open group</a>
                                         </div>
+                                          
                                         <br>
                                         </br>
 
@@ -56,6 +58,7 @@
                     });
                 });</script>
         </div>
+        <title><c:out value="${EditPhoto.jsp}" /></title>
     </jsp:body>
 
 </t:Masterpage>

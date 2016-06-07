@@ -1,8 +1,11 @@
 <jsp:include page="LanguageServlet" />
+<jsp:include page="ShoppingcartServlet" />
 
 
 <%@tag description="Photo 2" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@attribute name="header" fragment="true" %>
 
 <head>
@@ -18,6 +21,7 @@
     <script src="../WEB-INF/js/dialog.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/draggable.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/grid.min.js" type="text/javascript"></script>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9">
@@ -120,78 +124,43 @@
                             });</script>
                     </div>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-cart" role="menu">
-                            <li>
-                                <span class="item">
-                                    <span class="item-left">
-                                        <img src="http://lorempixel.com/50/50/" alt="" />
-                                        <span class="item-info">
-                                            <span>Foto 1</span>
-                                            <span>23$</span>
-                                        </span>
-                                    </span>
-                                    <span class="item-right">
-                                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                                    </span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="item">
-                                    <span class="item-left">
-                                        <img src="http://lorempixel.com/50/50/" alt="" />
-                                        <span class="item-info">
-                                            <span>Foto 2</span>
-                                            <span>23$</span>
-                                        </span>
-                                    </span>
-                                    <span class="item-right">
-                                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                                    </span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="item">
-                                    <span class="item-left">
-                                        <img src="http://lorempixel.com/50/50/" alt="" />
-                                        <span class="item-info">
-                                            <span>Foto 3</span>
-                                            <span>23$</span>
-                                        </span>
-                                    </span>
-                                    <span class="item-right">
-                                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                                    </span>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="item">
-                                    <span class="item-left">
-                                        <img src="http://lorempixel.com/50/50/" alt="" />
-                                        <span class="item-info">
-                                            <span>Foto 4</span>
-                                            <span>23$</span>
-                                        </span>
-                                    </span>
-                                    <span class="item-right">
-                                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                                    </span>
-                                </span>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a class="text-center" href="">View Cart</a></li>
-                        </ul>
-                    </li>
-                </ul>
 
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</div>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> ${fn:length(cart)} - Items<span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-cart" role="menu">
+                            <c:forEach items="${cart}" var="item">
+
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span><c:out value="${item.name}"/></span>                                             
+                                                <span>$<c:out value="${item.price}"/></span>                                             
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.id}"/>">x</button>
+                                        </span>
+                                    </span>
+
+                                </li>                                                </c:forEach>
+
+
+                                <li class="divider"></li>
+                                <li><a class="text-center" href="">View Cart</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
 </head>
 <html>
-    <jsp:invoke fragment="header"/>
-    <div id="body" >
-        <jsp:doBody/>
-    </body>
-</html>
+<jsp:invoke fragment="header"/>
+
+<div id="body" >
+    <jsp:doBody/>
+</body>
+
+</html> 

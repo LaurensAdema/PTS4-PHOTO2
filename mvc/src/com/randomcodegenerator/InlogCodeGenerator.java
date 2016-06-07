@@ -15,7 +15,7 @@ public class InlogCodeGenerator {
     
      public String GenerateCode() {
          
-    char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*_+`-+..,';|".toCharArray();
+    char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
 StringBuilder sb = new StringBuilder();
 Random random = new Random();
 

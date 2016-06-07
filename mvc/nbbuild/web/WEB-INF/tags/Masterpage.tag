@@ -29,9 +29,7 @@
             <c:choose>
                 <c:when test = "${ empty account}">
                     <form role="form" class="form-group" ID="formbefore" action="LoginServlet" method="post">
-
                         <div class="form-group">
-
                             <label for="tbusername">
                                 <c:out value="${lbl_username}"/> 
                             </label>
@@ -59,7 +57,7 @@
                 <c:otherwise>
                     <div class="form-group profile-usertitle " ID="formafter">
                         <div class="profile-usertitle-name">
-                            <c:out value="${account.naam}"/>
+                            <c:out value="${account.first_name}"/>
                         </div>
                         <div class="profile-usertitle-job">
                             <c:out value="${account.type}"/>
@@ -82,19 +80,33 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand active" href="/WEB-INF/index.jsp">Home</a>
+                
             </div>
             <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>
-                    <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
-                    <li><a href="/WEB-INF/Register.jsp">Register</a></li>
-                    <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
-                    <li><a href="/WEB-INF/showphotoscustomer.jsp">Zie foto's</a></li>
-                    <li><a href="/WEB-INF/mygroups.jsp">My groups</a></li>
+                 <ul class="nav navbar-nav">
+                     <c:set var="accounttype" scope="session" value="${'a'}"/>     
+                    <c:choose>
+                        <c:when test = "${accounttype == 'u'}">
+                        <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                        </c:when>    
+                        <c:when test = "${accounttype == 'f'}">
+                         <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>   
+                        </c:when>         
+                        <c:when test = "${accounttype == 'a'}">                     
+                        <li><a href="/WEB-INF/login-error.jsp">Admin</a></li>
+                        <li><a href="/WEB-INF/index.jsp">Homepage</a></li> 
+                        <li><a href="/WEB-INF/accountpage2.jsp">Add code to account</a></li>
+                        </c:when>
+                        <c:otherwise>
+                        <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp">Register</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    
+
+
 
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+<ul class="nav navbar-nav navbar-right">
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -170,6 +182,7 @@
                         </ul>
                     </li>
                 </ul>
+
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -177,7 +190,6 @@
 </head>
 <html>
     <jsp:invoke fragment="header"/>
-
     <div id="body" >
         <jsp:doBody/>
     </body>

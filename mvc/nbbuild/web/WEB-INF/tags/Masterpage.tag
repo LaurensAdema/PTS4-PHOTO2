@@ -122,9 +122,9 @@
                     </div>
                     <li class="dropdown">
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> ${fn:length(cart.photos)} - Items<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> ${fn:length(cart.products)} - Items<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-cart" role="menu">
-                            <c:forEach items="${cart.photos}" var="item">
+                            <c:forEach items="${cart.products}" var="item">
 
                                 <li>
                                     <span class="item">

@@ -51,6 +51,22 @@ public class Product {
         this.name = name;
     }
 
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     
 
     public Photo getPhoto() {
@@ -69,15 +85,15 @@ public class Product {
         this.price = price;
     }
 
-        @Override
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
-        if (!Photo.class.isAssignableFrom(obj.getClass())) {
+        if (!Product.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
-        final Photo other = (Photo) obj;
+        final Product other = (Product) obj;
         if (id != other.getId()) {
             return false;
         }

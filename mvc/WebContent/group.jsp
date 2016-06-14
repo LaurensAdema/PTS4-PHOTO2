@@ -49,7 +49,7 @@
                                                 $<c:out value="${item.price}"/></p>
                                         </div>
                                         <div class="col-xs-12 col-md-6">
-                                            <a class="btn btn-success" href="/WEB-INF/shoppingcart.jsp?add=<c:out value="${item.id}"/>">Add to cart</a>
+                                            <a class="btn btn-success" href="/WEB-INF/EditPhoto.jsp?id=<c:out value="${item.id}"/>">Add to cart</a>
                                         </div>
                                         <br>
                                         </br>

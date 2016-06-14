@@ -14,7 +14,7 @@
                     <strong>Shopping Cart</strong>
 
                 </div>
-                <c:forEach items="${cart.photos}" var="item">
+                <c:forEach items="${cart.products}" var="item">
                     <div id="products" class="row list-group">
 
                         <div class="item  col-xs-4 col-lg-4">
@@ -33,6 +33,14 @@
 
                                     <c:out value="Quantity: ${item.value}"/></div>
 
+                                <br>
+                                <div class="col-xs-6 col-md-6">
+
+                                    <c:out value="Printed in ${item.key.color}"/></div>
+                                <br>
+                                <div class="col-xs-6 col-md-6">
+
+                                    <c:out value="Printed on ${item.key.material}"/></div>
                                 <br>
                                 <div class="col-xs-6 col-md-6">
 
@@ -82,7 +90,7 @@
                     </div>
                 </div>
                 <a class="btn btn-danger" href="/WEB-INF/shoppingcart.jsp">Back to shopping cart</a>
-                <a class="btn btn-success" href="/WEB-INF/ordercompletejsp">Finalize order</a>
+                <a class="btn btn-success" href="/WEB-INF/ordercomplete.jsp">Finalize order</a>
             </div>
             <script>
                 $(document).ready(function () {

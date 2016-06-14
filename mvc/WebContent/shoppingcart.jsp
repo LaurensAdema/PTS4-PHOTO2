@@ -18,7 +18,7 @@
                                 class="glyphicon glyphicon-th"></span>Grid</a>
                     </div>
                 </div>
-                <c:forEach items="${cart.photos}" var="item">
+                <c:forEach items="${cart.products}" var="item">
                     <div id="products" class="row list-group">
 
                         <div class="item  col-xs-4 col-lg-4">
@@ -31,6 +31,12 @@
                                     <div class="col-xs-6 col-md-6">
 
                                         <c:out value="$${item.key.price}"/></div>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Printed in ${item.key.color}"/></div>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Printed on ${item.key.material}"/></div>
                                     <div class="row">
 
                                         <div class="col-xs-6 col-md-6">

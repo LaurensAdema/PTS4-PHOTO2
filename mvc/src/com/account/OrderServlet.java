@@ -1,4 +1,4 @@
-package com.login;
+package com.account;
 
 import com.database.Database;
 import com.domain.account.Account;
@@ -42,7 +42,7 @@ public class OrderServlet extends HttpServlet {
         Account account = (Account) request.getSession().getAttribute("account");
         ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("cart");
 
-        ResultSet rs = Database.getDatabase().query("INSERT INTO order (accountID,payed,price) VALUES (" + account.getID() + " , true , " + cart.getPrice() + ")", Database.QUERY.UPDATE);
+        ResultSet rs = Database.getDatabase().query("INSERT INTO ordera (accountID,payed,price) VALUES (" + account.getID() + " , true , " + cart.getPrice() + ")", Database.QUERY.UPDATE);
 
         int key = -1;
 
@@ -55,12 +55,12 @@ public class OrderServlet extends HttpServlet {
             if (key != -1) {
 
                 for (Entry<Product, Integer> e : cart.getProducts().entrySet()) {
-                    Database.getDatabase().query("INSERT INTO order_product (orderID,productID) VALUES (" + key + " , " + e.getKey().getId() + ")", Database.QUERY.UPDATE);
+                    Database.getDatabase().query("INSERT INTO order_product (orderID,productID,quantity) VALUES (" + key + " , " + e.getKey().getId() + " , " + e.getValue() + ")", Database.QUERY.UPDATE);
 
                 }
-            }
+                request.getSession().setAttribute("cart", new ShoppingCart());
 
-            request.getSession().setAttribute("cart", new ShoppingCart());
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(OrderServlet.class.getName()).log(Level.SEVERE, null, ex);

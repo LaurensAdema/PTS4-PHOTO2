@@ -4,27 +4,30 @@
 <%@ page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:include page="EditProductServlet" />
 
 <t:Masterpage>
 
     <jsp:body>
-          <h1>Edit Your Photo's </h1>
-     <form>
-         <h2>Change Color </h2>
-  <select name="item">
-    <option value="Color">Color</option>
-    <option value="Greyscale">Greyscale</option>
-    <option value="Sepia">Sepia</option>
-  </select>
-           <form>
-         <h2>Print your photo on products </h2>
-  <select name="item">
-    <option value="Color">Mug</option>
-    <option value="Greyscale">Phonecase</option>
-    <option value="Sepia">Desk Decore</option>
-  </select>
-  <input type="submit" value="Submit">
-</form>
+        <h4>Edit Photo</h4>
+        <c:out value="${photo.name}"/>
+        <form action="EditProductServlet" method="post">
+            Color<br>
+            <select name="color">
+                <option value="Color">Color</option>
+                <option value="Greyscale">Greyscale</option>
+                <option value="Sepia">Sepia</option>
+            </select><br><br>
+
+            What should your photo be printed on?<br>
+            <select name="material">
+                <option value="Mug">Mug</option>
+                <option value="Shirt">Shirt</option>
+                <option value="Paper">Paper</option>
+                <option value="Phonecase">Phonecase</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
     </jsp:body>
 
 </t:Masterpage>

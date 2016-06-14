@@ -36,6 +36,7 @@ public class MyPhotosServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
     }
 
     @Override
@@ -75,6 +76,7 @@ public class MyPhotosServlet extends HttpServlet {
                                     while (results.next()) {
                                         photo = new Photo(results.getString("name"), results.getInt("price"), results.getInt("id"), results.getString("pathlowres"), results.getString("pathhighres"));
                                         item.setPhoto(photo);
+                                        item.setName(photo.getName());
                                     }
                                 }
                             }
@@ -96,6 +98,8 @@ public class MyPhotosServlet extends HttpServlet {
                             }
                         } else if (request.getParameter("plus") != null) {
                             shoppingcart.getProducts().put(item, shoppingcart.getProducts().get(item) + 1);
+                            request.getSession().setAttribute("cart", shoppingcart);
+
                         }
                         request.getSession().setAttribute("cart", shoppingcart);
                     }

@@ -5,6 +5,7 @@
 <t:Masterpage>
 
     <jsp:body>
+        <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -42,16 +43,32 @@
                 </div>
 
             </div>
-        </div>
+        </div></div>
         <h3>Add some inlogcode here</h3>
-        <div class="col-md-12">
+        <div class="row">
+                <table class="table col-lg-offset-1">
+                    
+                    <thead>
+                        <tr>
+                            <th>Name of project</th>    
+                            <th>Inlogcodes already activated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${mygroupies}" var="item"></c:forEach>
+                        <tr><td><c:out value="${item.name}"/></td><td><c:out value="${item.inlogcode}"/></td></tr>
+
+                    </tbody>
+                </table>
+
+            </div>
         <form action="AttachLoginCodeServlet" method="post">
             <div class="form-inline">
                 <label  for="tblogincode">Inlogcode here</label>
                 <input type="text" class="form-control" name="tblogincode" placeholder="Inlogcode">
             <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-            </div>
+        
+            </div></form>
     </jsp:body>
 
 </t:Masterpage>

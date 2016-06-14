@@ -7,6 +7,7 @@ package com.logincode;
 
 import com.database.Database;
 import com.domain.account.Account;
+import com.domain.photo.Group;
 import com.domain.photo.Project;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,15 +38,17 @@ public class AttachLoginCodeServlet extends HttpServlet {
 
         String logincode = request.getParameter("tblogincode");
         Account account = (Account) request.getSession(true).getAttribute("account");
+        Group AddedGroup = new Group();
         if (account != null && logincode != null)
         {
             int foundID = -1;
             try
             {
-                ResultSet rs = Database.getDatabase().query("SELECT id FROM pgroup WHERE logincode = " + logincode, Database.QUERY.QUERY);
+                ResultSet rs = Database.getDatabase().query("SELECT * FROM pgroup WHERE logincode = " + logincode, Database.QUERY.QUERY);
                 
                 while (rs.next())
                 {
+                    AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("name"));
                     foundID = rs.getInt("id");
                     break;
                 }
@@ -58,7 +61,7 @@ public class AttachLoginCodeServlet extends HttpServlet {
             }
             if(foundID != -1)
             {
-                Database.getDatabase().query("INSERT INTO account_group (accountID,groupID) VALUES (" + account.getID() + " , " + foundID + ")", Database.QUERY.UPDATE);
+                Database.getDatabase().query("INSERT INTO account_group (accountID,groupID) VALUES (" + account.getID() + " , " + AddedGroup.getId() + ")", Database.QUERY.UPDATE);
             }
         }
         RequestDispatcher rd = request.getRequestDispatcher("accountpage2.jsp");
@@ -69,6 +72,33 @@ public class AttachLoginCodeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        HttpSession newSession = req.getSession(true);
+        Account A = (Account)newSession.getAttribute("account");
+        List<Group> Mygroups = new ArrayList<>();
+        
+        Group AddedGroup = new Group();
+         try
+            {
+                ResultSet rs = Database.getDatabase().query("SELECT * FROM `account_group` WHERE accountID =" + A.getID(), Database.QUERY.QUERY);
+                
+                while (rs.next())
+                {
+                    
+                    AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("name"));
+                    Mygroups.add(AddedGroup);
+                }
+            } catch (SQLException ex)
+            {
+                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            } finally
+            {
+                Database.getDatabase().closeConnection();
+            }
+       
+       newSession.setAttribute("mygroupies",Mygroups);
+                
     }
 
 }

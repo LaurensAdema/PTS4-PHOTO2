@@ -33,7 +33,15 @@ public class Group {
         this.groupName = groupName;
         this.date = date;
     }
-
+    public Group(int id, String loginCode, String groupName) {
+        this.id = id;
+        this.loginCode = loginCode;
+        this.groupName = groupName;
+    }
+    public Group()
+    {
+        
+    }
     public List<Photo> getPhotos() {
         if (photos == null) {
             loadPhotos();

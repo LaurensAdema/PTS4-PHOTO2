@@ -7,8 +7,8 @@
 
     
 <jsp:body>
-             <%--   <t:projectinterface></t:projectinterface>
-           <t:Upload></t:Upload> --%>
+           
+           <t:Upload></t:Upload>
 </jsp:body>
 </t:Masterpage>
     

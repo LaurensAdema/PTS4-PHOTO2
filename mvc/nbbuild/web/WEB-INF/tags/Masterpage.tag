@@ -93,7 +93,9 @@
                         <li><a href="/WEB-INF/accountmanagement.jsp">Normal Account Management</a></li>
                         </c:when>    
                         <c:when test = "${account.type == 'Photographer'}">
-                         <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li>   
+                         <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li> 
+                         <li><a href="/WEB-INF/fotograafpanel.jsp">Upload</a></li> 
+                         
                         </c:when>         
                         <c:when test = "${account.type == 'Admin'}">                     
                         <li><a href="/WEB-INF/adminpanel.jsp">Admin Panel</a></li>

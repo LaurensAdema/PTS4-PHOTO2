@@ -40,7 +40,7 @@ public class MyPhotosServlet extends HttpServlet {
             throws ServletException, IOException {
         if (request.getSession().getAttribute("account") != null) {
             Map<Photo, Integer> shoppingcart = (HashMap<Photo, Integer>) request.getSession().getAttribute("cart");
-            if (request.getParameter("add") != null || request.getParameter("del") != null) {
+            if (request.getParameter("add") != null || request.getParameter("del") != null || request.getParameter("rem") != null || request.getParameter("plus") != null) {
 
                 Photo item = null;
                 ResultSet results = null;
@@ -51,6 +51,12 @@ public class MyPhotosServlet extends HttpServlet {
                     }
                     if (request.getParameter("del") != null) {
                         results = Database.getDatabase().query("SELECT * FROM photo WHERE id = " + request.getParameter("del"), Database.QUERY.QUERY);
+                    }
+                    if (request.getParameter("rem") != null) {
+                        results = Database.getDatabase().query("SELECT * FROM photo WHERE id = " + request.getParameter("rem"), Database.QUERY.QUERY);
+                    }
+                    if (request.getParameter("plus") != null) {
+                        results = Database.getDatabase().query("SELECT * FROM photo WHERE id = " + request.getParameter("plus"), Database.QUERY.QUERY);
                     }
 
                     if (results != null) {
@@ -67,6 +73,14 @@ public class MyPhotosServlet extends HttpServlet {
                         }
                     } else if (request.getParameter("del") != null) {
                         shoppingcart.remove(item);
+                    } else if (request.getParameter("rem") != null) {
+                        if(shoppingcart.get(item) != 1) {
+                            shoppingcart.put(item, shoppingcart.get(item) - 1);
+                        } else {
+                            shoppingcart.remove(item);
+                        }
+                    } else if(request.getParameter("plus") != null) {
+                        shoppingcart.put(item, shoppingcart.get(item) + 1);
                     }
                     request.getSession().setAttribute("cart", shoppingcart);
                 } catch (SQLException ex) {

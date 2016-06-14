@@ -93,14 +93,6 @@
         <url-pattern>/ShowPicturesServletHighRes</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AddGroupServlet</servlet-name>
-        <servlet-class>com.group.AddGroupServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddGroupServlet</servlet-name>
-        <url-pattern>/AddGroupServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>MyPhotosServlet</servlet-name>
         <servlet-class>com.account.MyPhotosServlet</servlet-class>
     </servlet>

@@ -1,13 +1,8 @@
 <jsp:include page="LanguageServlet" />
-
-
-
 <%@tag description="Photo 2" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@attribute name="header" fragment="true" %>
-
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -21,6 +16,7 @@
     <script src="../WEB-INF/js/dialog.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/draggable.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/grid.min.js" type="text/javascript"></script>
+    <link href="../WEB-INF/css/flags.css" rel="stylesheet" type="text/css"/>
 
 <div class="container-fluid">
     <div class="row">
@@ -112,8 +108,8 @@
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="?lang=english"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-                            <li><a href="?lang=dutch"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>
+                            <li><a href="?lang=English"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+                            <li><a href="?lang=Nederlands"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>
                         </ul>
                         <script>$(".dropdown-menu li a").click(function () {
                                 var selText = $(this).text();

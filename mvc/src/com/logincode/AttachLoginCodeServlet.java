@@ -38,20 +38,23 @@ public class AttachLoginCodeServlet extends HttpServlet {
 
         String logincode = request.getParameter("tblogincode");
         Account account = (Account) request.getSession(true).getAttribute("account");
-        Group AddedGroup = new Group();
         if (account != null && logincode != null)
         {
-            boolean hasrows = true;
             try
             {
-                ResultSet rs = Database.getDatabase().query("SELECT * FROM pgroup WHERE logincode = " + logincode, Database.QUERY.QUERY);
-                if (rs==null)
+                ResultSet results = Database.getDatabase().query("SELECT * FROM pgroup WHERE logincode = " + logincode, Database.QUERY.QUERY);
+                while (results.next())
                 {
-                hasrows=false;
-                }
-                while (rs.next())
-                {
-                    AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("name"));
+                    ResultSet alreadyAdded = Database.getDatabase().query("SELECT * FROM account_group WHERE accountID = " + account.getID() + " AND groupID = " + results.getInt("id"), Database.QUERY.QUERY);
+                    if (!alreadyAdded.isBeforeFirst() ) 
+                    {
+                        Database.getDatabase().query("INSERT INTO account_group (accountID,groupID) VALUES (" + account.getID() + " , " + results.getInt("id") + ")", Database.QUERY.UPDATE);
+                        response.sendRedirect("accountmanagement.jsp");
+                    }
+                    else
+                    {
+                        response.sendRedirect("accountmanagement.jsp?err="+logincode);
+                    }
                     break;
                 }
             } catch (SQLException ex)
@@ -61,13 +64,7 @@ public class AttachLoginCodeServlet extends HttpServlet {
             {
                 Database.getDatabase().closeConnection();
             }
-            if(hasrows)
-            {
-    Database.getDatabase().query("INSERT INTO account_group (accountID,groupID) VALUES (" + account.getID() + " , " + AddedGroup.getId() + ")", Database.QUERY.UPDATE);
-            }
         }
-        RequestDispatcher rd = request.getRequestDispatcher("accountmanagement.jsp");
-        rd.forward(request, response);
     }
 
     @Override
@@ -76,17 +73,35 @@ public class AttachLoginCodeServlet extends HttpServlet {
     {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        Account A = (Account)req.getSession().getAttribute("account");
+        Account A = (Account) req.getSession().getAttribute("account");
         List<Group> Mygroups = new ArrayList<>();
         List<Integer> groupids = new ArrayList<Integer>();
         Group AddedGroup = new Group();
-         try
+        try
+        {
+            ResultSet rs = Database.getDatabase().query("SELECT * FROM account_group WHERE accountID = " + A.getID(), Database.QUERY.QUERY);
+
+            while (rs.next())
             {
-                ResultSet rs = Database.getDatabase().query("SELECT * FROM account_group WHERE accountID = " + A.getID(), Database.QUERY.QUERY);
-                
+                groupids.add(rs.getInt("groupID"));
+            }
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+        } finally
+        {
+            Database.getDatabase().closeConnection();
+        }
+        for (int I : groupids)
+        {
+            try
+            {
+                ResultSet rs = Database.getDatabase().query("SELECT * FROM pgroup WHERE id = " + I, Database.QUERY.QUERY);
+
                 while (rs.next())
                 {
-                    groupids.add(rs.getInt("groupID"));
+                    AddedGroup = new Group(rs.getInt("id"), rs.getString("logincode"), rs.getString("groupname"));
+                    Mygroups.add(AddedGroup);
                 }
             } catch (SQLException ex)
             {
@@ -95,31 +110,10 @@ public class AttachLoginCodeServlet extends HttpServlet {
             {
                 Database.getDatabase().closeConnection();
             }
-         for(int I: groupids)
-         {
-                      try
-            {
-                ResultSet rs = Database.getDatabase().query("SELECT * FROM pgroup WHERE id = " + I, Database.QUERY.QUERY);
-                
-                while (rs.next())
-                {
-                    AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("groupname"));
-                    Mygroups.add(AddedGroup);
-                }
-            } catch (SQLException ex)
-            {
-                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-                      finally
-            {
-                Database.getDatabase().closeConnection();
-            }
-         }
-             
-         
-       
-       req.getSession().setAttribute("mygroupies",Mygroups);
-                
+        }
+
+        req.getSession().setAttribute("mygroupies", Mygroups);
+
     }
 
 }

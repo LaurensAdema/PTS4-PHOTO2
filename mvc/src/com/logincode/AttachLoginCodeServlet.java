@@ -41,15 +41,17 @@ public class AttachLoginCodeServlet extends HttpServlet {
         Group AddedGroup = new Group();
         if (account != null && logincode != null)
         {
-            int foundID = -1;
+            boolean hasrows = true;
             try
             {
                 ResultSet rs = Database.getDatabase().query("SELECT * FROM pgroup WHERE logincode = " + logincode, Database.QUERY.QUERY);
-                
+                if (rs==null)
+                {
+                hasrows=false;
+                }
                 while (rs.next())
                 {
                     AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("name"));
-                    foundID = rs.getInt("id");
                     break;
                 }
             } catch (SQLException ex)
@@ -59,12 +61,12 @@ public class AttachLoginCodeServlet extends HttpServlet {
             {
                 Database.getDatabase().closeConnection();
             }
-            if(foundID != -1)
+            if(hasrows)
             {
-                Database.getDatabase().query("INSERT INTO account_group (accountID,groupID) VALUES (" + account.getID() + " , " + AddedGroup.getId() + ")", Database.QUERY.UPDATE);
+    Database.getDatabase().query("INSERT INTO account_group (accountID,groupID) VALUES (" + account.getID() + " , " + AddedGroup.getId() + ")", Database.QUERY.UPDATE);
             }
         }
-        RequestDispatcher rd = request.getRequestDispatcher("accountpage2.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("accountmanagement.jsp");
         rd.forward(request, response);
     }
 
@@ -80,7 +82,7 @@ public class AttachLoginCodeServlet extends HttpServlet {
         Group AddedGroup = new Group();
          try
             {
-                ResultSet rs = Database.getDatabase().query("SELECT * FROM `account_group` WHERE accountID =" + A.getID(), Database.QUERY.QUERY);
+                ResultSet rs = Database.getDatabase().query("SELECT * FROM account_group WHERE accountID = " + A.getID(), Database.QUERY.QUERY);
                 
                 while (rs.next())
                 {

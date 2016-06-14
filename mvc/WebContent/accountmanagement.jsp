@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="java.util.List"%>
@@ -17,16 +18,16 @@
                 <div class="panel-body">
                     <dl>
                         <dt>
-                            Account Name:
+                            First Name:
                         </dt>
                         <dd>
-                            Test
+                        Henk
                         </dd>
                         <dt>
                             Account Type:
                         </dt>
                         <dd>
-                            Test2
+                        fuck you
                         </dd>
                         <dt>
                             Some more account info:
@@ -59,6 +60,8 @@
                         
 
                         <c:forEach items="${mygroupies}" var="item">
+                        
+
                         <tr><td><c:out value="${item.groupName}"/></td><td><c:out value="${item.loginCode}"/></td></tr>
 </c:forEach>
                     </tbody>

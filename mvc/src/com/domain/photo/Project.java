@@ -5,124 +5,96 @@
  */
 package com.domain.photo;
 
-import java.io.Serializable;
+import com.database.Database;
+import com.domain.site.LanguageServlet;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import org.joda.time.*;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author markb
  */
-public class Project implements Serializable {
+public class Project {
 
-    public Project(String Name, DateTime Date, String code)
+    private int id;
+    private String name;
+    private Timestamp date;
+    private List<Group> groups;
+
+    public Project(int id, String name, Timestamp date)
     {
-        this.Name = Name;
-        this.Date = Date;
-        this.code = code;
-        this.fotos = new ArrayList<>();
-    }
-    
-    public Project(String Name, DateTime Date, String code, ArrayList<Photo> fotos)
-    {
-        this.Name = Name;
-        this.Date = Date;
-        this.code = code;
-        this.fotos = fotos;
+        this.id = id;
+        this.name = name;
+        this.date = date;
     }
 
-    private String Name;
+    public Project(String name, Timestamp date)
+    {
+        this.name = name;
+        this.date = date;
+    }
 
-    /**
-     * Get the value of Name
-     *
-     * @return the value of Name
-     */
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
     public String getName()
     {
-        return Name;
+        return name;
     }
 
-    /**
-     * Set the value of Name
-     *
-     * @param Name new value of Name
-     */
-    public void setName(String Name)
+    public void setName(String name)
     {
-        this.Name = Name;
+        this.name = name;
     }
 
-    private DateTime Date;
-
-    /**
-     * Get the value of Date
-     *
-     * @return the value of Date
-     */
-    public DateTime getDate()
+    public Timestamp getDate()
     {
-        return Date;
+        return date;
     }
 
-    /**
-     * Set the value of Date
-     *
-     * @param Date new value of Date
-     */
-    public void setDate(DateTime Date)
+    public void setDate(Timestamp date)
     {
-        this.Date = Date;
+        this.date = date;
     }
 
-    private String code;
-
-    /**
-     * Get the value of code
-     *
-     * @return the value of code
-     */
-    public String getCode()
+    public List<Group> getGroups()
     {
-        return code;
-    }
+        if (groups == null) {
+            groups = new ArrayList<>();
+            try {
+                ResultSet results = Database.getDatabase().query("SELECT * FROM pgroup WHERE id IN (SELECT pgroupID FROM project_pgroup WHERE projectID = " + id + ")", Database.QUERY.QUERY);
 
-    private ArrayList<Photo> fotos;
-
-    /**
-     * Get the value of fotos
-     *
-     * @return the value of fotos
-     */
-    public ArrayList<Photo> getFotos()
-    {
-        return fotos;
-    }
-
-    /**
-     * Add foto
-     *
-     * @param foto new foto
-     */
-    public void addFoto(Photo foto)
-    {
-        this.fotos.add(foto);
+                if (results != null) {
+                    while (results.next()) {
+                        groups.add(new Group(results.getInt("id"), results.getString("logincode"), results.getString("groupname"), results.getDate("date")));
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                Database.getDatabase().closeConnection();
+            }
+        }
+        return groups;
     }
     
-    /**
-     * Set the value of fotos
-     *
-     * @param fotos new value of fotos
-     */
-    public void setFoto(ArrayList<Photo> fotos)
-    {
-        this.fotos = fotos;
-    }
-
     @Override
     public String toString()
     {
-        return "Project{" + "Name=" + Name + ", Date=" + Date + '}';
+        return "Project{" + "Name=" + name + ", Date=" + date.toLocalDateTime() + '}';
     }
 
 }

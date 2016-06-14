@@ -112,5 +112,12 @@
         <servlet-name>Additemservlet</servlet-name>
         <url-pattern>/Additemservlet</url-pattern>
     </servlet-mapping>
-   
+    <servlet>
+        <servlet-name>ProjectServlet</servlet-name>
+        <servlet-class>com.project.ProjectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjectServlet</servlet-name>
+        <url-pattern>/ProjectServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

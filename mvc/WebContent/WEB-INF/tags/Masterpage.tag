@@ -21,6 +21,7 @@
     <script src="../WEB-INF/js/dialog.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/draggable.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/grid.min.js" type="text/javascript"></script>
+    <link href="../WEB-INF/css/flags.css" rel="stylesheet" type="text/css"/>
 
 <div class="container-fluid">
     <div class="row">

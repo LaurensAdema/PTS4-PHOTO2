@@ -2,6 +2,8 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="java.util.List"%>
 <%@ page import="com.domain.photo.Project"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="LanguageConfigServlet" />
 <t:Masterpage>
 
     <jsp:body>
@@ -15,12 +17,14 @@
             <input type="text" class="form-control" name="tbelname" placeholder="name of element ex. lbl_username"/><br>
             <input type="text" class="form-control" name="tbelvalue" placeholder="value of element so : Username"/>
             <select name="page">
-                <option name="master" value="1">master</option>
-                <option name="index" value="2">index</option>
+                <c:forEach items="${pages}" var="page">
+                    <option name="<c:out value="${page.value}"/>" value="<c:out value="${page.key}"/>"><c:out value="${page.value}"/></option>
+                </c:forEach>
             </select>
             <select name="language">
-                <option name="English" value="1">English</option>
-                <option name="Nederlands"value="2">Nederlands</option>
+                <c:forEach items="${languages}" var="language">
+                    <option name="<c:out value="${language.value}"/>" value="<c:out value="${language.key}"/>"><c:out value="${language.value}"/></option>
+                </c:forEach>
             </select>
 
             <button type="submit" class="btn btn-default" ID="btnlang" >

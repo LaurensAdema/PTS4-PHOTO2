@@ -16,6 +16,7 @@
                 <form role="form" class="form form-group" action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
                     <label for="selectgroup">Select a Group</label>
                     <select name="files" id="selectgroup" class="form-control required">
+                        <option label=" "></option>
                         <c:forEach items="${projects}" var="project">
                             <optgroup label="<c:out value="${project.name}"/>">
                                 <c:forEach items="${project.groups}" var="group">

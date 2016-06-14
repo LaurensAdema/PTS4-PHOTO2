@@ -131,12 +131,13 @@
                                         <span class="item-left">
                                             <img src="http://lorempixel.com/50/50/" alt="" />
                                             <span class="item-info">
-                                                <span><c:out value="${item.name}"/></span>                                             
-                                                <span>$<c:out value="${item.price}"/></span>                                             
+                                                <span><c:out value="${item.key.name}"/></span>                                             
+                                                <span>$<c:out value="${item.key.price}"/></span>
+                                                <span>Quantity: <c:out value="${item.value}"/></span>     
                                             </span>
                                         </span>
                                         <span class="item-right">
-                                            <a class="btn btn-xs btn-danger pull-right" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.id}"/>">x</a>
+                                            <a class="btn btn-xs btn-danger pull-right" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.key.id}"/>">x</a>
                                         </span>
                                     </span>
 
@@ -144,7 +145,7 @@
 
 
                                 <li class="divider"></li>
-                                <li><a class="text-center" href="">View Cart</a></li>
+                                <li><a class="text-center" href="/WEB-INF/shoppingcart.jsp">View Cart</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -19,19 +19,24 @@
                 </div>
                 <c:forEach items="${cart}" var="item">
                     <div id="products" class="row list-group">
+                        
                         <div class="item  col-xs-4 col-lg-4">
                             <div class="thumbnail">
+                                
                                 <div class="caption">
                                     <h4 class="group inner list-group-item-heading">
-                                        <c:out value="${item.name}"/></h4>
+                                        <c:out value="${item.key.name}"/></h4>
                                     <br/>
                                     <div class="col-xs-6 col-md-6">
 
-                                        <c:out value="${item.price}"/></div
+                                        <c:out value="$${item.key.price}"/></div>
+                                        <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Quantity: ${item.value}"/></div>
                                     <div class="row">
 
                                         <div class="col-xs-6 col-md-6">
-                                            <a class="btn btn-success" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.id}"/>">Remove from cart</a>
+                                            <a class="btn btn-success" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.key.id}"/>">Remove from cart</a>
                                         </div>
                                         <br>
                                         </br>

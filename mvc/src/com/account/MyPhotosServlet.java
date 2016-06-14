@@ -10,7 +10,9 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -37,17 +39,16 @@ public class MyPhotosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("account") != null) {
-            List<Photo> shoppingcart = (List<Photo>) request.getSession().getAttribute("cart");
+            Map<Photo, Integer> shoppingcart = (HashMap<Photo, Integer>) request.getSession().getAttribute("cart");
             if (request.getParameter("add") != null || request.getParameter("del") != null) {
 
                 Photo item = null;
-                ResultSet results;
+                ResultSet results = null;
 
                 try {
                     if (request.getParameter("add") != null) {
                         results = Database.getDatabase().query("SELECT * FROM photo WHERE id = " + request.getParameter("add"), Database.QUERY.QUERY);
                     }
-                    results = Database.getDatabase().query("SELECT * FROM photo WHERE id = " + request.getParameter("add"), Database.QUERY.QUERY);
                     if (request.getParameter("del") != null) {
                         results = Database.getDatabase().query("SELECT * FROM photo WHERE id = " + request.getParameter("del"), Database.QUERY.QUERY);
                     }
@@ -58,8 +59,12 @@ public class MyPhotosServlet extends HttpServlet {
                         }
                     }
                     if (request.getParameter("add") != null) {
-
-                        shoppingcart.add(item);
+                        if(shoppingcart.get(item) == null || shoppingcart.get(item) == 0) {
+                            shoppingcart.put(item, 1);
+                        } else {
+                            shoppingcart.put(item, shoppingcart.get(item) + 1);
+                            
+                        }
                     } else if (request.getParameter("del") != null) {
                         shoppingcart.remove(item);
                     }

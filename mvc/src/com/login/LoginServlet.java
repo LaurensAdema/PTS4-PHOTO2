@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
@@ -49,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             {
                 newSession.setAttribute("lang", lang);
             }
-            newSession.setAttribute("cart", new ArrayList<Photo>());
+            newSession.setAttribute("cart", new HashMap<Photo, Integer>());
             newSession.setAttribute("account", account);
 
         }

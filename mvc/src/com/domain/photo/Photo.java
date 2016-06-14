@@ -16,6 +16,7 @@ public class Photo {
     private String pathlowres;
     private String pathhighres;
     private int id;
+    private int quantity;
 
     public Photo(String name, int price, int id, String pathlowres, String pathhighres) {
         this.name = name;
@@ -48,6 +49,16 @@ public class Photo {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

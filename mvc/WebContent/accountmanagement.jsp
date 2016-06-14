@@ -69,7 +69,10 @@
 
         </div>
         <c:if test="${not empty param.err}">
-            Rode tekst met error<br>
+            <div class="label-danger" >
+                <label for="tblogincode"> Inlogcode already added.                       
+                </label>
+           </div>
         </c:if>
 
         <form action="AttachLoginCodeServlet" method="post">

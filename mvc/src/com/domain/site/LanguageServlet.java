@@ -24,7 +24,7 @@ public class LanguageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String language = "dutch";
+        String language = "Nederlands";
         if (request.getParameter("lang") != null)
         {
             ResultSet allLanguages = Database.getDatabase().query("SELECT name FROM language WHERE name = " + request.getParameter("lang"), Database.QUERY.QUERY);

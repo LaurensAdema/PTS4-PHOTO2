@@ -136,7 +136,7 @@
                                             </span>
                                         </span>
                                         <span class="item-right">
-                                            <button class="btn btn-xs btn-danger pull-right" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.id}"/>">x</button>
+                                            <a class="btn btn-xs btn-danger pull-right" href="/WEB-INF/mygroups.jsp?del=<c:out value="${item.id}"/>">x</a>
                                         </span>
                                     </span>
 

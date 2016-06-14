@@ -9,13 +9,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Laurens Adema
+ * @author NesciO
  */
 public class ProductType {
-    public enum formaten {
-        
+    public enum sizes {
+        A0, A1, A2, A3, A4, A5
     }
-    private String naam;
-    private double prijs;
-    private ArrayList<formaten> formaten;
+    
+    public enum materials {
+        mug, shirt, fabric, paper
+    }
 }

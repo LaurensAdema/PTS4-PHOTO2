@@ -15,28 +15,28 @@ import java.util.Map.Entry;
  * @author NesciO
  */
 public class ShoppingCart {
-    private Map<Photo, Integer> photos;
+    private Map<Product, Integer> products;
     private int price;
 
     public ShoppingCart() {
-        photos = new HashMap<>();
+        products = new HashMap<>();
         price = 0;
     }
     
     public int getPrice() {
         price = 0;
-        for(Entry<Photo, Integer> e : photos.entrySet()) {
+        for(Entry<Product, Integer> e : products.entrySet()) {
             price += e.getKey().getPrice() * e.getValue();
         }
         return price;
     }
 
-    public Map<Photo, Integer> getPhotos() {
-        return photos;
+    public Map<Product, Integer> getProducts() {
+        return products;
     }
 
-    public void setPhotos(Map<Photo, Integer> photos) {
-        this.photos = photos;
+    public void setProducts(Map<Product, Integer> products) {
+        this.products = products;
     }
 
     public void setPrice(int price) {

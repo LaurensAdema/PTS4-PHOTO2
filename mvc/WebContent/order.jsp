@@ -18,31 +18,31 @@
                     <div id="products" class="row list-group">
 
                         <div class="item  col-xs-4 col-lg-4">
-                            
-                                <div class="caption">
-                                    
-                                    <h4 class="group inner list-group-item-heading">
-                                        <c:out value="${item.key.name}"/></h4>
-                                    <br/>
-                                    <div class="col-xs-6 col-md-6">
 
-                                        <c:out value="Price: $${item.key.price}"/></div>
+                            <div class="caption">
 
-                                    <br>
-                                    <div class="col-xs-6 col-md-6">
+                                <h4 class="group inner list-group-item-heading">
+                                    <c:out value="${item.key.name}"/></h4>
+                                <br/>
+                                <div class="col-xs-6 col-md-6">
 
-                                        <c:out value="Quantity: ${item.value}"/></div>
+                                    <c:out value="Price: $${item.key.price}"/></div>
 
-                                    <br>
-                                    <div class="col-xs-6 col-md-6">
+                                <br>
+                                <div class="col-xs-6 col-md-6">
 
-                                        <c:out value="Total: $${item.key.price * item.value }"/></div>
+                                    <c:out value="Quantity: ${item.value}"/></div>
 
-                                    <br>
-                                    </br>
+                                <br>
+                                <div class="col-xs-6 col-md-6">
+
+                                    <c:out value="Total: $${item.key.price * item.value }"/></div>
+
+                                <br>
+                                </br>
 
                             </div>
-                                        
+
                         </div>
                     </div>
                 </c:forEach>
@@ -53,20 +53,43 @@
                         <div class="thumbnail">
 
                             <div class="caption">
-                                <h4 class="group inner list-group-item">
+                                <h4>
                                     <c:out value="Total: $${cart.price}"/></h4>
+                            </div>
+                        </div>
+                        Payment method: 
+                        <select name="paymentmethod">
+                            <option name="iDeal" value="iDeal">iDeal</option>
+                            <option name="PayPal" value="PayPal">PayPal</option>
+                            <option name="MasterCard" value="MasterCard">MasterCard</option>
+                            <option name="Visa" value="Visa">Visa</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="item  col-xs-4 col-lg-4">
+                        <div class="thumbnail">
+
+                            <div class="caption">
+                                <h4>Address</h4><br>
+                                <c:out value="Name: ${account.first_name}"/> <c:out value="${account.last_name}"/><br>
+                                <c:out value="E-mail address: ${account.email}"/><br>
+                                <c:out value="Postal code: ${account.postal_code}"/><br>
+                                <c:out value="Home number: ${account.nr}"/>
                             </div>
                         </div>
                     </div>
                 </div>
-            <a class="btn btn-danger" href="/WEB-INF/shoppingcart.jsp">Back to shopping cart</a> <a class="btn btn-success" href="/WEB-INF/order.jsp">Finalize order</a>
-        </div>
-        <script>
-            $(document).ready(function () {
+                <a class="btn btn-danger" href="/WEB-INF/shoppingcart.jsp">Back to shopping cart</a> <a class="btn btn-success" href="/WEB-INF/order.jsp">Finalize order</a>
+            </div>
+            <script>
+                $(document).ready(function () {
                     event.preventDefault();
-                    $('#products .item').addClass('list-group-item');            });</script>
-    </div>
-</jsp:body>
+                    $('#products .item').addClass('list-group-item');
+                });</script>
+        </div>
+    </jsp:body>
 
 </t:Masterpage>
 

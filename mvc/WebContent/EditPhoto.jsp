@@ -1,8 +1,4 @@
-<%-- 
-    Document   : EditPhoto
-    Created on : 7-jun-2016, 13:12:05
-    Author     : soufyan
---%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="java.util.List"%>

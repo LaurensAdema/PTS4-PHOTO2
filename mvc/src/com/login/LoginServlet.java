@@ -7,6 +7,7 @@ import com.domain.account.Customer;
 import com.domain.account.Admin;
 import com.domain.photo.Photo;
 import com.domain.photo.Project;
+import com.domain.bestelling.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -50,7 +51,7 @@ public class LoginServlet extends HttpServlet {
             {
                 newSession.setAttribute("lang", lang);
             }
-            newSession.setAttribute("cart", new HashMap<Photo, Integer>());
+            newSession.setAttribute("cart", new ShoppingCart());
             newSession.setAttribute("account", account);
 
         }

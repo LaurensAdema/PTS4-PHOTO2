@@ -18,7 +18,7 @@
                                 class="glyphicon glyphicon-th"></span>Grid</a>
                     </div>
                 </div>
-                <c:forEach items="${cart}" var="item">
+                <c:forEach items="${cart.photos}" var="item">
                     <div id="products" class="row list-group">
 
                         <div class="item  col-xs-4 col-lg-4">

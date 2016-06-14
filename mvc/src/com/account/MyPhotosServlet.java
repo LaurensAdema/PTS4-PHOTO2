@@ -2,6 +2,7 @@ package com.account;
 
 import com.database.Database;
 import com.domain.account.Account;
+import com.domain.bestelling.ShoppingCart;
 import com.domain.photo.Group;
 import com.domain.photo.Photo;
 import com.domain.site.LanguageServlet;
@@ -39,7 +40,7 @@ public class MyPhotosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("account") != null) {
-            Map<Photo, Integer> shoppingcart = (HashMap<Photo, Integer>) request.getSession().getAttribute("cart");
+            ShoppingCart shoppingcart = (ShoppingCart) request.getSession().getAttribute("cart");
             if (request.getParameter("add") != null || request.getParameter("del") != null || request.getParameter("rem") != null || request.getParameter("plus") != null) {
 
                 Photo item = null;
@@ -65,22 +66,22 @@ public class MyPhotosServlet extends HttpServlet {
                         }
                     }
                     if (request.getParameter("add") != null) {
-                        if(shoppingcart.get(item) == null || shoppingcart.get(item) == 0) {
-                            shoppingcart.put(item, 1);
+                        if(shoppingcart.getPhotos().get(item) == null || shoppingcart.getPhotos().get(item) == 0) {
+                            shoppingcart.getPhotos().put(item, 1);
                         } else {
-                            shoppingcart.put(item, shoppingcart.get(item) + 1);
+                            shoppingcart.getPhotos().put(item, shoppingcart.getPhotos().get(item) + 1);
                             
                         }
                     } else if (request.getParameter("del") != null) {
-                        shoppingcart.remove(item);
+                        shoppingcart.getPhotos().remove(item);
                     } else if (request.getParameter("rem") != null) {
-                        if(shoppingcart.get(item) != 1) {
-                            shoppingcart.put(item, shoppingcart.get(item) - 1);
+                        if(shoppingcart.getPhotos().get(item) != 1) {
+                            shoppingcart.getPhotos().put(item, shoppingcart.getPhotos().get(item) - 1);
                         } else {
-                            shoppingcart.remove(item);
+                            shoppingcart.getPhotos().remove(item);
                         }
                     } else if(request.getParameter("plus") != null) {
-                        shoppingcart.put(item, shoppingcart.get(item) + 1);
+                        shoppingcart.getPhotos().put(item, shoppingcart.getPhotos().get(item) + 1);
                     }
                     request.getSession().setAttribute("cart", shoppingcart);
                 } catch (SQLException ex) {

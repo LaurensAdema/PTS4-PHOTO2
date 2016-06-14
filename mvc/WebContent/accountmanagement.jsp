@@ -2,6 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page import="java.util.List"%>
 <%@ page import="com.domain.photo.Project"%>
+<jsp:include page="AttachLoginCodeServlet" />
 <t:Masterpage>
 
     <jsp:body>
@@ -55,9 +56,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${mygroupies}" var="item"></c:forEach>
-                        <tr><td><c:out value="${item.name}"/></td><td><c:out value="${item.inlogcode}"/></td></tr>
+                        
 
+                        <c:forEach items="${mygroupies}" var="item">
+                        <tr><td><c:out value="${item.groupName}"/></td><td><c:out value="${item.loginCode}"/></td></tr>
+</c:forEach>
                     </tbody>
                 </table>
 

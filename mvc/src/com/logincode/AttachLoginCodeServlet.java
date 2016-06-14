@@ -74,10 +74,9 @@ public class AttachLoginCodeServlet extends HttpServlet {
     {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        HttpSession newSession = req.getSession(true);
-        Account A = (Account)newSession.getAttribute("account");
+        Account A = (Account)req.getSession().getAttribute("account");
         List<Group> Mygroups = new ArrayList<>();
-        
+        List<Integer> groupids = new ArrayList<Integer>();
         Group AddedGroup = new Group();
          try
             {
@@ -85,9 +84,7 @@ public class AttachLoginCodeServlet extends HttpServlet {
                 
                 while (rs.next())
                 {
-                    
-                    AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("name"));
-                    Mygroups.add(AddedGroup);
+                    groupids.add(rs.getInt("groupID"));
                 }
             } catch (SQLException ex)
             {
@@ -96,8 +93,30 @@ public class AttachLoginCodeServlet extends HttpServlet {
             {
                 Database.getDatabase().closeConnection();
             }
+         for(int I: groupids)
+         {
+                      try
+            {
+                ResultSet rs = Database.getDatabase().query("SELECT * FROM pgroup WHERE id = " + I, Database.QUERY.QUERY);
+                
+                while (rs.next())
+                {
+                    AddedGroup = new Group(rs.getInt("id"),rs.getString("logincode"),rs.getString("groupname"));
+                    Mygroups.add(AddedGroup);
+                }
+            } catch (SQLException ex)
+            {
+                Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+                      finally
+            {
+                Database.getDatabase().closeConnection();
+            }
+         }
+             
+         
        
-       newSession.setAttribute("mygroupies",Mygroups);
+       req.getSession().setAttribute("mygroupies",Mygroups);
                 
     }
 

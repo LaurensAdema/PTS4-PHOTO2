@@ -81,7 +81,8 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-danger" href="/WEB-INF/shoppingcart.jsp">Back to shopping cart</a> <a class="btn btn-success" href="/WEB-INF/order.jsp">Finalize order</a>
+                <a class="btn btn-danger" href="/WEB-INF/shoppingcart.jsp">Back to shopping cart</a>
+                <a class="btn btn-success" href="/WEB-INF/ordercompletejsp">Finalize order</a>
             </div>
             <script>
                 $(document).ready(function () {

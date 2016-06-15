@@ -26,7 +26,7 @@
                 <option value="Paper">Paper</option>
                 <option value="Phonecase">Phonecase</option>
             </select>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Save and add to cart">
         </form>
     </jsp:body>
 

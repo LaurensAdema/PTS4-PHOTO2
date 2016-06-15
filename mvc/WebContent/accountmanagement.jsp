@@ -4,11 +4,12 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.domain.photo.Project"%>
 <jsp:include page="AttachLoginCodeServlet" />
+
 <t:Masterpage>
 
     <jsp:body>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -45,7 +46,39 @@
                     </div>
 
                 </div>
-            </div></div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Recent orders
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Total price</th>
+                                    <th>Date of purchase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${orders}" var="item">
+                                    <tr style="cursor: pointer;" onclick="window.document.location='/WEB-INF/vieworder.jsp?id=' + <c:out value="${item.id}"/>">
+                                        <td><c:out value="$${item.price}"/></td>
+                                        <td><c:out value="${item.date}"/></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+
+
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <h3>Add some inlogcode here</h3>
         <div class="row">
             <table class="table col-lg-offset-1">
@@ -72,7 +105,7 @@
             <div class="label-danger" >
                 <label for="tblogincode"> Inlogcode already added.                       
                 </label>
-           </div>
+            </div>
         </c:if>
 
         <form action="AttachLoginCodeServlet" method="post">

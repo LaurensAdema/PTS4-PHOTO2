@@ -136,4 +136,24 @@
         <servlet-name>MyOrdersServlet</servlet-name>
         <url-pattern>/MyOrdersServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditPhotoToGrey</servlet-name>
+        <servlet-class>com.editphoto.EditPhotoToGrey</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditPhotoToGrey</servlet-name>
+        <url-pattern>/EditPhotoToGrey</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EditPhotoToSepiaServlet</servlet-name>
+        <servlet-class>com.editphoto.EditPhotoToSepiaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditPhotoToSepiaServlet</servlet-name>
+        <url-pattern>/EditPhotoToSepiaServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
 </web-app>

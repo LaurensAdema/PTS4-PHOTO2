@@ -31,7 +31,7 @@
                     <div id="products" class="row list-group">
                         <div class="item  col-xs-4 col-lg-4">
                             <div class="thumbnail">
-                                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                                <img class="group list-group-image" src="<c:out value="${item.pathlowres}"/> "alt="<c:out value="${item.pathhighres}"/> " />
                                 <div class="caption">
                                     <h4 class="group inner list-group-item-heading">
                                         <c:out value="${item.name}"/></h4>

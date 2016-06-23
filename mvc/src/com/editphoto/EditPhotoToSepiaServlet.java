@@ -1,7 +1,7 @@
 package com.editphoto;
 
 import com.database.Database;
-import com.randomcodegenerator.InlogCodeGenerator;
+import com.randomcodegenerator.CodeGenerator;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -95,10 +95,7 @@ public class EditPhotoToSepiaServlet extends HttpServlet {
         String Accountid = null;
         String Prijs = null;
         String Pathlowres = null;
-
-        InlogCodeGenerator inlogCodeGenerator = new InlogCodeGenerator();
-
-        String inlogcode = inlogCodeGenerator.GenerateCode();
+        String inlogcode = CodeGenerator.generateAlphanumericCode(8);
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();

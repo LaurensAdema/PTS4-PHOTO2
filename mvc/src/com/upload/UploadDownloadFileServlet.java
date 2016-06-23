@@ -1,7 +1,7 @@
 package com.upload;
 
 import com.database.Database;
-import com.randomcodegenerator.InlogCodeGenerator;
+import com.randomcodegenerator.CodeGenerator;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -89,9 +89,7 @@ public class UploadDownloadFileServlet extends HttpServlet {
         String Prijs = null;
         String Pathlowres = null;
 
-        InlogCodeGenerator inlogCodeGenerator = new InlogCodeGenerator();
-
-        String inlogcode = inlogCodeGenerator.GenerateCode();
+        String inlogcode = CodeGenerator.generateAlphanumericCode(8);
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();

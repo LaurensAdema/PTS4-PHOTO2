@@ -7,7 +7,7 @@ package com.upload;
 
 import com.database.Database;
 import com.domain.site.LanguageServlet;
-import com.randomcodegenerator.InlogCodeGenerator;
+import com.randomcodegenerator.CodeGenerator;
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,12 +42,13 @@ import org.apache.commons.net.ftp.FTPReply;
  */
 public class UploadServlet extends HttpServlet {
 
-    private String hostName = "84.24.156.65";
-    private int port = 21;
-    private String username = "photoshop";
-    private String password = "pts4";
-    private int maxFileSize = 5000 * 1024;
-    private int maxMemSize = 5000 * 1024;
+    //private final String hostName = "84.24.156.65";
+    private final String hostName = "192.168.1.201";
+    private final int port = 21;
+    private final String username = "photoshop";
+    private final String password = "pts4";
+    private final int maxFileSize = 5000 * 1024;
+    private final int maxMemSize = 5000 * 1024;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -66,14 +67,10 @@ public class UploadServlet extends HttpServlet {
 
         int groupID = 2;
         String price = "0";
-        String fileName = "DEFAULT";
+        String fileName = CodeGenerator.generateNumericCode(8) + "_" + CodeGenerator.generateNumericCode(8);
         String extension = null;
         String pathLowRes = null;
         String pathHighRes = null;
-
-        InlogCodeGenerator inlogCodeGenerator = new InlogCodeGenerator();
-
-        String inlogcode = inlogCodeGenerator.GenerateCode();
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -105,21 +102,11 @@ public class UploadServlet extends HttpServlet {
             while (fileItemsIterator2.hasNext())
             {
                 FileItem fileItem = fileItemsIterator2.next();
-                fileName = fileItem.getName();
-                System.out.println("FieldName=" + fileItem.getFieldName());
-                System.out.println("FileName=" + fileItem.getName());
-                System.out.println("ContentType=" + fileItem.getContentType());
-                System.out.println("Size in bytes=" + fileItem.getSize());
 
                 // High res temp
                 System.out.println("Absolute Path at server=" + temp.getAbsolutePath());
                 fileItem.write(temp);
 
-                // out.write("File "+fileItem.getName()+ " uploaded successfully.");
-                // out.write("<br>");
-                //out.write("<a href=\"UploadDownloadFileServlet?fileName=High resolution\\"+fileItem.getName()+"\">Download "+fileItem.getName()+"</a>");
-                // out.write("<img src=\"UploadDownloadFileServlet?fileName=High resolution\\"+fileItem.getName()+"\">Download "+fileItem.getName()+">");
-                // out.write("<img src=\"UploadDownloadFileServlet?fileName=knipsel22.jpg\">Download knipsel22.jpg>");
                 // High res upload
                 FTPClient ftp = null;
                 InputStream in = null;
@@ -166,11 +153,11 @@ public class UploadServlet extends HttpServlet {
                     //Graphics2D g2d = dimg.createGraphics();
                     //g2d.drawImage(tmp, 0, 0, null);
                     //g2d.dispose();
-                    File lowResFile = new File(request.getServletContext().getAttribute("FILES_DIR") + File.separator + "\\Low resolution\\" + FilenameUtils.removeExtension(fileName) + ".jpg");
+                    File lowResFile = new File(request.getServletContext() + "\\lowRes\\" + fileName + ".jpg");
                     lowResFile.getParentFile().mkdirs();
                     ImageIO.write(dimg, "JPG", lowResFile);
 
-                    pathLowRes = lowResFile.getAbsolutePath();
+                    pathLowRes = "\\lowRes\\" + fileName + ".jpg";
                 } catch (Exception ex)
                 {
                     System.out.println(ex.getMessage());
@@ -211,11 +198,6 @@ public class UploadServlet extends HttpServlet {
                 temp.deleteOnExit();
             }
 
-            //Database.getDatabase().query("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( 1 , test , 2 , /tesadtdsf , /teadstsdf)", Database.QUERY.UPDATE);
-            //   out.write("INSERT INTO photo (accountID,name,price,pathlowres,pathhighres) VALUES ( "+Accountid+" , "+Filename+" , "+price+" , Low resolution\\"+Filename+" , High resolution\\"+Filename+")");
-            out.write("Geef volgende code aan klant mee, zodat zei de relaterende fotos kunnen koppelen aan hen account");
-            out.write("<br>");
-            out.write(inlogcode);
             out.write("<br>");
             out.write("<a href=\"/WEB-INF/index.jsp\">Terug naar home</a>");
             out.write("</body></html>");

@@ -29,7 +29,7 @@ public class LanguageServlet extends HttpServlet {
         String language = "Nederlands";
         if (request.getParameter("lang") != null)
         {
-            ResultSet allLanguages = Database.getDatabase().query("SELECT name FROM language WHERE name = " + request.getParameter("lang"), Database.QUERY.QUERY);
+            ResultSet allLanguages = Database.getDatabase().query("SELECT id, name FROM language WHERE name = " + request.getParameter("lang"), Database.QUERY.QUERY);
             try
             {
                 if (allLanguages != null)
@@ -39,6 +39,7 @@ public class LanguageServlet extends HttpServlet {
                         if (allLanguages.getString("name").equals(request.getParameter("lang")))
                         {
                             request.getSession().setAttribute("lang", request.getParameter("lang"));
+                            request.getSession().setAttribute("languageid", allLanguages.getInt("id"));
                             break;
                         }
                     }

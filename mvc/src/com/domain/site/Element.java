@@ -2,9 +2,9 @@ package com.domain.site;
 
 public class Element {
 
-    private int id;
+    private String id;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class Element {
         this.translation = translation;
     }
 
-    public Element(int id, String name, String description, String translation) {
+    public Element(String id, String name, String description, String translation) {
         this.id = id;
         this.name = name;
         this.description = description;

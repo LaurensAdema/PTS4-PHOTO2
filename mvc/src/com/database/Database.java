@@ -286,5 +286,26 @@ public class Database {
         return query;
 
     }
+public ResultSet RawQuery(String query)
+{
+            try {
+            if (conn == null || conn.isClosed()) {
 
+                openConnection();
+                if (conn == null) {
+                    System.out.println("Geen conn");
+                    return null;
+                }
+            
+			PreparedStatement SQLquery = conn.prepareStatement(query);
+                SQLquery.executeUpdate();
+
+                return SQLquery.getGeneratedKeys();			
+			}}
+			catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return null;
+}
 }

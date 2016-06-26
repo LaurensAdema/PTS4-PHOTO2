@@ -66,7 +66,6 @@ public class LanguageConfigServlet extends HttpServlet {
     {
         HashMap<Integer, String> pages = new HashMap<>();
         HashMap<Integer, String> languages = new HashMap<>();
-        List<Language> talen = new ArrayList<>();
         if (request.getSession().getAttribute("account") != null)
         {
             Account account = (Account) request.getSession().getAttribute("account");
@@ -90,13 +89,7 @@ public class LanguageConfigServlet extends HttpServlet {
                     {
                         while (langResults.next())
                         {
-                            talen.add(new Language(
-                                    langResults.getInt("id"),
-                                    langResults.getString("name"),
-                                    langResults.getString("iso"),
-                                    langResults.getString("Country")
-                            ));
-                            languages.put(langResults.getInt("id"), langResults.getString("name"));
+                        languages.put(langResults.getInt("id"), langResults.getString("name"));
                         }
                     }
                 } catch (SQLException ex)

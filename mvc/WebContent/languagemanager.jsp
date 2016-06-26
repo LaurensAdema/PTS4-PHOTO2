@@ -18,10 +18,10 @@
                 </select>
                     <div class="btn-group" role="group">
                         
-                        <button type="submit" action="select" class="btn btn-sm btn-primary" ID="btnselectlang" onclick="form.action='LangManagementServlet?select'">
- Select this Language
+                        <button type="submit" class="btn btn-sm btn-warning" ID="btnselectlang" onclick="form.action='LangManagementServlet?select'">
+                        Select this Language
                         </button>
-                        <button type="submit" class="btn btn-sm btn-primary" ID="btldeletelang" action="deletelang=true" onclick="window.location.href = 'LangManagementServlet'">
+                        <button type="submit" class="btn btn-sm btn-danger" ID="btldeletelang" action="deletelang=true" onclick="window.location.href = 'LangManagementServlet'">
                             Delete this Language
                         </button>
                         

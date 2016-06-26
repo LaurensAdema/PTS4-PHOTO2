@@ -64,53 +64,52 @@ public class LanguageConfigServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        HashMap<Integer, String> pages = new HashMap<>();
-        HashMap<Integer, String> languages = new HashMap<>();
-        List<Language> talen = new ArrayList<>();
-        if (request.getSession().getAttribute("account") != null)
-        {
-            Account account = (Account) request.getSession().getAttribute("account");
-            if (account.getClass() == Admin.class)
-            {
-                try
-                {
-                    ResultSet pageResults = Database.getDatabase().query("SELECT * FROM page", Database.QUERY.QUERY);
-
-                    if (pageResults != null)
-                    {
-                        while (pageResults.next())
-                        {
-                            pages.put(pageResults.getInt("id"), pageResults.getString("uri"));
-                        }
-                    }
-                    
-                    ResultSet langResults = Database.getDatabase().query("SELECT * FROM `language` WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
-
-                    if (langResults != null)
-                    {
-                        while (langResults.next())
-                        {
-                            talen.add(new Language(
-                                    langResults.getInt("id"),
-                                    langResults.getString("name"),
-                                    langResults.getString("iso"),
-                                    langResults.getString("Country")
-                            ));
-                            languages.put(langResults.getInt("id"), langResults.getString("name"));
-                        }
-                    }
-                } catch (SQLException ex)
-                {
-                    Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
-                } finally
-                {
-                    Database.getDatabase().closeConnection();
-                }
-            }
-        }
-        request.getSession().setAttribute("pages", pages);
-        request.getSession().setAttribute("languages", languages);
-        request.getSession().setAttribute("talen", talen);
+//        HashMap<Integer, String> pages = new HashMap<>();
+//        HashMap<Integer, String> languages = new HashMap<>();
+//        List<Language> talen = new ArrayList<>();
+//        if (request.getSession().getAttribute("account") != null)
+//        {
+//            Account account = (Account) request.getSession().getAttribute("account");
+//            if (account.getClass() == Admin.class)
+//            {
+//                try
+//                {
+//                    ResultSet pageResults = Database.getDatabase().query("SELECT * FROM page", Database.QUERY.QUERY);
+//
+//                    if (pageResults != null)
+//                    {
+//                        while (pageResults.next())
+//                        {
+//                            pages.put(pageResults.getInt("id"), pageResults.getString("uri"));
+//                        }
+//                    }
+//                    
+//                    ResultSet langResults = Database.getDatabase().query("SELECT * FROM `language` WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
+//
+//                    if (langResults != null)
+//                    {
+//                        while (langResults.next())
+//                        {
+//                            talen.add(new Language(
+//                                    langResults.getInt("id"),
+//                                    langResults.getString("name"),
+//                                    langResults.getString("iso"),
+//                                    langResults.getString("Country")
+//                            ));
+//                            languages.put(langResults.getInt("id"), langResults.getString("name"));
+//                        }
+//                    }
+//                } catch (SQLException ex)
+//                {
+//                    Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                } finally
+//                {
+//                    Database.getDatabase().closeConnection();
+//                }
+//            }
+//        }
+//        request.getSession().setAttribute("pages", pages);
+//        request.getSession().setAttribute("languages", languages);
     }
 
 }

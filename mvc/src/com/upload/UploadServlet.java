@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,8 +43,8 @@ import org.apache.commons.net.ftp.FTPReply;
  */
 public class UploadServlet extends HttpServlet {
 
-    //private final String hostName = "84.24.156.65";
-    private final String hostName = "192.168.1.201";
+    private final String hostName = "84.24.156.65";
+    //private final String hostName = "192.168.1.201";
     private final int port = 21;
     private final String username = "photoshop";
     private final String password = "pts4";
@@ -153,11 +154,13 @@ public class UploadServlet extends HttpServlet {
                     //Graphics2D g2d = dimg.createGraphics();
                     //g2d.drawImage(tmp, 0, 0, null);
                     //g2d.dispose();
-                    File lowResFile = new File(request.getServletContext() + "\\lowRes\\" + fileName + ".jpg");
+                    ServletContext servletContext = getServletContext();
+                    String contextPath = servletContext.getRealPath(File.separator);
+                    File lowResFile = new File(contextPath + "\\lowRes\\" + fileName + ".jpg");
                     lowResFile.getParentFile().mkdirs();
                     ImageIO.write(dimg, "JPG", lowResFile);
 
-                    pathLowRes = "\\lowRes\\" + fileName + ".jpg";
+                    pathLowRes = "\\WEB-INF\\lowRes\\" + fileName + ".jpg";
                 } catch (Exception ex)
                 {
                     System.out.println(ex.getMessage());

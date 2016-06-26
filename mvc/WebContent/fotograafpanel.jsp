@@ -13,9 +13,9 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <form role="form" class="form form-group" action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
-                    <label for="selectgroup">Select a Group</label>
-                    <select name="files" id="selectgroup" class="form-control required">
+                <form role="form" class="form form-group" action="UploadServlet" method="post" enctype="multipart/form-data">
+                    <label for="selectGroupID">Select a Group</label>
+                    <select name="selectGroupID" id="selectGroupID" class="form-control required">
                         <option label=" "></option>
                         <c:forEach items="${projects}" var="project">
                             <optgroup label="<c:out value="${project.name}"/>">
@@ -26,11 +26,11 @@
                         </c:forEach>
                     </select>
                     </br>
-                    <label for="tbfilename">Select File to Upload:</label>
-                    <input type="file" name="tbfilename" multiple="" class="btn btn-primary" required>
+                    <label for="tbFilename">Select File to Upload:</label>
+                    <input type="file" name="tbFilename" multiple="" class="btn btn-primary" required>
                     </br>
-                    <label for="tbprijs">Add price for all photo's in this group: €  <label>
-                            <input type="number" name="tbprijs" step="0.01" min="0.01" max="99" required />
+                    <label for="tbPrice">Add price for all photo's in this group: €  <label>
+                            <input type="number" name="tbPrice" step="0.01" min="0.01" max="99" required />
                             <input type="submit" value="Upload" class="btn btn-primary">
                             </form>
                             </div>

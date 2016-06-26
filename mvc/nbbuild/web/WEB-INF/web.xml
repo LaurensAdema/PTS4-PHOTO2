@@ -77,14 +77,6 @@
         <url-pattern>/PhotoGroup</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>UploadDownloadFileServlet</servlet-name>
-        <servlet-class>com.upload.UploadDownloadFileServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UploadDownloadFileServlet</servlet-name>
-        <url-pattern>/UploadDownloadFileServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>ShowPicturesServletLowRes</servlet-name>
         <servlet-class>com.showpictures.ShowPicturesServletLowRes</servlet-class>
     </servlet>

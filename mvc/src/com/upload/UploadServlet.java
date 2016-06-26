@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -47,8 +46,8 @@ public class UploadServlet extends HttpServlet {
     private final int port = 21;
     private final String username = "photoshop";
     private final String password = "pts4";
-    private final int maxFileSize = 5000 * 1024;
-    private final int maxMemSize = 5000 * 1024;
+    private final int maxFileSize = 50000 * 1024;
+    private final int maxMemSize = 50000 * 1024;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -65,16 +64,12 @@ public class UploadServlet extends HttpServlet {
             throw new ServletException("Content type is not multipart/form-data");
         }
 
-        int groupID = 2;
-        String price = "0";
-        String fileName = CodeGenerator.generateNumericCode(8) + "_" + CodeGenerator.generateNumericCode(8);
-        String extension = null;
+        int groupID = -1;
+        String price = null;
+        String fileName = CodeGenerator.generateNumericCode(8) + "_" + CodeGenerator.generateNumericCode(8) + "_" + CodeGenerator.generateNumericCode(8);
         String pathLowRes = null;
         String pathHighRes = null;
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.write("<html><head></head><body>");
         try
         {
             List<FileItem> fileItemsList = uploader.parseRequest(request);
@@ -88,7 +83,7 @@ public class UploadServlet extends HttpServlet {
 
                     String fieldname = fileItem.getFieldName();
 
-                    if (fieldname.equals("tbGroupID"))
+                    if (fieldname.equals("selectGroupID"))
                     {
                         groupID = Integer.parseInt(fileItem.getString());
                     } else if (fieldname.equals("tbPrice"))
@@ -98,153 +93,156 @@ public class UploadServlet extends HttpServlet {
                     fileItemsIterator1.remove();
                 }
             }
-            Iterator<FileItem> fileItemsIterator2 = fileItemsList.iterator();
-            while (fileItemsIterator2.hasNext())
+
+            if (price != null && groupID > -1)
             {
-                FileItem fileItem = fileItemsIterator2.next();
-
-                // High res temp
-                System.out.println("Absolute Path at server=" + temp.getAbsolutePath());
-                fileItem.write(temp);
-
-                // High res upload
-                FTPClient ftp = null;
-                InputStream in = null;
-                try
+                Iterator<FileItem> fileItemsIterator2 = fileItemsList.iterator();
+                while (fileItemsIterator2.hasNext())
                 {
-                    ftp = new FTPClient();
-                    if (server)
-                    {
-                        ftp.connect("localhost", port);
-                    } else
-                    {
-                        ftp.connect(hostName, port);
-                    }
-                    if (ftp.login(username, password))
-                    {
+                    FileItem fileItem = fileItemsIterator2.next();
 
-                        ftp.setFileType(FTP.BINARY_FILE_TYPE);
+                    // High res temp
+                    System.out.println("Absolute Path at server=" + temp.getAbsolutePath());
+                    fileItem.write(temp);
 
-                        int reply = ftp.getReplyCode();
-                        System.out.println("Received Reply from FTP Connection:" + reply);
-
-                        if (FTPReply.isPositiveCompletion(reply))
+                    // High res upload
+                    FTPClient ftp = null;
+                    InputStream in = null;
+                    try
+                    {
+                        ftp = new FTPClient();
+                        if (server)
                         {
-                            System.out.println("Connected Success");
+                            ftp.connect("localhost", port);
+                        } else
+                        {
+                            ftp.connect(hostName, port);
+                        }
+                        if (ftp.login(username, password))
+                        {
+
+                            ftp.setFileType(FTP.BINARY_FILE_TYPE);
+
+                            int reply = ftp.getReplyCode();
+                            System.out.println("Received Reply from FTP Connection:" + reply);
+
+                            if (FTPReply.isPositiveCompletion(reply))
+                            {
+                                System.out.println("Connected Success");
+                            }
+
+                            in = new FileInputStream(temp);
+
+                            ftp.storeFile(fileName, in);
+                            pathHighRes = "ftp://photoviewer@" + hostName + ":" + port + "/" + fileName;
+
+                            System.out.println("SUCCESS");
+
+                            ftp.logout();
+                        }
+                        ftp.disconnect();
+                    } catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                    // Low res upload
+                    try
+                    {
+                        //creation
+
+                        BufferedImage img = ImageIO.read(temp);
+
+                        int original_width = img.getWidth();
+                        int original_height = img.getHeight();
+                        int bound_width = 200;
+                        int bound_height = 200;
+                        int new_width = original_width;
+                        int new_height = original_height;
+
+                        // first check if we need to scale width
+                        if (original_width > bound_width)
+                        {
+                            //scale width to fit
+                            new_width = bound_width;
+                            //scale height to maintain aspect ratio
+                            new_height = (new_width * original_height) / original_width;
                         }
 
-                        in = new FileInputStream(temp);
-
-                        ftp.storeFile(fileName, in);
-                        pathHighRes = "ftp://photoviewer@" + hostName + ":" + port + "/" + fileName;
-
-                        System.out.println("SUCCESS");
-
-                        ftp.logout();
-                    }
-                    ftp.disconnect();
-                } catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-
-                // Low res upload
-                try
-                {
-                    //creation
-
-                    BufferedImage img = ImageIO.read(temp);
-
-                    int original_width = img.getWidth();
-                    int original_height = img.getHeight();
-                    int bound_width = 200;
-                    int bound_height = 200;
-                    int new_width = original_width;
-                    int new_height = original_height;
-
-                    // first check if we need to scale width
-                    if (original_width > bound_width)
-                    {
-                        //scale width to fit
-                        new_width = bound_width;
-                        //scale height to maintain aspect ratio
-                        new_height = (new_width * original_height) / original_width;
-                    }
-
-                    // then check if we need to scale even with the new height
-                    if (new_height > bound_height)
-                    {
-                        //scale height to fit instead
-                        new_height = bound_height;
-                        //scale width to maintain aspect ratio
-                        new_width = (new_height * original_width) / original_height;
-                    }
-
-                    Image tmp = img.getScaledInstance(new_width, new_height, Image.SCALE_SMOOTH);
-                    BufferedImage dimg = new BufferedImage(new_width, new_height, BufferedImage.SCALE_SMOOTH);
-                    Graphics2D g2d = dimg.createGraphics();
-                    g2d.drawImage(tmp, 0, 0, null);
-                    g2d.dispose();
-
-                    //upload
-                    ServletContext servletContext = getServletContext();
-                    String contextPath = servletContext.getRealPath(File.separator);
-                    File lowResFile = new File(contextPath + "\\lowRes\\" + fileName + ".jpg");
-                    lowResFile.getParentFile().mkdirs();
-                    ImageIO.write(dimg, "JPG", lowResFile);
-
-                    pathLowRes = "\\WEB-INF\\lowRes\\" + fileName + ".jpg";
-                } catch (Exception ex)
-                {
-                    System.out.println(ex.getMessage());
-                }
-            }
-
-            // Database
-            if (fileName != null && price != null && pathLowRes != null && pathHighRes != null)
-            {
-                ResultSet rs = Database.getDatabase().query("INSERT INTO photo (name,price,pathlowres,pathhighres) VALUES (" + fileName + " , " + price + " , " + pathLowRes + " , " + pathHighRes + ")", Database.QUERY.UPDATE);
-                int key = -1;
-
-                try
-                {
-                    if (rs != null)
-                    {
-                        while (rs.next())
+                        // then check if we need to scale even with the new height
+                        if (new_height > bound_height)
                         {
-                            key = rs.getInt(1);
+                            //scale height to fit instead
+                            new_height = bound_height;
+                            //scale width to maintain aspect ratio
+                            new_width = (new_height * original_width) / original_height;
                         }
-                    }
-                    if (key != -1)
+
+                        Image tmp = img.getScaledInstance(new_width, new_height, Image.SCALE_SMOOTH);
+                        BufferedImage dimg = new BufferedImage(new_width, new_height, BufferedImage.SCALE_SMOOTH);
+                        Graphics2D g2d = dimg.createGraphics();
+                        g2d.drawImage(tmp, 0, 0, null);
+                        g2d.dispose();
+
+                        //upload
+                        ServletContext servletContext = getServletContext();
+                        String contextPath = servletContext.getRealPath(File.separator);
+                        File lowResFile = new File(contextPath + "\\lowRes\\" + fileName + ".jpg");
+                        lowResFile.getParentFile().mkdirs();
+                        ImageIO.write(dimg, "JPG", lowResFile);
+
+                        pathLowRes = "\\WEB-INF\\lowRes\\" + fileName + ".jpg";
+                    } catch (Exception ex)
                     {
-                        Database.getDatabase().query("INSERT INTO photo_group (photoID,groupID) VALUES (" + key + " , " + groupID + ")", Database.QUERY.UPDATE);
+                        System.out.println(ex.getMessage());
                     }
-                } catch (SQLException ex)
-                {
-                    Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
-                } finally
-                {
-                    Database.getDatabase().closeConnection();
                 }
-            }
 
-            if (!temp.delete())
+                // Database
+                if (fileName != null && price != null && pathLowRes != null && pathHighRes != null && groupID > -1)
+                {
+                    ResultSet rs = Database.getDatabase().query("INSERT INTO photo (name,price,pathlowres,pathhighres) VALUES (" + fileName + " , " + price + " , " + pathLowRes + " , " + pathHighRes + ")", Database.QUERY.UPDATE);
+                    int key = -1;
+
+                    try
+                    {
+                        if (rs != null)
+                        {
+                            while (rs.next())
+                            {
+                                key = rs.getInt(1);
+                            }
+                        }
+                        if (key != -1)
+                        {
+                            Database.getDatabase().query("INSERT INTO photo_group (photoID,groupID) VALUES (" + key + " , " + groupID + ")", Database.QUERY.UPDATE);
+                        }
+                    } catch (SQLException ex)
+                    {
+                        Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } finally
+                    {
+                        Database.getDatabase().closeConnection();
+                    }
+                }
+
+                if (!temp.delete())
+                {
+                    System.err.println("Temp not deleted");
+                    temp.deleteOnExit();
+                }
+                response.sendRedirect(request.getContextPath() + "/fotograafpanel.jsp");
+            } else
             {
-                System.err.println("Temp not deleted");
-                temp.deleteOnExit();
+                request.setAttribute("errorMessage", "Some fields are empty.");
+                request.getRequestDispatcher("/fotograafpanel.jsp").forward(request, response);
             }
-
-            out.write("<br>");
-            out.write("<a href=\"/WEB-INF/index.jsp\">Terug naar home</a>");
-            out.write("</body></html>");
-
-            //response.sendRedirect(request.getContextPath() + "/index.jsp");
         } catch (FileUploadException e)
         {
-            out.write("Exception in uploading file.");
+            System.out.println("Exception in uploading file.");
         } catch (Exception e)
         {
-            out.write("Exception in uploading file.");
+            System.out.println("Exception in uploading file.");
         }
     }
 }

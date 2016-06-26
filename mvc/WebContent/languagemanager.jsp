@@ -10,8 +10,8 @@
          <div class = "panel panel-primary">
             <div class="panel-heading">Edit Language</div>
             <div class="panel-body">
-                <form role="form" class="form-group" ID="formselectlanguage" action="LangManagementServlet" method="post">        
-                <select id="langselect" name="langselect">
+                <form role="form" class="form-group" ID="formselectlanguage" action="LangManagementServlet" method="post">   
+                <select id="langselect" name="langselect" class="selectpicker">
                     <c:forEach items="${languages}" var="taal">
                         <option value="<c:out value="${taal.id}"/>"><c:out value="${taal.name}"/></option>   
                     </c:forEach>
@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-sm btn-warning" ID="btnselectlang" onclick="form.action='LangManagementServlet?select'">
                         Select this Language
                         </button>
-                        <button type="submit" class="btn btn-sm btn-danger" ID="btldeletelang" action="deletelang=true">
+                        <button type="submit" class="btn btn-sm btn-danger" ID="btldeletelang" onclick="form.action='LangManagementServlet?delete'">
                             Delete this Language
                         </button>
                         

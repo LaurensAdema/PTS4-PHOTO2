@@ -1,4 +1,5 @@
 <jsp:include page="LanguageServlet" />
+<jsp:include page="LanguageConfigServlet" />
 <%@tag description="Photo 2" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -17,6 +18,10 @@
     <script src="../WEB-INF/js/draggable.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/grid.min.js" type="text/javascript"></script>
     <link href="../WEB-INF/css/flags.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
 <div class="container-fluid">
     <div class="row">
@@ -108,8 +113,11 @@
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="?lang=English"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-                            <li><a href="?lang=Nederlands"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>
+                            <c:forEach items="${languages}" var="taal">
+                                <li><a href="?lang=<c:out value="${taal.name}"/>"><img src="img/blank.gif" class="flag flag-<c:out value="${taal.ISO}"/>" alt="English"/> <c:out value="${taal.name}"/></a></li>
+                            </c:forEach>
+                            <!-- <<li><a href="?lang=English"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+                            <li><a href="?lang=Nederlands"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>-->
                         </ul>
                         <script>$(".dropdown-menu li a").click(function () {
                                 var selText = $(this).text();

@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-sm btn-warning" ID="btnselectlang" onclick="form.action='LangManagementServlet?select'">
                         Select this Language
                         </button>
-                        <button type="submit" class="btn btn-sm btn-danger" ID="btldeletelang" action="deletelang=true" onclick="window.location.href = 'LangManagementServlet'">
+                        <button type="submit" class="btn btn-sm btn-danger" ID="btldeletelang" action="deletelang=true">
                             Delete this Language
                         </button>
                         

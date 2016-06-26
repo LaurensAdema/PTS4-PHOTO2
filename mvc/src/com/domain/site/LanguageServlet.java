@@ -100,9 +100,7 @@ public class LanguageServlet extends HttpServlet {
         } finally {
             Database.getDatabase().closeConnection();
         }
-        if (request.getSession()!=null)
-        {
-        request.getSession().setAttribute("languages", languages);  
-        }
+        request.setAttribute("languages", languages);  
+        
     }
 }

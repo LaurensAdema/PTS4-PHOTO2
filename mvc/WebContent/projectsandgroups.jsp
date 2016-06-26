@@ -3,13 +3,15 @@
 <%@ page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="OrderServlet" />
+<jsp:include page="LangManagementServlet" />
 
 <t:Masterpage>
 
     <jsp:body>
         <div class='container'>
-        <table class="table col-lg-offset-1">
+            <div class="row"> 
+                
+        <table class="table">
                 <thead>
                     <tr>
                         <th>Name of project</th>    
@@ -28,7 +30,7 @@
                 </tbody>
             </table>    
         </div>
-           
+           </div>  
     </jsp:body>
 
 </t:Masterpage>

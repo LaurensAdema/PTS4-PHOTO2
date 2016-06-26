@@ -17,6 +17,9 @@
     <script src="../WEB-INF/js/draggable.min.js" type="text/javascript"></script>
     <script src="../WEB-INF/js/grid.min.js" type="text/javascript"></script>
     <link href="../WEB-INF/css/flags.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>
+
 
 <div class="container-fluid">
     <div class="row">

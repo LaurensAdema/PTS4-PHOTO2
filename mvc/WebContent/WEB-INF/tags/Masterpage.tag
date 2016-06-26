@@ -111,8 +111,11 @@
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="?lang=English"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-                            <li><a href="?lang=Nederlands"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>
+                            <c:forEach items="${talen}" var="taal">
+                                <li><a href="?lang=<c:out value="${taal.name}"/>"<img src="img/blank.gif" class="flag flag-<c:out value="${taal.ISO}"/>" alt="English"/> <c:out value="${taal.name}"/></a></li>
+                            </c:forEach>
+                            <!-- <<li><a href="?lang=English"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+                            <li><a href="?lang=Nederlands"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>-->
                         </ul>
                         <script>$(".dropdown-menu li a").click(function () {
                                 var selText = $(this).text();

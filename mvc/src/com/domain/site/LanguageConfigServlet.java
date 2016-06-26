@@ -8,12 +8,14 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 public class LanguageConfigServlet extends HttpServlet {
 
@@ -64,6 +66,7 @@ public class LanguageConfigServlet extends HttpServlet {
     {
         HashMap<Integer, String> pages = new HashMap<>();
         HashMap<Integer, String> languages = new HashMap<>();
+        List<Language> talen = new ArrayList<>();
         if (request.getSession().getAttribute("account") != null)
         {
             Account account = (Account) request.getSession().getAttribute("account");
@@ -81,12 +84,18 @@ public class LanguageConfigServlet extends HttpServlet {
                         }
                     }
                     
-                    ResultSet langResults = Database.getDatabase().query("SELECT * FROM language", Database.QUERY.QUERY);
+                    ResultSet langResults = Database.getDatabase().query("SELECT * FROM `language` WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
 
                     if (langResults != null)
                     {
                         while (langResults.next())
                         {
+                            talen.add(new Language(
+                                    langResults.getInt("id"),
+                                    langResults.getString("name"),
+                                    langResults.getString("iso"),
+                                    langResults.getString("Country")
+                            ));
                             languages.put(langResults.getInt("id"), langResults.getString("name"));
                         }
                     }
@@ -99,9 +108,9 @@ public class LanguageConfigServlet extends HttpServlet {
                 }
             }
         }
-
         request.getSession().setAttribute("pages", pages);
         request.getSession().setAttribute("languages", languages);
+        request.getSession().setAttribute("talen", talen);
     }
 
 }

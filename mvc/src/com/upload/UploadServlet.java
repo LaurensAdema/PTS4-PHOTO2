@@ -8,14 +8,14 @@ package com.upload;
 import com.database.Database;
 import com.domain.site.LanguageServlet;
 import com.randomcodegenerator.CodeGenerator;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -32,19 +32,18 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
 /**
  *
- * @author soufyan
+ * @author Laurens Adema
  */
 public class UploadServlet extends HttpServlet {
 
+    private final boolean server = false;
     private final String hostName = "84.24.156.65";
-    //private final String hostName = "192.168.1.201";
     private final int port = 21;
     private final String username = "photoshop";
     private final String password = "pts4";
@@ -114,7 +113,13 @@ public class UploadServlet extends HttpServlet {
                 try
                 {
                     ftp = new FTPClient();
-                    ftp.connect(hostName, port);
+                    if (server)
+                    {
+                        ftp.connect("localhost", port);
+                    } else
+                    {
+                        ftp.connect(hostName, port);
+                    }
                     if (ftp.login(username, password))
                     {
 
@@ -146,14 +151,42 @@ public class UploadServlet extends HttpServlet {
                 // Low res upload
                 try
                 {
+                    //creation
+
                     BufferedImage img = ImageIO.read(temp);
 
-                    //Image tmp = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-                    BufferedImage dimg = new BufferedImage(200, 200, BufferedImage.SCALE_SMOOTH);
+                    int original_width = img.getWidth();
+                    int original_height = img.getHeight();
+                    int bound_width = 200;
+                    int bound_height = 200;
+                    int new_width = original_width;
+                    int new_height = original_height;
 
-                    //Graphics2D g2d = dimg.createGraphics();
-                    //g2d.drawImage(tmp, 0, 0, null);
-                    //g2d.dispose();
+                    // first check if we need to scale width
+                    if (original_width > bound_width)
+                    {
+                        //scale width to fit
+                        new_width = bound_width;
+                        //scale height to maintain aspect ratio
+                        new_height = (new_width * original_height) / original_width;
+                    }
+
+                    // then check if we need to scale even with the new height
+                    if (new_height > bound_height)
+                    {
+                        //scale height to fit instead
+                        new_height = bound_height;
+                        //scale width to maintain aspect ratio
+                        new_width = (new_height * original_width) / original_height;
+                    }
+
+                    Image tmp = img.getScaledInstance(new_width, new_height, Image.SCALE_SMOOTH);
+                    BufferedImage dimg = new BufferedImage(new_width, new_height, BufferedImage.SCALE_SMOOTH);
+                    Graphics2D g2d = dimg.createGraphics();
+                    g2d.drawImage(tmp, 0, 0, null);
+                    g2d.dispose();
+
+                    //upload
                     ServletContext servletContext = getServletContext();
                     String contextPath = servletContext.getRealPath(File.separator);
                     File lowResFile = new File(contextPath + "\\lowRes\\" + fileName + ".jpg");

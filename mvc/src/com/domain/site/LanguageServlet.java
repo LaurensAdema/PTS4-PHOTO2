@@ -9,6 +9,8 @@ import com.database.Database;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -78,6 +80,28 @@ public class LanguageServlet extends HttpServlet {
         {
             Database.getDatabase().closeConnection();
         }
+        //Code to get the Navbar language as well: 
+
+        List<Language> languages = new ArrayList<>();
+        ResultSet langResults = Database.getDatabase().query("SELECT * FROM `language` WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
+        try {
+            if (langResults != null) {
+                while (langResults.next()) {
+                    languages.add(new Language(
+                            langResults.getInt("id"),
+                            langResults.getString("name"),
+                            langResults.getString("iso"),
+                            langResults.getString("Country")
+                    ));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Database.getDatabase().closeConnection();
+        }
+        request.getSession().setAttribute("languages", languages);
+        
     }
 
 }

@@ -1,19 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.domain.site;
 
-/**
- *
- * @author Laurens Adema
- */
 public class Element {
-    public enum types {
-        SPAN
+
+    private int id;
+
+    public int getId() {
+        return id;
     }
-    private String naam;
-    private String pagina;
-    private types type;
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String translation;
+
+    public String getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(String translation) {
+        this.translation = translation;
+    }
+
+    public Element(int id, String name, String description, String translation) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.translation = translation;
+    }
+
+
+    public Element() {
+    }
+
 }

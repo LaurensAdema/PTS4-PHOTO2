@@ -168,4 +168,12 @@
         <servlet-name>LanguageManager</servlet-name>
         <url-pattern>/LanguageManager</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LangManagementServlet</servlet-name>
+        <servlet-class>com.domain.site.LangManagementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LangManagementServlet</servlet-name>
+        <url-pattern>/LangManagementServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -133,7 +133,7 @@
                                 <li>
                                     <span class="item">
                                         <span class="item-left">
-                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <img class="group list-group-image" src="<c:out value="${item.key.photo.pathlowres}"/> "alt="<c:out value="${item.key.name}"/> " />
                                             <span class="item-info">
                                                 <span><c:out value="${item.key.name}"/></span>                                             
                                                 <span>$<c:out value="${item.key.price}"/></span>

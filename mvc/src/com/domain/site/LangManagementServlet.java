@@ -55,10 +55,12 @@ public class LangManagementServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
+    
     public void GetAllElements(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-    List<Element> elements = new ArrayList<>();   
+    List<Element> elements = new ArrayList<>();
+    
         ResultSet Wholelanguage = Database.getDatabase().query("SELECT element.id,element_language.text,element.name,element.description FROM element_language, element "+
                  "WHERE element_language.LanguageID = "+request.getParameter("langselect")+" AND element.id=element_language.ElementID", Database.QUERY.QUERY);   
             try{

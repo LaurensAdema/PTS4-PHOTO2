@@ -10,7 +10,7 @@
             <div class ="panel panel-primary">
                 <div class="panel-heading">Add a new Language</div>
                 <div class="panel-body">
-                     <form role="form" class="form-group" ID="formselectlanguage" action="AddLanguageServlet" method="post"> 
+                     <form role="form" class="form-horizontal" ID="formselectlanguage" action="AddLanguageServlet" method="post"> 
                          <div><p>
                         Here you can add your new language. Simply choose your country, and optionally give the Language a Display Name for the language selector in the navigation
                         bar.Note that this name isn't changeable afterwards. Without a display name the country itself will be displayed as the name.

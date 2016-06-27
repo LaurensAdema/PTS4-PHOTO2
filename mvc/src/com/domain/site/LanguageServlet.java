@@ -84,7 +84,7 @@ public class LanguageServlet extends HttpServlet {
         //Code to get the Navbar language as well: 
 
         List<Language> languages = new ArrayList<>();
-        ResultSet langResults = Database.getDatabase().query("SELECT * FROM `language` WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
+        ResultSet langResults = Database.getDatabase().query("SELECT * FROM language WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
         try {
             if (langResults != null) {
                 while (langResults.next()) {
@@ -101,7 +101,8 @@ public class LanguageServlet extends HttpServlet {
         } finally {
             Database.getDatabase().closeConnection();
         }
-        request.setAttribute("languages", languages);  
+//        request.getSession().setAttribute("languages", languages);
+        request.setAttribute("languages", languages);
         
     }
 }

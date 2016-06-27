@@ -300,14 +300,15 @@ public ResultSet RawQuery(String query)
                     {
                 PreparedStatement SQLquery = conn.prepareStatement(query);
                 SQLquery.executeQuery();
-                return SQLquery.getGeneratedKeys();}
+                return SQLquery.getGeneratedKeys();
                     }
+                    
             else    {
 			PreparedStatement SQLquery = conn.prepareStatement(query);
                         SQLquery.executeUpdate();
                         return SQLquery.getGeneratedKeys();
                     }
-        }
+        }}
 			catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
 

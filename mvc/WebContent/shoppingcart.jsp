@@ -26,8 +26,7 @@
                             <div class="thumbnail">
 
                                 <div class="caption">
-                                    <h4 class="group inner list-group-item-heading">
-                                        <c:out value="${item.key.name}"/></h4>
+                                        <img class="group list-group-image" src="<c:out value="${item.key.photo.pathlowres}"/> "alt="<c:out value="${item.key.name}"/> " />
                                     <br/>
                                     <div class="col-xs-6 col-md-6">
 

@@ -9,87 +9,85 @@
 
     <jsp:body>
         <div class="container">
-        <div class = "panel panel-primary">
-            <div class = "panel-body">
-                <div class="well well-sm">
-                    <strong>Order #<c:out value="${order.id}"/> on <c:out value="${order.date}"/></strong>
+            <div class = "panel panel-primary">
+                <div class = "panel-body">
+                    <div class="well well-sm">
+                        <strong>Order #<c:out value="${order.id}"/> on <c:out value="${order.date}"/></strong>
 
-                </div>
-                <c:forEach items="${order.products}" var="item">
-                    <div id="products" class="row list-group">
+                    </div>
+                    <c:forEach items="${order.products}" var="item">
+                        <div id="products" class="row list-group">
+
+                            <div class="item  col-xs-4 col-lg-4">
+
+                                <div class="caption">
+                                    <img class="group list-group-image" src="<c:out value="${item.key.photo.pathlowres}"/> "alt="<c:out value="${item.key.name}"/> " />
+                                    <br/>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Price: $${item.key.price}"/></div>
+
+                                    <br>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Quantity: ${item.value}"/></div>
+
+                                    <br>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Printed in ${item.key.color}"/></div>
+                                    <br>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Printed on ${item.key.material}"/></div>
+                                    <br>
+                                    <div class="col-xs-6 col-md-6">
+
+                                        <c:out value="Total: $${item.key.price * item.value }"/></div>
+
+                                    <br>
+                                    </br>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <br>
+                    <div id="total" class="row list-group">
 
                         <div class="item  col-xs-4 col-lg-4">
+                            <div class="thumbnail">
 
-                            <div class="caption">
-
-                                <h4 class="group inner list-group-item-heading">
-                                    <c:out value="${item.key.name}"/></h4>
-                                <br/>
-                                <div class="col-xs-6 col-md-6">
-
-                                    <c:out value="Price: $${item.key.price}"/></div>
-
-                                <br>
-                                <div class="col-xs-6 col-md-6">
-
-                                    <c:out value="Quantity: ${item.value}"/></div>
-
-                                <br>
-                                <div class="col-xs-6 col-md-6">
-
-                                    <c:out value="Printed in ${item.key.color}"/></div>
-                                <br>
-                                <div class="col-xs-6 col-md-6">
-
-                                    <c:out value="Printed on ${item.key.material}"/></div>
-                                <br>
-                                <div class="col-xs-6 col-md-6">
-
-                                    <c:out value="Total: $${item.key.price * item.value }"/></div>
-
-                                <br>
-                                </br>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </c:forEach>
-                <br>
-                <div id="total" class="row list-group">
-
-                    <div class="item  col-xs-4 col-lg-4">
-                        <div class="thumbnail">
-
-                            <div class="caption">
-                                <h4>
-                                    <c:out value="Total: $${order.price}"/></h4>
+                                <div class="caption">
+                                    <h4>
+                                        <c:out value="Total: $${order.price}"/></h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="item  col-xs-4 col-lg-4">
-                        <div class="thumbnail">
+                        <div class="item  col-xs-4 col-lg-4">
+                            <div class="thumbnail">
 
-                            <div class="caption">
-                                <h4>Delivered to</h4><br>
-                                <c:out value="Name: ${account.first_name}"/> <c:out value="${account.last_name}"/><br>
-                                <c:out value="E-mail address: ${account.email}"/><br>
-                                <c:out value="Postal code: ${account.postal_code}"/><br>
-                                <c:out value="Home number: ${account.nr}"/>
+                                <div class="caption">
+                                    <h4>Delivered to</h4><br>
+                                    <c:out value="Name: ${account.first_name}"/> <c:out value="${account.last_name}"/><br>
+                                    <c:out value="E-mail address: ${account.email}"/><br>
+                                    <c:out value="Postal code: ${account.postal_code}"/><br>
+                                    <c:out value="Home number: ${account.nr}"/>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        event.preventDefault();
+                        $('#products .item').addClass('list-group-item');
+                    });</script>
             </div>
-            <script>
-                $(document).ready(function () {
-                    event.preventDefault();
-                    $('#products .item').addClass('list-group-item');
-                });</script>
         </div>
-                            </div>
     </jsp:body>
 
 </t:Masterpage>

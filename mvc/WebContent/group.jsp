@@ -33,13 +33,10 @@
                             <div class="thumbnail">
                                 <img class="group list-group-image" src="<c:out value="${item.pathlowres}"/> "alt="<c:out value="${item.name}"/> " />
                                 <div class="caption">
-                                    <h4 class="group inner list-group-item-heading">
-                                        <c:out value="${item.name}"/></h4>
+
                                     
                                     <br/>
-                                    <p class="group inner list-group-item-text">
-                                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                                    
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
                                             <p class="lead">

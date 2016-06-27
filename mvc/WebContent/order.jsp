@@ -82,7 +82,7 @@
 
                             <div class="caption">
                                 <h4>Address</h4><br>
-                                <c:out value="First Name: ${account.first_name}"/>
+                                <c:out value="First Name: ${account.first_name}"/><br>
                                 <c:out value="Last Name: ${account.last_name}"/><br>
                                 <c:out value="E-mail address: ${account.email}"/><br>
                                 <c:out value="Postal code: ${account.postal_code}"/><br>

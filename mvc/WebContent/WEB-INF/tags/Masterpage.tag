@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-9">
             <h1 class="text-center h1">
-                PhotoShop 
+                <c:out value="${Head_header}"/>  
             </h1>
         </div>
         <div class="col-md-3">
@@ -47,15 +47,8 @@
                             </label>
                             <input type="password" class="form-control" name="tbpassword" />
                         </div>
-
-                        <div class="checkbox">
-
-                            <label>
-                                <input type="checkbox" />  <c:out value="${lbl_rememberusername}"/> 
-                            </label>
-                        </div> 
                         <button type="submit" class="btn btn-default" ID="btnsubmit" >
-                            Log In
+                           <c:out value="${btn_login}"/>
                         </button>
                     </form>
                 </c:when>
@@ -68,7 +61,7 @@
                             <c:out value="${account.type}"/>
                         </div>
                         <button type="submit" class="btn btn-default" ID="btnlogout" onclick="window.location.href = 'LoginServlet'" >
-                            Log Out
+                            <c:out value="${btn_logout}"/>
                         </button>
                     </div>
                 </c:otherwise>
@@ -79,39 +72,41 @@
         <div class="container-fluid">
              <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarlist" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only"> <c:out value="${navbar_toggle}"/></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-<!--      <a class="navbar-brand" href="#">Brand</a>-->
     </div>
             <div class="collapse navbar-collapse" id="navbarlist">
                  <ul class="nav navbar-nav">
                      <c:set var="accounttype" scope="session" value="${'Admin'}"/>     
                     <c:choose>
                         <c:when test = "${account.type == 'Customer'}">
-                        <li><a href="/WEB-INF/accountmanagement.jsp">Normal Account Management</a></li>
+                        <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
+                        <li><a href="/WEB-INF/mygroups.jsp"> <c:out value="${page_mygroups}"/></a></li>
                         </c:when>    
                         <c:when test = "${account.type == 'Photographer'}">
-                         <li><a href="/WEB-INF/index.jsp">Mijn Producten</a></li> 
-                         <li><a href="/WEB-INF/fotograafpanel.jsp">Upload</a></li> 
+                        <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
+                         <li><a href="/WEB-INF/addgroup.jsp"> <c:out value="${page_addgroup}"/></a></li>
+                         <li><a href="/WEB-INF/fotograafpanel.jsp"> <c:out value="${page_fotograafpanel}"/></a></li> 
                          
                         </c:when>         
                         <c:when test = "${account.type == 'Admin'}">                     
-                        <li><a href="/WEB-INF/adminpanel.jsp">Admin Panel</a></li>
-                        <li><a href="/WEB-INF/index.jsp">Index</a></li> 
-                        <li><a href="/WEB-INF/accountmanagement.jsp">Normal Account Management</a></li>
-                        <li><a href="/WEB-INF/mygroups.jsp">Mygroups</a></li>
+                        <li><a href="/WEB-INF/adminpanel.jsp"> <c:out value="${page_adminpanel}"/></a></li>
+                        <li><a href="/WEB-INF/addnewlanguage.jsp"> <c:out value="${page_addnewlanguage}"/></a></li>
+                        <li><a href="/WEB-INF/languagemanager.jsp"> <c:out value="${page_languagemanager}"/></a></li>
+                        <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
+                        <li><a href="/WEB-INF/mygroups.jsp"> <c:out value="${page_mygroups}"/></a></li>
                         </c:when>
                         <c:otherwise>
-                        <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp">Register</a></li>
+                        <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp"> <c:out value="${page_register}"/></a></li>
                         </c:otherwise>
                     </c:choose>
 </ul>
 <ul class="nav navbar-nav navbar-right">
                     <div class="navbar-nav btn-group">
-                        <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Language <span class="caret"></span></a>
+                        <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#"><c:out value="${lang}"/><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <c:forEach items="${languages}" var="taal">
                                 <li><a href="?lang=<c:out value="${taal.name}"/>"><img src="img/blank.gif" class="flag flag-<c:out value="${taal.ISO}"/>" alt="English"/> <c:out value="${taal.name}"/></a></li>
@@ -137,19 +132,19 @@
                                             <span class="item-info">
                                                 <span><c:out value="${item.key.name}"/></span>                                             
                                                 <span>$<c:out value="${item.key.price}"/></span>
-                                                <span>Quantity: <c:out value="${item.value}"/></span>     
+                                                <span><c:out value="${shoppingcart_lbl_quantity}"/><c:out value="${item.value}"/></span>     
                                             </span>
                                         </span>
                                         <span class="item-right">
                                             <a class="btn btn-xs btn-danger pull-right" href="/WEB-INF/shoppingcart.jsp?del=<c:out value="${item.key.id}"/>">x</a>
                                         </span>
                                     </span>
-
-                                </li>                                                </c:forEach>
+                                </li>
+                            </c:forEach>
 
 
                                 <li class="divider"></li>
-                                <li><a class="text-center" href="/WEB-INF/shoppingcart.jsp">View Cart</a></li>
+                                <li><a class="text-center" href="/WEB-INF/shoppingcart.jsp"><c:out value="${shoppingcart_viewcart}"/></a></li>
                             </ul>
                         </li>
                     </ul>

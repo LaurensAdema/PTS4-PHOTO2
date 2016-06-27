@@ -7,6 +7,7 @@
 <t:Masterpage>
 
     <jsp:body>
+        <div class="container">
 <div class="input-group">
     <form role="form" class="form-group" ID="language" action="LanguageConfigServlet" method="post">
         <div class="form-group">
@@ -31,7 +32,7 @@
                 add to db
             </button>
     </form>
-
+</div>
 </div>
 </div>
     </jsp:body></t:Masterpage>

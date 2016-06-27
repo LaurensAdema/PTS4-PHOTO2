@@ -11,7 +11,8 @@
         <div class = "panel panel-primary">
             <div class = "panel-body">
                 <h4>Order completed</h4><br><br>
-                You will recieve an e-mail shortly containing your order and payment details.
+                You will recieve an e-mail shortly containing your order and payment details.<br>
+                You can find this order under your recent orders, in your account management.
             </div>
         </div>
     </jsp:body>

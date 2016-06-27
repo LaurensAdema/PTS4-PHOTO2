@@ -81,6 +81,8 @@ public class MyOrdersServlet extends HttpServlet {
             if (accountID == account.getID()) {
                 request.getSession().setAttribute("order", order);
             }
+        } else {
+            
         }
 
     }

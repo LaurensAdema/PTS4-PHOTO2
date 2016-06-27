@@ -6,11 +6,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <t:Masterpage>
     <jsp:body>
+        <div class="container">
+            <div class="panel panel-primary col-md-6">
+                
+            </div>
         <div class="panel panel-primary col-md-6">
             <div class="panel-heading">
-                <h3 class="panel-title">
-                    File upload
-                </h3>
+                <h3 class="panel-title">File upload</h3>
             </div>
             <div class="panel-body">
                 <form role="form" class="form form-group" action="UploadServlet" method="post" enctype="multipart/form-data">
@@ -35,6 +37,7 @@
                             </form>
                             </div>
 
-                            </div>
+                        </div>
+                        </div>
                         </jsp:body>
                     </t:Masterpage>

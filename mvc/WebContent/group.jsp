@@ -35,10 +35,7 @@
                                 <div class="caption">
                                     <h4 class="group inner list-group-item-heading">
                                         <c:out value="${item.name}"/></h4>
-
-                                    <div class="col-xs-6 col-md-6">
-                                        <a class="btn btn-sm" href="#">Delete this picture</a>
-                                    </div>
+                                    
                                     <br/>
                                     <p class="group inner list-group-item-text">
                                         Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,

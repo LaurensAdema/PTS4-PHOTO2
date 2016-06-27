@@ -36,7 +36,7 @@ public class MyProjectsServlet extends HttpServlet {
         Account account = (Account) request.getSession().getAttribute("account");
         if (account != null)
         {
-            ResultSet results = Database.getDatabase().query("SELECT * FROM project_account WHERE accountID = " + account.getID() , Database.QUERY.QUERY);
+            ResultSet results = Database.getDatabase().query("SELECT * FROM project_account WHERE accountID = " + account.getID(), Database.QUERY.QUERY);
             try
             {
                 if (results != null)
@@ -74,5 +74,4 @@ public class MyProjectsServlet extends HttpServlet {
             request.getSession().setAttribute("projects", projects);
         }
     }
-}
 }

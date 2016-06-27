@@ -40,6 +40,11 @@ public class Project implements Serializable{
         this.name = name;
         this.date = date;
     }
+    
+    public Project(String name)
+    {
+        this.name = name;
+    }
 
     public int getId()
     {

@@ -288,7 +288,7 @@ public class Database {
     }
 public ResultSet RawQuery(String query)
 {
-            try {
+    try {
             if (conn == null || conn.isClosed()) {
 
                 openConnection();
@@ -296,12 +296,18 @@ public ResultSet RawQuery(String query)
                     System.out.println("Geen conn");
                     return null;
                 }
-            
+            if (query.toLowerCase().startsWith("select"))
+                    {
+                PreparedStatement SQLquery = conn.prepareStatement(query);
+                SQLquery.executeQuery();
+                return SQLquery.getGeneratedKeys();}
+                    }
+            else    {
 			PreparedStatement SQLquery = conn.prepareStatement(query);
-                SQLquery.executeUpdate();
-
-                return SQLquery.getGeneratedKeys();			
-			}}
+                        SQLquery.executeUpdate();
+                        return SQLquery.getGeneratedKeys();
+                    }
+        }
 			catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
 

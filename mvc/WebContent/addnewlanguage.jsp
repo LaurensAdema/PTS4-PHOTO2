@@ -10,22 +10,28 @@
             <div class ="panel panel-primary">
                 <div class="panel-heading">Add a new Language</div>
                 <div class="panel-body">
-                    <div class="col-md-12"><p>
+                     <form role="form" class="form-group" ID="formselectlanguage" action="AddLanguageServlet" method="post"> 
+                         <div><p>
                         Here you can add your new language. Simply choose your country, and optionally give the Language a Display Name for the language selector in the navigation
-                        bar.(otherwise the Country itself will be used as name)Click on "add language to website" and poof! Your Language is now added.
+                        bar.Note that this name isn't changeable afterwards. Without a display name the country itself will be displayed as the name.
+                        Click on "add language to website" and poof! Your Language is now added.
                         <strong>Important: </strong>The newly added language will have standard english translations.
                         To edit translations of already added languages,<a href="/WEB-INF/languagemanager.jsp">Click here</a>.
-      
-                        
                         </p></div>
-                    <form role="form" class="form-group" ID="formselectlanguage" action="AddLanguageServlet" method="post"> 
+                        <label for="Countryselect">Select your country</label>
                         <select id="Countryselect" name="Countryselect" class="selectpicker">
+                            
                           <c:forEach items="${newlanguages}" var="taal">  
                             <option value="<c:out value="${taal.id}"/>"><c:out value="${taal.country}"/></option>  
                           </c:forEach>
                         </select>   
+                        <label for="editLanguageName">(optional)Give a Display name</label>
                         
-                     </form>
+                        <td><input type="text" name="editLanguageName" class="form-horizontal" value=""/>
+                        <button type="submit" class="btn btn-default" ID="btnNewLang" onclick="window.location.href = 'AddLanguageServlet'" >
+                        Add this language to the website!
+                        </button>
+                    </form><p>
             </div>  
         </div>
         </div>

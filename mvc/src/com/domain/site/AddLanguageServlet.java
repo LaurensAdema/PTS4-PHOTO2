@@ -22,11 +22,44 @@ public class AddLanguageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        
-        
-       
-
-    }  
+        Language newlanguage=null;
+    if (request.getParameter("Countryselect")!=null)
+    {
+    String selectlang = request.getParameter("Countryselect");
+    int selectid = Integer.valueOf(selectlang);
+     int langid = -1;
+    List<Language> exist = (List<Language>) request.getSession().getAttribute("languages");
+    for (Language L : exist)
+    {
+        if (L.getId()==selectid)
+        {
+        langid=selectid;
+        }
+    }
+    }
+    
+    if (newlanguage==null)
+    {
+        String langerror = "Country is already added";
+        request.setAttribute("langerror", langerror);
+    }
+    else
+    {
+    
+    ResultSet rs = Database.getDatabase().RawQuery("INSERT INTO element_language (LanguageID,ElementID,text) VALUES (" + newlanguage.getId() + " , " + 1 + " , " + "test" + ")");
+    try{
+        if (rs==null)
+    {
+        String langerror = "Database test file failed to insert";
+        request.setAttribute("langerror", langerror);
+    }}
+    finally
+    {
+    Database.getDatabase().closeConnection();
+    
+    }
+    }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

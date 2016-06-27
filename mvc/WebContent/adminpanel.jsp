@@ -22,8 +22,8 @@
                 </c:forEach>
             </select>
             <select name="language">
-                <c:forEach items="${languages}" var="language">
-                    <option name="<c:out value="${language.value}"/>" value="<c:out value="${language.key}"/>"><c:out value="${language.value}"/></option>
+                <c:forEach items="${RequestScope.languages}" var="language">
+                    <option name="<c:out value="${language.id}"/>" value="<c:out value="${language.name}"/>"><c:out value="${language.value}"/></option>
                 </c:forEach>
             </select>
 
@@ -34,15 +34,4 @@
 
 </div>
 </div>
-<form role="form" class="form-group" ID="formbefore" action="AddGroupServlet" method="post">
-     
-
-Groepnaam:<input type="text" class="form-control" name="tbgroupname" />
-<br>
-Inlogcode: <input type="text" class="form-control" name="tbinlogcode" />
-<br>
-<button type="submit" class="btn btn-default" ID="btnsubmit" >
-                            Maak nieuwe group aan
-                        </button>
-</form>
     </jsp:body></t:Masterpage>

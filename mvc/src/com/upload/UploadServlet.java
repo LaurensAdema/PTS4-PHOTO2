@@ -225,6 +225,7 @@ public class UploadServlet extends HttpServlet {
                         Database.getDatabase().closeConnection();
                     }
                 }
+                
 
                 if (!temp.delete())
                 {

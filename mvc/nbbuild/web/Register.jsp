@@ -5,6 +5,7 @@
 <t:Masterpage>
 
     <jsp:body>
+        <div class="container">
         <h1>Account details </h1>
         <form role="form" class="form-group" ID="formbefore" action="RegisterServlet" method="post">
             <div style="color: #FF0000;">${errorMessage}</div>
@@ -39,7 +40,7 @@
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
-        
+        </div>
     </jsp:body>
   
 </t:Masterpage>

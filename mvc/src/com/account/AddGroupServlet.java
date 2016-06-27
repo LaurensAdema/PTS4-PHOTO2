@@ -22,7 +22,7 @@ public class AddGroupServlet extends HttpServlet {
         String groupname = request.getParameter("groupName");
         String id = request.getParameter("selectProjectID");
 
-        if (!groupname.equals(""))
+        if (!groupname.equals("") && !id.equals(""))
         {
             ResultSet rs = Database.getDatabase().query("INSERT INTO pgroup (groupname,logincode) VALUES ( " + groupname + " , " + CodeGenerator.generateAlphanumericCode(8) + " ) ", Database.QUERY.UPDATE);
             int key = -1;
@@ -32,7 +32,7 @@ public class AddGroupServlet extends HttpServlet {
                 {
                     while (rs.next())
                     {
-                        key = rs.getInt("id");
+                        key = rs.getInt(1);
 
                     }
                     if (key != -1)

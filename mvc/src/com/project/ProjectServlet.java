@@ -5,6 +5,7 @@
  */
 package com.project;
 
+import com.account.AddGroupServlet;
 import com.database.Database;
 import com.domain.account.Account;
 import com.domain.account.Admin;
@@ -12,6 +13,7 @@ import com.domain.account.Photographer;
 import com.domain.photo.Group;
 import com.domain.photo.Project;
 import com.domain.site.LanguageServlet;
+import com.randomcodegenerator.CodeGenerator;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +34,15 @@ public class ProjectServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        response.setContentType("text/html");
 
+        String projectname = request.getParameter("projectName");
+
+        if (!projectname.equals(""))
+        {
+            Database.getDatabase().query("INSERT INTO project (name) VALUES ( " + projectname + " ) ", Database.QUERY.UPDATE);
+        }
+        response.sendRedirect(request.getContextPath() + "/fotograafpanel.jsp");
     }
 
     @Override

@@ -9,6 +9,19 @@
         <div class="container">
             <div class="panel panel-primary col-md-6">
                 <div class="panel-heading">
+                    <h3 class="panel-title">Add project</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form form-group" action="ProjectServlet" method="post">
+                        <h4>Add a new project</h4>
+                        Project name: <br>
+                        <input type="text" name="projectName"><br>
+                        <input type="submit" value="Add project" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary col-md-6">
+                <div class="panel-heading">
                     <h3 class="panel-title">Add group</h3>
                 </div>
                 <div class="panel-body">

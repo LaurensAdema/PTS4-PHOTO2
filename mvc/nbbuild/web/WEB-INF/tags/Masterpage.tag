@@ -106,7 +106,7 @@
 </ul>
 <ul class="nav navbar-nav navbar-right">
                     <div class="navbar-nav btn-group">
-                        <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#"><c:out value="${lang}"/><span class="caret"></span></a>
+                        <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#"><c:out value="${navbar_lang}"/><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <c:forEach items="${languages}" var="taal">
                                 <li><a href="?lang=<c:out value="${taal.name}"/>"><img src="img/blank.gif" class="flag flag-<c:out value="${taal.ISO}"/>" alt="English"/> <c:out value="${taal.name}"/></a></li>
@@ -127,7 +127,7 @@
 
                                 <li>
                                     <span class="item">
-                                        <span class="item-left">
+                                        <span class="list-item">
                                             <img class="group list-group-image" src="<c:out value="${item.key.photo.pathlowres}"/> "alt="<c:out value="${item.key.name}"/> " />
                                             <span class="item-info">
                                                 <span><c:out value="${item.key.name}"/></span>                                             

@@ -99,7 +99,10 @@ public class AddLanguageServlet extends HttpServlet {
 
                 }
                 //Update language name
+                if(request.getParameter("editLanguageName")!=null)
+                {
                 ResultSet rs4 = Database.getDatabase().RawQuery("UPDATE language SET name = '" + request.getParameter("editLanguageName") + "' WHERE id = " + selectid);
+                
                 try {
                     if (rs4 != null) {
                         while (rs4.next()) {
@@ -108,11 +111,30 @@ public class AddLanguageServlet extends HttpServlet {
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    Database.getDatabase().closeConnection();
+                } finally
+                            {
+                                Database.getDatabase().closeConnection();
+                            } 
+                }
+                //Update wanneer geen optionele Naam
+                if(request.getParameter("editLanguageName")==null)
+                {
+                ResultSet rs5 = Database.getDatabase().RawQuery("UPDATE language SET name = '" + newlanguage.getCountry() + "' WHERE id = " + selectid);
+                
+                try {
+                    if (rs5 != null) {
+                        while (rs5.next()) {
+
+                        }
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
+                } finally
+                            {
+                                Database.getDatabase().closeConnection();
+                            } 
                 }
                 
-            }
         }
 
         if (newlanguage == null) {
@@ -120,7 +142,7 @@ public class AddLanguageServlet extends HttpServlet {
             request.setAttribute("langerror", langerror);
         }
         response.sendRedirect(request.getContextPath() + "/index.jsp");
-    }
+    }}
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

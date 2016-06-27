@@ -6,53 +6,43 @@
 
     <jsp:body>
         <div class="container">
-        <div class = "panel panel-primary">
-            <div class = "panel-body">
-                <div class="well well-sm">
-                    <strong>Foto's within this project</strong>
-                    <div class="btn-group">
-                        <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-                            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                class="glyphicon glyphicon-th"></span>Grid</a>
+            <div class = "panel panel-primary">
+                <div class = "panel-body">
+                    <div class="well well-sm">
+                        <strong>Foto's within this project</strong>
+                        <div class="btn-group">
+                            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+                                </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                                    class="glyphicon glyphicon-th"></span>Grid</a>
+                        </div>
                     </div>
-                </div>
-                <c:forEach items="${groups}" var="group">
+                    <c:forEach items="${groups}" var="group">
+                        <c:choose>
+                            <c:when test="${param.id eq group.id}">
+                                <c:set var="groupSelected" value="${group}" />
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
                     <c:choose>
-                        <c:when test="${param.id eq group.id}">
-                            <c:set var="groupSelected" value="${group}" />
+                        <c:when test = "${ empty groupSelected}">
+                            <c:redirect url="mygroups.jsp"/>
                         </c:when>
                     </c:choose>
-                </c:forEach>
-                <c:choose>
-                    <c:when test = "${ empty groupSelected}">
-                        <c:redirect url="mygroups.jsp"/>
-                    </c:when>
-                </c:choose>
-                <c:forEach items="${groupSelected.photos}" var="item">
-                    <div id="products" class="row list-group">
-                        <div class="item  col-xs-4 col-lg-4">
-                            <div class="thumbnail">
-                                <img class="group list-group-image" src="<c:out value="${item.pathlowres}"/> "alt="<c:out value="${item.name}"/> " />
-                                <div class="caption">
-
-                                    
-                                    <br/>
-                                    
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <p class="lead">
-                                                $<c:out value="${item.price}"/></p>
+                    <c:forEach items="${groupSelected.photos}" var="item">
+                            <ul id="products" class= "row media-list container">						
+                                <div class="col-sm-4 well well-sm item">		
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object list-group-item" src="<c:out value="${item.pathlowres}"/>" alt="<c:out value="${item.name}"/>"/>
+                                            </a>
                                         </div>
-                                        <div class="col-xs-12 col-md-6">
+                                        <div class="media-body">
+                                            <br>
+                                            <label name="lblprice" class="text-center">$<c:out value="${item.price}"/></label>
                                             <a class="btn btn-success" href="/WEB-INF/EditPhoto.jsp?id=<c:out value="${item.id}"/>">Add to cart</a>
                                         </div>
-                                        <br>
-                                        </br>
-
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                </div></ul>
                     </c:forEach>
                 </div>
             </div>
@@ -69,7 +59,7 @@
                     });
                 });</script>
         </div>
-            </div>
+
     </jsp:body>
 
 </t:Masterpage>

@@ -127,7 +127,7 @@
 
                                 <li>
                                     <span class="item">
-                                        <span class="item-left">
+                                        <span class="list-item">
                                             <img class="group list-group-image" src="<c:out value="${item.key.photo.pathlowres}"/> "alt="<c:out value="${item.key.name}"/> " />
                                             <span class="item-info">
                                                 <span><c:out value="${item.key.name}"/></span>                                             

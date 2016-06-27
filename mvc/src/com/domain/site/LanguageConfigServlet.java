@@ -82,14 +82,14 @@ public class LanguageConfigServlet extends HttpServlet {
                             pages.put(pageResults.getInt("id"), pageResults.getString("uri"));
                         }
                     }
-                    
+
                     ResultSet langResults = Database.getDatabase().query("SELECT * FROM `language` WHERE id in (select distinct languageID from element_language)", Database.QUERY.QUERY);
 
                     if (langResults != null)
                     {
                         while (langResults.next())
                         {
-                        languages.put(langResults.getInt("id"), langResults.getString("name"));
+                            languages.put(langResults.getInt("id"), langResults.getString("name"));
                         }
                     }
                 } catch (SQLException ex)
@@ -99,8 +99,16 @@ public class LanguageConfigServlet extends HttpServlet {
                 {
                     Database.getDatabase().closeConnection();
                 }
+            } else
+            {
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+
             }
-        }
+        } else
+            {
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+
+            }
         request.getSession().setAttribute("pages", pages);
         request.getSession().setAttribute("languages", languages);
     }

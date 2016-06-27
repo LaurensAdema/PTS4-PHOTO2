@@ -7,7 +7,6 @@ package com.domain.photo;
 
 import com.database.Database;
 import com.domain.site.LanguageServlet;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,19 +24,13 @@ public class Group {
     private String loginCode;
     private String groupName;
     private List<Photo> photos;
-    private Date date;
 
-    public Group(int id, String loginCode, String groupName, Date date) {
-        this.id = id;
-        this.loginCode = loginCode;
-        this.groupName = groupName;
-        this.date = date;
-    }
     public Group(int id, String loginCode, String groupName) {
         this.id = id;
         this.loginCode = loginCode;
         this.groupName = groupName;
     }
+
     public Group()
     {
         
@@ -80,8 +73,5 @@ public class Group {
         return groupName;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
 }

@@ -120,7 +120,7 @@ public class MyPhotosServlet extends HttpServlet {
 
                 if (results != null) {
                     while (results.next()) {
-                        groups.add(new Group(results.getInt("id"), results.getString("logincode"), results.getString("groupname"), results.getDate("date")));
+                        groups.add(new Group(results.getInt("id"), results.getString("logincode"), results.getString("groupname")));
                     }
                 }
             } catch (SQLException ex) {

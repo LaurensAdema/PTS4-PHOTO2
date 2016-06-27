@@ -176,4 +176,12 @@
         <servlet-name>AddLanguageServlet</servlet-name>
         <url-pattern>/AddLanguageServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGroupServlet</servlet-name>
+        <url-pattern>/AddGroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddGroupServlet</servlet-name>
+        <servlet-class>com.account.AddGroupServlet</servlet-class>
+    </servlet>
 </web-app>

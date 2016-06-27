@@ -31,6 +31,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -133,8 +134,8 @@ public class UploadServlet extends HttpServlet {
 
                             in = new FileInputStream(temp);
 
-                            ftp.storeFile(fileName, in);
-                            pathHighRes = "ftp://photoviewer@" + hostName + ":" + port + "/" + fileName;
+                            ftp.storeFile(fileName + "." + FilenameUtils.getExtension(fileItem.getName()), in);
+                            pathHighRes = "ftp://photoviewer@" + hostName + ":" + port + "/" + fileName + "." + FilenameUtils.getExtension(fileItem.getName());;
 
                             System.out.println("SUCCESS");
 

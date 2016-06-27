@@ -4,7 +4,8 @@
 <%@ page import="com.domain.photo.Project"%>
 <t:Masterpage>   
 <jsp:body>
-       <body>
+       
+           <div class="container">
  <form role="form" class="form-group" ID="formbefore" action="AddGroupServlet" method="post">
      
 
@@ -16,6 +17,7 @@ Inlogcode: <input type="text" class="form-control" name="tbinlogcode" />
                             Maak nieuwe group aan
 </button>
 </form>
-</body>
+
+</div>
 </jsp:body>
 </t:Masterpage>

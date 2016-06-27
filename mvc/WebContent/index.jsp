@@ -5,12 +5,9 @@
    <t:Masterpage>
         
       <jsp:body>
-          <div class="jumbotron">
+          <div class="container">
                <h1>Hello, world!</h1>
           </div>
-<%--           <c:out>${database_test}</c:out> 
-           <t:projectinterface></t:projectinterface>
-           <t:Upload></t:Upload>--%>
     </jsp:body>
        
    </t:Masterpage>

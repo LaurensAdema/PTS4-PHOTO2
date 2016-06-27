@@ -8,6 +8,7 @@
 <t:Masterpage>
 
     <jsp:body>
+        <div class="container">
         <div class = "panel panel-primary">
             <div class = "panel-body">
                 <div class="well well-sm">
@@ -84,6 +85,7 @@
                 });
             });</script>
     </div>
+        </div>
 </jsp:body>
 
 </t:Masterpage>

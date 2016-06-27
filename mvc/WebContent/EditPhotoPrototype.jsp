@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <t:Masterpage>
     <jsp:body>
+        <div class="container">
         <div class="panel panel-primary col-md-6">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -43,7 +44,7 @@
                             <input type="submit" value="Naar sepia" class="btn btn-primary">
                             </form>
                             </div>
-
+</div>
                             </div>
                         </jsp:body>
                     </t:Masterpage>

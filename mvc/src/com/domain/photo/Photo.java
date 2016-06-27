@@ -5,11 +5,13 @@
  */
 package com.domain.photo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author NesciO
  */
-public class Photo {
+public class Photo implements Serializable{
 
     private String name;
     private int price;

@@ -7,6 +7,7 @@ package com.domain.photo;
 
 import com.database.Database;
 import com.domain.site.LanguageServlet;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author markb
  */
-public class Project {
+public class Project implements Serializable{
 
     private int id;
     private String name;

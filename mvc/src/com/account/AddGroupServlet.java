@@ -1,6 +1,7 @@
 package com.account;
 
 import com.database.Database;
+import com.domain.account.Account;
 import com.domain.site.LanguageServlet;
 import com.randomcodegenerator.CodeGenerator;
 import java.io.IOException;
@@ -22,29 +23,33 @@ public class AddGroupServlet extends HttpServlet {
         String groupname = request.getParameter("groupName");
         String id = request.getParameter("selectProjectID");
 
-        if (!groupname.equals("") && !id.equals(""))
+        Account account = (Account) request.getSession().getAttribute("account");
+        if (account != null)
         {
-            ResultSet rs = Database.getDatabase().query("INSERT INTO pgroup (groupname,logincode) VALUES ( " + groupname + " , " + CodeGenerator.generateAlphanumericCode(8) + " ) ", Database.QUERY.UPDATE);
-            int key = -1;
-            if (rs != null)
+            if (!groupname.equals("") && !id.equals(""))
             {
-                try
+                ResultSet rs = Database.getDatabase().query("INSERT INTO pgroup (groupname,logincode) VALUES ( "  + groupname + " , " + CodeGenerator.generateAlphanumericCode(8) + " ) ", Database.QUERY.UPDATE);
+                int key = -1;
+                if (rs != null)
                 {
-                    while (rs.next())
+                    try
                     {
-                        key = rs.getInt(1);
+                        while (rs.next())
+                        {
+                            key = rs.getInt(1);
 
-                    }
-                    if (key != -1)
+                        }
+                        if (key != -1)
+                        {
+                            Database.getDatabase().query("INSERT INTO project_pgroup (projectID,pgroupID) VALUES ( " + id + " , " + key + " )", Database.QUERY.UPDATE);
+                        }
+                    } catch (SQLException ex)
                     {
-                        Database.getDatabase().query("INSERT INTO project_pgroup (projectID,pgroupID) VALUES ( " + id + " , " + key + " )", Database.QUERY.UPDATE);
+                        Logger.getLogger(AddGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } finally
+                    {
+                        Database.getDatabase().closeConnection();
                     }
-                } catch (SQLException ex)
-                {
-                    Logger.getLogger(AddGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
-                } finally
-                {
-                    Database.getDatabase().closeConnection();
                 }
             }
         }

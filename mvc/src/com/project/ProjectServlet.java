@@ -38,10 +38,37 @@ public class ProjectServlet extends HttpServlet {
 
         String projectname = request.getParameter("projectName");
 
-        if (!projectname.equals(""))
+        Account account = (Account) request.getSession().getAttribute("account");
+        if (account != null)
         {
-            Database.getDatabase().query("INSERT INTO project (name) VALUES ( " + projectname + " ) ", Database.QUERY.UPDATE);
+            if (!projectname.equals(""))
+            {
+                ResultSet rs = Database.getDatabase().query("INSERT INTO project (name) VALUES ( " + projectname + " ) ", Database.QUERY.UPDATE);
+                int key = -1;
+                if (rs != null)
+                {
+                    try
+                    {
+                        while (rs.next())
+                        {
+                            key = rs.getInt(1);
+
+                        }
+                        if (key != -1)
+                        {
+                            Database.getDatabase().query("INSERT INTO project_account (projectID,accountID) VALUES ( " + key + " , " + account.getID() + " )", Database.QUERY.UPDATE);
+                        }
+                    } catch (SQLException ex)
+                    {
+                        Logger.getLogger(AddGroupServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } finally
+                    {
+                        Database.getDatabase().closeConnection();
+                    }
+                }
+            }
         }
+
         response.sendRedirect(request.getContextPath() + "/fotograafpanel.jsp");
     }
 
@@ -52,7 +79,9 @@ public class ProjectServlet extends HttpServlet {
         if (request.getSession().getAttribute("account") != null)
         {
             Account account = (Account) request.getSession().getAttribute("account");
-            if (account.getClass() == Admin.class || account.getClass() == Photographer.class)
+
+            if (account.getClass() == Admin.class
+                    || account.getClass() == Photographer.class)
             {
                 try
                 {
@@ -63,11 +92,13 @@ public class ProjectServlet extends HttpServlet {
                         while (results.next())
                         {
                             projects.add(new Project(results.getInt("id"), results.getString("name"), results.getTimestamp("date")));
+
                         }
                     }
                 } catch (SQLException ex)
                 {
-                    Logger.getLogger(LanguageServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LanguageServlet.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 } finally
                 {
                     Database.getDatabase().closeConnection();

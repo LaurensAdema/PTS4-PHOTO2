@@ -7,6 +7,7 @@ package com.domain.photo;
 
 import com.database.Database;
 import com.domain.site.LanguageServlet;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author NesciO
  */
-public class Group {
+public class Group implements Serializable{
 
     private int id;
     private String loginCode;

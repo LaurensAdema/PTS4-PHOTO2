@@ -29,7 +29,7 @@
                                     <br/>
                                     <div class="col-xs-6 col-md-6">
 
-                                        <fmt:formatDate pattern="dd-MM-yyyy" value="${item.date}" /></div
+                                        </div>
                                     <div class="row">
 
                                         <div class="col-xs-6 col-md-6">

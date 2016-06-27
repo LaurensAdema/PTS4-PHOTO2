@@ -36,7 +36,7 @@ public class EditProductServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String color = request.getParameter("color");
+        String color = request.getParameter("selectcolor");
         String material = request.getParameter("material");
 
         Photo photoEdit = (Photo) request.getSession().getAttribute("editphoto");

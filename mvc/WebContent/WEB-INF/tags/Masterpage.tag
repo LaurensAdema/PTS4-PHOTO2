@@ -48,7 +48,7 @@
                             <input type="password" class="form-control" name="tbpassword" />
                         </div>
                         <button type="submit" class="btn btn-default" ID="btnsubmit" >
-                           <c:out value="${btn_login}"/>
+                            <c:out value="${btn_login}"/>
                         </button>
                     </form>
                 </c:when>
@@ -70,47 +70,47 @@
     </div>
     <nav class="navbar navbar-default ">
         <div class="container-fluid">
-             <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarlist" aria-expanded="false">
-        <span class="sr-only"> <c:out value="${navbar_toggle}"/></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarlist" aria-expanded="false">
+                    <span class="sr-only"> <c:out value="${navbar_toggle}"/></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
             <div class="collapse navbar-collapse" id="navbarlist">
-                 <ul class="nav navbar-nav">
-                     <c:set var="accounttype" scope="session" value="${'Admin'}"/>     
+                <ul class="nav navbar-nav">
+                    <c:set var="accounttype" scope="session" value="${'Admin'}"/>     
                     <c:choose>
                         <c:when test = "${account.type == 'Customer'}">
-                        <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
-                        <li><a href="/WEB-INF/mygroups.jsp"> <c:out value="${page_mygroups}"/></a></li>
-                        </c:when>    
-                        <c:when test = "${account.type == 'Photographer'}">
-                        <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
-                         <li><a href="/WEB-INF/addgroup.jsp"> <c:out value="${page_addgroup}"/></a></li>
-                         <li><a href="/WEB-INF/fotograafpanel.jsp"> <c:out value="${page_fotograafpanel}"/></a></li> 
-                         
+                            <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
+                            <li><a href="/WEB-INF/mygroups.jsp"> <c:out value="${page_mygroups}"/></a></li>
+                            </c:when>    
+                            <c:when test = "${account.type == 'Photographer'}">
+                            <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
+                            <li><a href="/WEB-INF/addgroup.jsp"> <c:out value="${page_myphotos}"/></a></li>
+                            <li><a href="/WEB-INF/fotograafpanel.jsp"> <c:out value="${page_fotograafpanel}"/></a></li> 
+
                         </c:when>         
                         <c:when test = "${account.type == 'Admin'}">                     
-                        <li><a href="/WEB-INF/adminpanel.jsp"> <c:out value="${page_adminpanel}"/></a></li>
-                        <li><a href="/WEB-INF/addnewlanguage.jsp"> <c:out value="${page_addnewlanguage}"/></a></li>
-                        <li><a href="/WEB-INF/languagemanager.jsp"> <c:out value="${page_languagemanager}"/></a></li>
-                        <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
-                        <li><a href="/WEB-INF/mygroups.jsp"> <c:out value="${page_mygroups}"/></a></li>
-                        </c:when>
-                        <c:otherwise>
-                        <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp"> <c:out value="${page_register}"/></a></li>
-                        </c:otherwise>
-                    </c:choose>
-</ul>
-<ul class="nav navbar-nav navbar-right">
+                            <li><a href="/WEB-INF/adminpanel.jsp"> <c:out value="${page_adminpanel}"/></a></li>
+                            <li><a href="/WEB-INF/addnewlanguage.jsp"> <c:out value="${page_addnewlanguage}"/></a></li>
+                            <li><a href="/WEB-INF/languagemanager.jsp"> <c:out value="${page_languagemanager}"/></a></li>
+                            <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
+                            <li><a href="/WEB-INF/mygroups.jsp"> <c:out value="${page_mygroups}"/></a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <li><a class="navbar-brand active" <a href="/WEB-INF/Register.jsp"> <c:out value="${page_register}"/></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <div class="navbar-nav btn-group">
                         <a class="navbar-btn btn dropdown-toggle btn-select" data-toggle="dropdown" href="#"><c:out value="${navbar_lang}"/><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <c:forEach items="${languages}" var="taal">
                                 <li><a href="?lang=<c:out value="${taal.name}"/>"><img src="img/blank.gif" class="flag flag-<c:out value="${taal.ISO}"/>" alt="English"/> <c:out value="${taal.name}"/></a></li>
-                            </c:forEach>
+                                    </c:forEach>
                             <!-- <<li><a href="?lang=English"><img src="img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
                             <li><a href="?lang=Nederlands"><img src="img/blank.gif" class="flag flag-nl" alt="Nederlands" /> Nederlands</a></li>-->
                         </ul>
@@ -143,21 +143,21 @@
                             </c:forEach>
 
 
-                                <li class="divider"></li>
-                                <li><a class="text-center" href="/WEB-INF/shoppingcart.jsp"><c:out value="${shoppingcart_viewcart}"/></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-    </div>
+                            <li class="divider"></li>
+                            <li><a class="text-center" href="/WEB-INF/shoppingcart.jsp"><c:out value="${shoppingcart_viewcart}"/></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
 </head>
 <html>
-<jsp:invoke fragment="header"/>
+    <jsp:invoke fragment="header"/>
 
-<div id="body" >
-    <jsp:doBody/>
-</body>
+    <div id="body" >
+        <jsp:doBody/>
+    </body>
 
 </html> 

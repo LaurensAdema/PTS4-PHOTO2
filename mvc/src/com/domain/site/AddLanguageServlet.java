@@ -119,6 +119,7 @@ public class AddLanguageServlet extends HttpServlet {
             String langerror = "Country is already added";
             request.setAttribute("langerror", langerror);
         }
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
     @Override

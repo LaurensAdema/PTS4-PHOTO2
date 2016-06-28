@@ -84,6 +84,6 @@ public class EditProductServlet extends HttpServlet {
             request.getSession().setAttribute("editphoto", photo);
 
         }
-
+        
     }
 }

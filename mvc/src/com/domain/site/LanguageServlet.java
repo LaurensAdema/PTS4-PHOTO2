@@ -58,7 +58,9 @@ public class LanguageServlet extends HttpServlet {
             language = request.getSession().getAttribute("lang").toString();
         }
         
-
+//        ResultSet rs =Database.getDatabase().query("SELECT element_language.text, element.name FROM element_language, element WHERE id IN" +
+//                "( SELECT ElementID FROM element WHERE PageID IN ( SELECT id FROM page WHERE uri IN('"+request.getServletPath() + "','masterpage') ) )" +
+//                "AND element_language.LanguageID ='"+languageID+"' AND element.id=element_language.ElementID",Database.QUERY.QUERY);
         ResultSet rs = Database.getDatabase().query("SELECT element_language.text, element.name FROM element_language, element WHERE ElementID IN "
                 + "(SELECT ElementID FROM element WHERE PageID IN "
                 + "(SELECT id FROM page WHERE uri = " + request.getServletPath() + " OR uri = masterpage)) AND element_language.LanguageID IN "

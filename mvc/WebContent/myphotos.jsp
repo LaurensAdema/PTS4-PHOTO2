@@ -10,26 +10,41 @@
 
         <div class="container">
             <div class="panel-body">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Total price</th>
-                            <th>Date of purchase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${projects}" var="project">
-                        <optgroup label="<c:out value="${project.name}"/>">
-                        <c:forEach items="${project.groups}" var="group">
-                            <option value="<c:out value="${group.id}"/>"><c:out value="${group.groupName}"/></option>
-                        </c:forEach>
-                        </optgroup>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                </dl>
-            </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            My projects and login codes
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Group name</th>
+                                    <th>Login code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${projects}" var="item">
+                                    <tr>
+                                        <td><b><c:out value="${item.name}"/></b></td><td></td>
+                                    </tr>
+                                    <c:forEach items="${item.groups}" var="group">
 
+                                        <tr>
+                                            <td><c:out value="    ${group.groupName}"/></td>
+                                            <td><c:out value="    ${group.loginCode}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </jsp:body>
 </t:Masterpage>

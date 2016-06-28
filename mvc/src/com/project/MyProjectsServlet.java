@@ -42,14 +42,14 @@ public class MyProjectsServlet extends HttpServlet {
                 if (results != null)
                 {
                     while (results.next())
-                    {
-                        ResultSet results2 = Database.getDatabase().query("SELECT * FROM project WHERE id = " + results.getInt("projectID"), Database.QUERY.QUERY);
+                    {   int projectID = results.getInt("projectID");
+                        ResultSet results2 = Database.getDatabase().query("SELECT * FROM project WHERE id = " + projectID, Database.QUERY.QUERY);
                         if (results2 != null)
                         {
                             while (results2.next())
                             {
                                 Project p = new Project(results2.getString("name"));
-                                ResultSet results3 = Database.getDatabase().query("SELECT * FROM pgroup WHERE id IN ( SELECT pgroupID FROM project_pgroup WHERE projectID = " + results.getInt("projectID") + " )", Database.QUERY.QUERY);
+                                ResultSet results3 = Database.getDatabase().query("SELECT * FROM pgroup WHERE id IN ( SELECT pgroupID FROM project_pgroup WHERE projectID = " + projectID + " )", Database.QUERY.QUERY);
 
                                 if (results3 != null)
                                 {

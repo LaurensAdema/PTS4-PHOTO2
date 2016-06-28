@@ -44,6 +44,7 @@ public class Project implements Serializable{
     public Project(String name)
     {
         this.name = name;
+        groups = new ArrayList<>();
     }
 
     public int getId()

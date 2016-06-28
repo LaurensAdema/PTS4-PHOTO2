@@ -88,7 +88,7 @@
                             </c:when>    
                             <c:when test = "${account.type == 'Photographer'}">
                             <li><a href="/WEB-INF/accountmanagement.jsp"> <c:out value="${page_accountmanagement}"/></a></li>
-                            <li><a href="/WEB-INF/addgroup.jsp"> <c:out value="${page_myphotos}"/></a></li>
+                            <li><a href="/WEB-INF/myphotos.jsp"> <c:out value="${page_myphotos}"/></a></li>
                             <li><a href="/WEB-INF/fotograafpanel.jsp"> <c:out value="${page_fotograafpanel}"/></a></li> 
 
                         </c:when>         

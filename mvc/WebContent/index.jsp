@@ -5,9 +5,7 @@
    <t:Masterpage>
         
       <jsp:body>
-          <div class="container">
-               <h1>Hello, world!</h1>
-          </div>
+          
     </jsp:body>
        
    </t:Masterpage>

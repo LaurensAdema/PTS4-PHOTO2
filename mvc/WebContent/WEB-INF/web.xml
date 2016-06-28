@@ -192,4 +192,12 @@
         <servlet-name>MyProjectsServlet</servlet-name>
         <servlet-class>com.project.MyProjectsServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>AllOrdersServlet</servlet-name>
+        <url-pattern>/AllOrdersServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AllOrdersServlet</servlet-name>
+        <servlet-class>com.domain.bestelling.AllOrdersServlet</servlet-class>
+    </servlet>
 </web-app>

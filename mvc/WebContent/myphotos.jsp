@@ -30,13 +30,12 @@
                                         <td><b><c:out value="${item.name}"/></b></td><td></td>
                                     </tr>
                                     <c:forEach items="${item.groups}" var="group">
-
                                         <tr>
-                                            <td><c:out value="    ${group.groupName}"/></td>
-                                            <td><c:out value="    ${group.loginCode}"/></td>
-                                        </tr>
-                                    </c:forEach>
+                                            <td><i><c:out value="${group.groupName}"/></i></td>
+                                            <td><i><c:out value="${group.loginCode}"/></i></td>
+                                   </tr>
                                 </c:forEach>
+                            </c:forEach>
 
                             </tbody>
                         </table>
